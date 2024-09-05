@@ -1,108 +1,61 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
-import io, { Socket } from "socket.io-client";
+import { useEffect, useState } from "react";
+import { HelmetProvider } from "react-helmet-async";
+import { SplashScreen } from "./components/loading";
+import { Router } from "./routes";
 
-const socket: Socket = io("http://localhost:3001");
+/**
+ * Bare useEffect with no dependencies might work in production,
+ * but such an effect would trigger twice in development (react 18+ strict mode)
+ *
+ * @see https://react.dev/learn/you-might-not-need-an-effect#initializing-the-application
+ */
 
-const App: React.FC = () => {
-    const [message, setMessage] = useState<string>("");
-    const [messages, setMessages] = useState<
-        Array<{ id: string; data: string }>
-    >([]);
-    const [authToken, setAuthToken] = useState<string>("");
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+let didInit = false;
 
+const App = () => {
+    const [appInitialized, setAppInitialized] = useState(didInit); // convert didInit to a stateful variable for render-logic to use
+
+    // initialization effect
     useEffect(() => {
-        socket.on("connect", () => {
-            console.log("Connected to server");
+        if (!didInit) {
+            didInit = true;
+            setAppInitialized(true);
 
-            // Authenticate once connected
-            if (authToken) {
-                socket.emit("authenticate", authToken);
-            }
-        });
+            // Here, write initialization code.
 
-        socket.on("message", (id: string, data: string) => {
-            setMessages((prevMessages) => [...prevMessages, { id, data }]);
-        });
+            /**
+       * Example :
 
-        socket.on("authenticated", () => {
-            setIsAuthenticated(true);
-            console.log("User authenticated");
-        });
-
-        socket.on("authentication_error", () => {
-            setIsAuthenticated(false);
-            console.log("Authentication failed");
-        });
-
-        return () => {
-            socket.off("connect");
-            socket.off("message");
-            socket.off("authenticated");
-            socket.off("authentication_error");
-        };
-    }, [authToken]);
-
-    const handleSendMsg = () => {
-        if (message.trim() && isAuthenticated) {
-            socket.emit("message", message);
-            setMessage("");
-        } else if (!isAuthenticated) {
-            console.log("User not authenticated");
+      if (import.meta.env.MODE === NODE_ENV.PROD) {
+        launchSentry();
+       }
+      
+      */
         }
-    };
+        // Keep depndency array empty to avoid executing the content above multiple times
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setMessage(event.target.value);
-    };
-
-    const handleAuthTokenChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setAuthToken(event.target.value);
-    };
-
-    const handleAuthenticate = () => {
-        if (authToken) {
-            socket.emit("authenticate", authToken);
-        }
-    };
-
-    return (
-        <div className="p-4">
-            <input
-                type="text"
-                value={authToken}
-                onChange={handleAuthTokenChange}
-                placeholder="Enter authentication token"
-                className="border p-2 mb-2"
-            />
-            <button
-                onClick={handleAuthenticate}
-                className="bg-green-500 text-white px-4 py-2 mb-4"
-            >
-                Authenticate
-            </button>
-            <input
-                type="text"
-                value={message}
-                onChange={handleChange}
-                placeholder="Enter your message"
-                className="border p-2 mr-2"
-            />
-            <button
-                onClick={handleSendMsg}
-                className="bg-blue-500 text-white px-4 py-2"
-            >
-                Envoyer
-            </button>
-            <div className="mt-4">
-                {messages.map((msg, index) => (
-                    <p key={index} className="mb-2">
-                        <b>{msg.id}</b>: {msg.data}
-                    </p>
-                ))}
-            </div>
-        </div>
-    );
+    if (!appInitialized) {
+        return <SplashScreen />;
+    } else {
+        return (
+            <>
+                {/* 
+          Allows using <Helmet> in children components 
+  
+          Helmet lets you manage all of your changes to the document head.
+        */}
+                <HelmetProvider>
+                    {/* 
+            The actual route renderer.
+            Must be wrapped in a <BrowserRouter /> (or equivalent - from main.tsx)
+          */}
+                    <Router />
+                </HelmetProvider>
+            </>
+        );
+    }
 };
 
 export default App;
