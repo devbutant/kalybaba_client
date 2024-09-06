@@ -41,9 +41,6 @@ const Login: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
-        console.log({ email, password });
-
         mutation.mutate({ email, password });
     };
 
