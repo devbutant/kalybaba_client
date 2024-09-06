@@ -1,30 +1,24 @@
-// AppAuthContext.tsx
 import { jwtDecode } from "jwt-decode";
-import React, {
-    createContext,
-    ReactNode,
-    useContext,
-    useEffect,
-    useState,
-} from "react";
+import React, { createContext, ReactNode, useEffect, useState } from "react";
 
 interface AuthContextType {
     isAuthenticated: boolean;
     token: string | null;
     setToken: (token: string | null) => void;
-    logout: () => void; // Ajout d'une méthode de déconnexion
+    logout: () => void;
     userId: string | null;
     friends: string[];
     setFriends: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 interface TokenPayload {
-    id: string; // Ajoute toutes les propriétés dont tu as besoin
-    sub: string; // Ajoute toutes les propriétés dont tu as besoin
-    // Ajoute d'autres propriétés si nécessaire
+    id: string;
+    sub: string;
 }
 
-const AppAuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AppAuthContext = createContext<AuthContextType | undefined>(
+    undefined
+);
 
 export const AppAuthProvider: React.FC<{ children: ReactNode }> = ({
     children,
@@ -66,12 +60,4 @@ export const AppAuthProvider: React.FC<{ children: ReactNode }> = ({
             {children}
         </AppAuthContext.Provider>
     );
-};
-
-export const useAppAuth = () => {
-    const context = useContext(AppAuthContext);
-    if (context === undefined) {
-        throw new Error("useAppAuth must be used within an AppAuthProvider");
-    }
-    return context;
 };

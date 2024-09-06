@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import React, { createContext, ReactNode, useState } from "react";
 import { Socket } from "socket.io-client";
 
 interface SocketAuthContextType {
@@ -8,9 +8,9 @@ interface SocketAuthContextType {
     setIsSocketAuthenticated: (isSocketAuthenticated: boolean) => void;
 }
 
-const SocketAuthContext = createContext<SocketAuthContextType | undefined>(
-    undefined
-);
+export const SocketAuthContext = createContext<
+    SocketAuthContextType | undefined
+>(undefined);
 
 export const SocketAuthProvider: React.FC<{ children: ReactNode }> = ({
     children,
@@ -30,14 +30,4 @@ export const SocketAuthProvider: React.FC<{ children: ReactNode }> = ({
             {children}
         </SocketAuthContext.Provider>
     );
-};
-
-export const useSocketAuth = () => {
-    const context = useContext(SocketAuthContext);
-    if (context === undefined) {
-        throw new Error(
-            "useSocketAuth must be used within an SocketAuthProvider"
-        );
-    }
-    return context;
 };

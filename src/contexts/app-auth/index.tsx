@@ -1,1 +1,1 @@
-export { AppAuthProvider } from "./app-auth.context";
+export { AppAuthContext, AppAuthProvider } from "./app-auth.context";

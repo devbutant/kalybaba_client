@@ -1,7 +1,7 @@
 // Router.tsx
 import React from "react";
 import { Navigate, useRoutes } from "react-router-dom";
-import { useAppAuth } from "../contexts/app-auth/app-auth.context";
+import { useAppAuth } from "../hooks/auth/app/use-app-auth";
 import Homepage from "../pages/homepage";
 import Login from "../pages/login";
 import Register from "../pages/register";

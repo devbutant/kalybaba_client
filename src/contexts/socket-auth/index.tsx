@@ -1,1 +1,1 @@
-export { SocketAuthProvider } from "./socket-auth.context";
+export { SocketAuthContext, SocketAuthProvider } from "./socket-auth.context";

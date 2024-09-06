@@ -3,8 +3,8 @@ import { Button } from "../../components/button";
 import { ChatContent } from "../../components/chat/chat-content";
 import FriendsList from "../../components/friends/friends-list";
 import FriendsSelection from "../../components/friends/friends-selection";
-import { useAppAuth } from "../../contexts/app-auth/app-auth.context";
-import { useSocketAuth } from "../../contexts/socket-auth/socket-auth.context";
+import { useAppAuth } from "../../hooks/auth/app/use-app-auth";
+import { useSocketAuth } from "../../hooks/auth/socket/use-socket-auth";
 import { useMessages } from "../../hooks/messages";
 import { useSocket } from "../../hooks/socket";
 

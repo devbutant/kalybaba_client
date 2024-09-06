@@ -1,4 +1,4 @@
-import { useSocketAuth } from "../../contexts/socket-auth/socket-auth.context";
+import { useSocketAuth } from "../auth/socket/use-socket-auth";
 import { useChat } from "../chat/use-chat";
 
 export const useMessages = () => {

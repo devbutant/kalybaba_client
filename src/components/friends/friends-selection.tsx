@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAppAuth } from "../../contexts/app-auth/app-auth.context";
+import { useAppAuth } from "../../hooks/auth/app/use-app-auth";
 import { useOutsideClick } from "../../hooks/useOutsideClick"; // Assurez-vous que le chemin est correct
 import { useUsers } from "../../hooks/useUsers";
 import { UserDto } from "../../types/dto/user.dto";

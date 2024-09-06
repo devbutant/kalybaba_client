@@ -2,18 +2,17 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAppAuth } from "../../contexts/app-auth/app-auth.context";
-// Type des données de connexion (utilisateur) et de la réponse
+import { useAppAuth } from "../../hooks/auth/app/use-app-auth";
+
 type LoginData = {
     email: string;
     password: string;
 };
 
 type LoginResponse = {
-    access_token: string; // Ceci doit correspondre à la structure de votre réponse API
+    access_token: string;
 };
 
-// Fonction pour envoyer les données de connexion
 const loginUser = async (userData: LoginData): Promise<LoginResponse> => {
     const response = await axios.post(
         "http://localhost:3001/auth/login",
