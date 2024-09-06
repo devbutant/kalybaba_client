@@ -1,5 +1,3 @@
-import React from "react";
-
 /**
  * Intended to be shown full-screen when content is being loaded.
  *

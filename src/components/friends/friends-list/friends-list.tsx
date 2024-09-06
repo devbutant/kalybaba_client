@@ -1,9 +1,8 @@
-// FriendsList.tsx
 import React from "react";
-import { useAppAuth } from "../../hooks/auth/app/use-app-auth";
+import { useFriends } from "../../../hooks/friends";
 
 const FriendsList: React.FC = () => {
-    const { friends, setFriends } = useAppAuth();
+    const { friends, setFriends } = useFriends();
 
     const handleSelectFriend = (friendId: string) => {
         setFriends((prevFriends: string[]) => {
@@ -36,4 +35,6 @@ const FriendsList: React.FC = () => {
     );
 };
 
-export default FriendsList;
+FriendsList.displayName = "FriendsList";
+
+export { FriendsList };

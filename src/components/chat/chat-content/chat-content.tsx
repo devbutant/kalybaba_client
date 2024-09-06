@@ -1,6 +1,7 @@
 import React from "react";
-import { useAppAuth } from "../../../hooks/auth/app/use-app-auth";
-import { useChat } from "../../../hooks/chat/use-chat";
+import { useAppAuth } from "../../../hooks/auth/app";
+import { useChat } from "../../../hooks/chat";
+
 const ChatContent: React.FC = () => {
     const { messages } = useChat();
     const { userId: currentUser } = useAppAuth();

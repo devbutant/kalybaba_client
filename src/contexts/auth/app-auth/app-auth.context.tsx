@@ -7,8 +7,6 @@ interface AuthContextType {
     setToken: (token: string | null) => void;
     logout: () => void;
     userId: string | null;
-    friends: string[];
-    setFriends: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 interface TokenPayload {
@@ -27,7 +25,6 @@ export const AppAuthProvider: React.FC<{ children: ReactNode }> = ({
         localStorage.getItem("access_token")
     );
     const [userId, setUserId] = useState<string | null>(null);
-    const [friends, setFriends] = useState<string[]>([]);
 
     useEffect(() => {
         if (token) {
@@ -53,8 +50,6 @@ export const AppAuthProvider: React.FC<{ children: ReactNode }> = ({
                 setToken,
                 logout,
                 userId,
-                friends,
-                setFriends,
             }}
         >
             {children}

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import io from "socket.io-client";
-import { useAppAuth } from "../auth/app/use-app-auth";
-import { useSocketAuth } from "../auth/socket/use-socket-auth";
+import { useAppAuth } from "../auth/app";
+import { useSocketAuth } from "../auth/socket";
 
 export const useSocket = () => {
     const {

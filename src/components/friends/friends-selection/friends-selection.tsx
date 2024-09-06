@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useAppAuth } from "../../hooks/auth/app/use-app-auth";
-import { useOutsideClick } from "../../hooks/useOutsideClick"; // Assurez-vous que le chemin est correct
-import { useUsers } from "../../hooks/useUsers";
-import { UserDto } from "../../types/dto/user.dto";
+import { useFriends } from "../../../hooks/friends";
+import { useOutsideClick } from "../../../hooks/useOutsideClick"; // Assurez-vous que le chemin est correct
+import { useUsers } from "../../../hooks/useUsers";
+import { UserDto } from "../../../types/dto/user.dto";
 
 const FriendsSelection: React.FC = () => {
     const { data: users, isLoading, isError } = useUsers();
-    const { friends, setFriends } = useAppAuth();
+    const { friends, setFriends } = useFriends();
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const handleSelectUser = (userId: string) => {
@@ -19,7 +19,6 @@ const FriendsSelection: React.FC = () => {
         });
     };
 
-    // Use the hook to detect clicks outside the component
     const containerRef = useOutsideClick(() => setIsOpen(false));
 
     if (isLoading) return <div>Loading...</div>;
@@ -59,4 +58,6 @@ const FriendsSelection: React.FC = () => {
     );
 };
 
-export default FriendsSelection;
+FriendsSelection.displayName = "FriendsSelection";
+
+export { FriendsSelection };

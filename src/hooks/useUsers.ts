@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { UserDto } from "../types/dto/user.dto";
-import { useAppAuth } from "./auth/app/use-app-auth";
+import { useAppAuth } from "./auth/app";
 
 // Modifiez fetchUsers pour accepter le token en paramètre
 const fetchUsers = async (token: string | null): Promise<UserDto[]> => {

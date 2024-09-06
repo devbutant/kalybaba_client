@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAppAuth } from "../../hooks/auth/app/use-app-auth";
+import { useAppAuth } from "../../hooks/auth/app";
 
 type LoginData = {
     email: string;
