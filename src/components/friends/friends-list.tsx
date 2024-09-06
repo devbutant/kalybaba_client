@@ -1,9 +1,9 @@
 // FriendsList.tsx
 import React from "react";
-import { useAuth } from "../../contexts/auth.context";
+import { useAppAuth } from "../../contexts/app-auth/app-auth.context";
 
 const FriendsList: React.FC = () => {
-    const { friends, setFriends } = useAuth();
+    const { friends, setFriends } = useAppAuth();
 
     const handleSelectFriend = (friendId: string) => {
         setFriends((prevFriends: string[]) => {

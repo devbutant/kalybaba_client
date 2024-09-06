@@ -1,13 +1,13 @@
 // Router.tsx
 import React from "react";
 import { Navigate, useRoutes } from "react-router-dom";
-import { useAuth } from "../contexts/auth.context";
+import { useAppAuth } from "../contexts/app-auth/app-auth.context";
 import Homepage from "../pages/homepage";
 import Login from "../pages/login";
 import Register from "../pages/register";
 
 const PrivateRoute: React.FC<{ element: React.ReactNode }> = ({ element }) => {
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated } = useAppAuth();
     return isAuthenticated ? (
         <>{element}</>
     ) : (
@@ -16,7 +16,7 @@ const PrivateRoute: React.FC<{ element: React.ReactNode }> = ({ element }) => {
 };
 
 const PublicRoute: React.FC<{ element: React.ReactNode }> = ({ element }) => {
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated } = useAppAuth();
     return !isAuthenticated ? <>{element}</> : <Navigate to="/" replace />;
 };
 

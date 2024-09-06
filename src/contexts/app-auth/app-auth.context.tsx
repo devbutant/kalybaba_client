@@ -1,4 +1,4 @@
-// AuthContext.tsx
+// AppAuthContext.tsx
 import { jwtDecode } from "jwt-decode";
 import React, {
     createContext,
@@ -20,12 +20,13 @@ interface AuthContextType {
 
 interface TokenPayload {
     id: string; // Ajoute toutes les propriétés dont tu as besoin
+    sub: string; // Ajoute toutes les propriétés dont tu as besoin
     // Ajoute d'autres propriétés si nécessaire
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AppAuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({
+export const AppAuthProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
     const [token, setToken] = useState<string | null>(
@@ -51,7 +52,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     };
 
     return (
-        <AuthContext.Provider
+        <AppAuthContext.Provider
             value={{
                 isAuthenticated,
                 token,
@@ -63,14 +64,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
             }}
         >
             {children}
-        </AuthContext.Provider>
+        </AppAuthContext.Provider>
     );
 };
 
-export const useAuth = () => {
-    const context = useContext(AuthContext);
+export const useAppAuth = () => {
+    const context = useContext(AppAuthContext);
     if (context === undefined) {
-        throw new Error("useAuth must be used within an AuthProvider");
+        throw new Error("useAppAuth must be used within an AppAuthProvider");
     }
     return context;
 };

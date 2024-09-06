@@ -1,7 +1,7 @@
 // hooks/useUsers.ts
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useAuth } from "../contexts/auth.context";
+import { useAppAuth } from "../contexts/app-auth/app-auth.context";
 import { UserDto } from "../types/dto/user.dto";
 
 // Modifiez fetchUsers pour accepter le token en paramètre
@@ -15,7 +15,7 @@ const fetchUsers = async (token: string | null): Promise<UserDto[]> => {
 };
 
 export const useUsers = () => {
-    const { token } = useAuth(); // Obtenez le token ici
+    const { token } = useAppAuth(); // Obtenez le token ici
 
     return useQuery<UserDto[]>({
         queryKey: ["users", token], // Ajoutez le token comme dépendance de la clé

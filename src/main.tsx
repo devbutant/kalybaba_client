@@ -3,20 +3,23 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
-import { AuthProvider } from "./contexts/auth.context.tsx";
+import { AppAuthProvider } from "./contexts/app-auth";
+import { SocketAuthProvider } from "./contexts/socket-auth";
 import "./index.css";
 
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
-        <AuthProvider>
-            <QueryClientProvider client={queryClient}>
-                <BrowserRouter>
-                    <App />
-                </BrowserRouter>
-            </QueryClientProvider>
-        </AuthProvider>
+        <SocketAuthProvider>
+            <AppAuthProvider>
+                <QueryClientProvider client={queryClient}>
+                    <BrowserRouter>
+                        <App />
+                    </BrowserRouter>
+                </QueryClientProvider>
+            </AppAuthProvider>
+        </SocketAuthProvider>
     </StrictMode>
 );
 

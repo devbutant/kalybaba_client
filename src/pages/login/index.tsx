@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/auth.context";
+import { useAppAuth } from "../../contexts/app-auth/app-auth.context";
 // Type des données de connexion (utilisateur) et de la réponse
 type LoginData = {
     email: string;
@@ -25,7 +25,7 @@ const loginUser = async (userData: LoginData): Promise<LoginResponse> => {
 const Login: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { setToken } = useAuth();
+    const { setToken } = useAppAuth();
     const navigate = useNavigate();
 
     const mutation = useMutation<LoginResponse, Error, LoginData>({

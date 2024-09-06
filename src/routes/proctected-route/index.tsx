@@ -1,10 +1,10 @@
 // ProtectedRoute.tsx
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../../contexts/auth.context";
+import { useAppAuth } from "../../contexts/app-auth/app-auth.context";
 
 const ProtectedRoute: React.FC<{ redirectTo: string }> = ({ redirectTo }) => {
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated } = useAppAuth();
 
     if (!isAuthenticated) {
         return <Navigate to={redirectTo} replace />;

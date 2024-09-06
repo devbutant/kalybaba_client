@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useAuth } from "../../contexts/auth.context";
+import { useAppAuth } from "../../contexts/app-auth/app-auth.context";
 import { useOutsideClick } from "../../hooks/useOutsideClick"; // Assurez-vous que le chemin est correct
 import { useUsers } from "../../hooks/useUsers";
 import { UserDto } from "../../types/dto/user.dto";
 
 const FriendsSelection: React.FC = () => {
     const { data: users, isLoading, isError } = useUsers();
-    const { friends, setFriends } = useAuth();
+    const { friends, setFriends } = useAppAuth();
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const handleSelectUser = (userId: string) => {
