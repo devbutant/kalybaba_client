@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { Button } from "../../components/button";
+import { ChatContent } from "../../components/chat/chat-content";
 import FriendsList from "../../components/friends/friends-list";
 import FriendsSelection from "../../components/friends/friends-selection";
 import { useAppAuth } from "../../contexts/app-auth/app-auth.context";
@@ -12,7 +13,7 @@ const Homepage: React.FC = () => {
     const { userId: currentUser, setToken } = useAppAuth();
     const { connectSocket, disconnectSocket } = useSocket();
     const { isSocketAuthenticated } = useSocketAuth();
-    const { messages, sendMessage, listenToMessages, stopListeningToMessages } =
+    const { sendMessage, listenToMessages, stopListeningToMessages } =
         useMessages();
 
     useEffect(() => {
@@ -52,32 +53,7 @@ const Homepage: React.FC = () => {
                     </Button>
 
                     <hr className="my-5" />
-
-                    {messages.map((msg, index) => (
-                        <div
-                            key={index}
-                            className={`mb-2 flex ${
-                                msg.userId === currentUser
-                                    ? "justify-end"
-                                    : "justify-start"
-                            }`}
-                        >
-                            <div
-                                className={`p-2 max-w-xs rounded-lg ${
-                                    msg.userId === currentUser
-                                        ? "bg-blue-500 text-white"
-                                        : "bg-gray-300 text-black"
-                                }`}
-                            >
-                                <p className="font-semibold">
-                                    {msg.userId === currentUser
-                                        ? "Moi"
-                                        : msg.id}
-                                </p>
-                                <p>{msg.data}</p>
-                            </div>
-                        </div>
-                    ))}
+                    <ChatContent />
                 </div>
 
                 <div className="p-4 border-t border-gray-200 bg-white flex items-center">

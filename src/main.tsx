@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import { AppAuthProvider } from "./contexts/app-auth";
+import { ChatProvider } from "./contexts/chat";
 import { SocketAuthProvider } from "./contexts/socket-auth";
 import "./index.css";
 
@@ -15,7 +16,9 @@ createRoot(document.getElementById("root")!).render(
             <AppAuthProvider>
                 <QueryClientProvider client={queryClient}>
                     <BrowserRouter>
-                        <App />
+                        <ChatProvider>
+                            <App />
+                        </ChatProvider>
                     </BrowserRouter>
                 </QueryClientProvider>
             </AppAuthProvider>

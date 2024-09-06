@@ -1,17 +1,13 @@
-import { useState } from "react";
 import { useSocketAuth } from "../../contexts/socket-auth/socket-auth.context";
+import { useChat } from "../chat/use-chat";
 
 export const useMessages = () => {
     const { socket } = useSocketAuth();
-    const [messages, setMessages] = useState<
-        Array<{ id: string; userId: string; data: string }>
-    >([]);
+    const { setMessages } = useChat();
 
     const listenToMessages = () => {
         if (socket) {
             socket.on("message", (id: string, userId: string, data: string) => {
-                console.log("Received message:", id, userId, data);
-
                 setMessages((prevMessages) => [
                     ...prevMessages,
                     { id, userId, data },
@@ -34,5 +30,5 @@ export const useMessages = () => {
         }
     };
 
-    return { messages, sendMessage, listenToMessages, stopListeningToMessages };
+    return { sendMessage, listenToMessages, stopListeningToMessages };
 };
