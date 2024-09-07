@@ -1,19 +1,10 @@
 import React, { createContext, ReactNode, useContext } from "react";
-import {
-    AppAuthContext,
-    AppAuthProvider,
-    AuthContextType,
-} from "../app-auth/app-auth.context";
+import { CombinedAuthContextType } from "../../../types/contexts";
+import { AppAuthContext, AppAuthProvider } from "../app-auth";
 import {
     SocketAuthContext,
-    SocketAuthContextType,
     SocketAuthProvider,
 } from "../socket-auth/socket-auth.context";
-
-interface CombinedAuthContextType {
-    socketAuth: SocketAuthContextType;
-    appAuth: AuthContextType;
-}
 
 export const CombinedAuthContext = createContext<
     CombinedAuthContextType | undefined

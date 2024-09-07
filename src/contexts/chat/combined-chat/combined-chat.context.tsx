@@ -1,14 +1,7 @@
 import React, { createContext, ReactNode, useContext } from "react";
+import { CombinedChatContextType } from "../../../types/contexts";
 import { ChatContext, ChatProvider } from "../chat-messages";
 import { FriendsContext, FriendsProvider } from "../friends";
-import { FriendsContextType } from "../friends/friends.context";
-
-import { ChatContextType } from "../chat-messages/chat-messages.context";
-
-interface CombinedChatContextType {
-    chatMessages: ChatContextType;
-    friends: FriendsContextType;
-}
 
 export const CombinedChatContext = createContext<
     CombinedChatContextType | undefined

@@ -2,7 +2,7 @@ import React from "react";
 import { useFriendsSelection } from "../../../hooks/friends/friends-selection";
 import { useFriends } from "../../../hooks/friends/use-friends";
 import { useUsersList } from "../../../hooks/users-list";
-import { UserDto } from "../../../types/dto/user.dto";
+import { UserDto } from "../../../types/dtos";
 import { Button } from "../../button";
 
 const FriendsSelection: React.FC = () => {

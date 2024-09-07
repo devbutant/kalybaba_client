@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { UserDto } from "../../types/dto/user.dto";
+import { UserDto } from "../../types/dtos";
 import { useAppAuth } from "../auth/app";
 
 const fetchUsers = async (token: string | null): Promise<UserDto[]> => {

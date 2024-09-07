@@ -1,13 +1,5 @@
-import React, { createContext, Dispatch, ReactNode, useState } from "react";
-
-export interface ChatContextType {
-    messages: Array<{ id: string; userId: string; data: string }>;
-    setMessages: Dispatch<
-        React.SetStateAction<
-            Array<{ id: string; userId: string; data: string }>
-        >
-    >;
-}
+import React, { createContext, ReactNode, useState } from "react";
+import { ChatContextType } from "../../../types/contexts";
 
 export const ChatContext = createContext<ChatContextType | undefined>(
     undefined
