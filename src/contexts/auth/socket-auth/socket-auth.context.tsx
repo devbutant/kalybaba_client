@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode, useState } from "react";
 import { Socket } from "socket.io-client";
 
-interface SocketAuthContextType {
+export interface SocketAuthContextType {
     socket: Socket | null;
     setSocket: (socket: Socket | null) => void;
     isSocketAuthenticated: boolean;

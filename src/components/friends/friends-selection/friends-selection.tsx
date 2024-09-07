@@ -1,28 +1,15 @@
-import React, { useState } from "react";
-import { useFriends } from "../../../hooks/friends";
-import { useOutsideClick } from "../../../hooks/useOutsideClick"; // Assurez-vous que le chemin est correct
-import { useUsers } from "../../../hooks/useUsers";
+import React from "react";
+import { useFriendsSelection } from "../../../hooks/friends/friends-selection";
+import { useFriends } from "../../../hooks/friends/use-friends";
+import { useUsersList } from "../../../hooks/users-list";
 import { UserDto } from "../../../types/dto/user.dto";
 
 const FriendsSelection: React.FC = () => {
-    const { data: users, isLoading, isError } = useUsers();
-    const { friends, setFriends } = useFriends();
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const { data: users } = useUsersList();
+    const { friends } = useFriends();
 
-    const handleSelectUser = (userId: string) => {
-        setFriends((prevFriends) => {
-            if (prevFriends.includes(userId)) {
-                return prevFriends.filter((id) => id !== userId);
-            } else {
-                return [...prevFriends, userId];
-            }
-        });
-    };
-
-    const containerRef = useOutsideClick(() => setIsOpen(false));
-
-    if (isLoading) return <div>Loading...</div>;
-    if (isError) return <div>Error loading users</div>;
+    const { handleSelectUser, isOpen, setIsOpen, containerRef } =
+        useFriendsSelection();
 
     return (
         <div className="relative p-4" ref={containerRef}>

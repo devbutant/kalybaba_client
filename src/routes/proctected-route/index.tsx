@@ -2,6 +2,7 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useAppAuth } from "../../hooks/auth/app";
+
 const ProtectedRoute: React.FC<{ redirectTo: string }> = ({ redirectTo }) => {
     const { isAuthenticated } = useAppAuth();
 

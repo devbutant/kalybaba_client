@@ -1,18 +1,10 @@
 import React from "react";
-import { useFriends } from "../../../hooks/friends";
+import { useFriendsList } from "../../../hooks/friends/friends-list";
+import { useFriends } from "../../../hooks/friends/use-friends";
 
 const FriendsList: React.FC = () => {
-    const { friends, setFriends } = useFriends();
-
-    const handleSelectFriend = (friendId: string) => {
-        setFriends((prevFriends: string[]) => {
-            if (prevFriends.includes(friendId)) {
-                return prevFriends.filter((id) => id !== friendId);
-            } else {
-                return [...prevFriends, friendId];
-            }
-        });
-    };
+    const { friends } = useFriends();
+    const { handleSelectFriend } = useFriendsList();
 
     return (
         <div className="p-4 border-2 border-cyan-500">

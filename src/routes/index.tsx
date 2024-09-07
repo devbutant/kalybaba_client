@@ -2,9 +2,9 @@
 import React from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 import { useAppAuth } from "../hooks/auth/app";
-import Homepage from "../pages/homepage";
-import Login from "../pages/login";
-import Register from "../pages/register";
+import { Homepage } from "../pages/homepage";
+import { Login } from "../pages/login";
+import { Register } from "../pages/register/register";
 
 const PrivateRoute: React.FC<{ element: React.ReactNode }> = ({ element }) => {
     const { isAuthenticated } = useAppAuth();
@@ -34,7 +34,6 @@ export function Router() {
             path: "/inscription",
             element: <PublicRoute element={<Register />} />,
         },
-        // Page 404
         { path: "*", element: <Navigate to="/404" replace /> },
     ]);
 }
