@@ -1,1 +1,1 @@
-export { useUsersList } from "./use-users-list";
+export { useFriendList } from "./use-users-list";

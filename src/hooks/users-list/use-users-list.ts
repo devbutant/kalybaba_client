@@ -2,14 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import { UserDto } from "../../types/dtos";
 import { useAppAuth } from "../contexts-hooks/auth/app";
 
-import { fetchUsers } from "../../services/users/fetch-users.service";
+import { fetchFriendList } from "../../services/friends/fetch-friends.service";
 
-export const useUsersList = () => {
+export const useFriendList = () => {
     const { token } = useAppAuth();
 
     return useQuery<UserDto[]>({
         queryKey: ["users", token], // Ajout du token comme dépendance de la clé (?)
-        queryFn: () => fetchUsers(token), // Passez le token à fetchUsers
+        queryFn: () => fetchFriendList(token), // Passez le token à fetchFriendList
         enabled: !!token,
     });
 };

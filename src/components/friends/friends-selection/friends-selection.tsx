@@ -2,12 +2,12 @@ import React from "react";
 import { useAppAuth } from "../../../hooks/contexts-hooks/auth/app";
 import { useFriends } from "../../../hooks/contexts-hooks/friends";
 import { useFriendsSelection } from "../../../hooks/friends/friends-selection";
-import { useUsersList } from "../../../hooks/users-list";
+import { useFriendList } from "../../../hooks/users-list";
 import { UserDto } from "../../../types/dtos";
 import { Button } from "../../button";
 
 const FriendsSelection: React.FC = () => {
-    const { data: users } = useUsersList();
+    const { data: friendList } = useFriendList();
     const { friends } = useFriends();
 
     const { userId: currentUserId } = useAppAuth();
@@ -21,13 +21,13 @@ const FriendsSelection: React.FC = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="bg-blue-500 text-white"
             >
-                Select Friends
+                Inviter
             </Button>
 
             {isOpen && (
                 <div className="absolute top-full mt-2 w-full bg-white shadow-lg rounded border border-gray-200">
                     <ul className="max-h-60 overflow-y-auto">
-                        {users
+                        {friendList
                             ?.filter(
                                 (user) =>
                                     user.id !== currentUserId &&
