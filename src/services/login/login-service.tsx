@@ -1,6 +1,4 @@
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
-import { Token } from "../../types";
 import { LoginDto, LoginResponseDto } from "../../types/dtos";
 
 export const loginUser = async (
@@ -13,17 +11,14 @@ export const loginUser = async (
     return response.data;
 };
 
-export const updateConnectedStatus = async (
-    token: string | null
+export const updateUserConnectionStatus = async (
+    token: string | null,
+    connected: boolean
 ): Promise<void> => {
     if (!token) return;
-
-    const decodedToken = jwtDecode<Token>(token);
-    const userId = decodedToken.id;
-
     await axios.patch(
-        `http://localhost:3001/users/${userId}/connected`,
-        {},
+        `http://localhost:3001/users/connected`,
+        { connected },
         {
             headers: {
                 Authorization: `Bearer ${token}`,

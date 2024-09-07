@@ -7,10 +7,11 @@ import { useAppAuth } from "../../hooks/auth/app";
 import { useSocketAuth } from "../../hooks/auth/socket";
 import { useMessages } from "../../hooks/messages";
 import { useSocket } from "../../hooks/socket";
+import { updateUserConnectionStatus } from "../../services/login";
 
 const Homepage: React.FC = () => {
     const [message, setMessage] = useState<string>("");
-    const { userId: currentUser, setToken } = useAppAuth();
+    const { userId: currentUser, setToken, token } = useAppAuth();
     const { connectSocket, disconnectSocket } = useSocket();
     const { isSocketAuthenticated } = useSocketAuth();
     const { sendMessage, listenToMessages, stopListeningToMessages } =
@@ -32,7 +33,8 @@ const Homepage: React.FC = () => {
         setMessage("");
     };
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
+        await updateUserConnectionStatus(token, false);
         disconnectSocket();
         stopListeningToMessages();
         localStorage.removeItem("access_token");

@@ -1,1 +1,1 @@
-export type { Token } from "./token";
+export type { DecodedToken } from "./decoded-token";
