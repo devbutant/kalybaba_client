@@ -4,8 +4,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import { CombinedAuthProvider } from "./contexts/auth/combined-auth";
-import { ChatProvider } from "./contexts/chat";
-import { FriendsProvider } from "./contexts/friends/friends.context.tsx";
+import { CombinedChatProvider } from "./contexts/chat/combined-chat";
 import "./index.css";
 
 const queryClient = new QueryClient();
@@ -15,11 +14,9 @@ createRoot(document.getElementById("root")!).render(
         <CombinedAuthProvider>
             <QueryClientProvider client={queryClient}>
                 <BrowserRouter>
-                    <ChatProvider>
-                        <FriendsProvider>
-                            <App />
-                        </FriendsProvider>
-                    </ChatProvider>
+                    <CombinedChatProvider>
+                        <App />
+                    </CombinedChatProvider>
                 </BrowserRouter>
             </QueryClientProvider>
         </CombinedAuthProvider>

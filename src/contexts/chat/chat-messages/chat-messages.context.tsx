@@ -1,6 +1,6 @@
 import React, { createContext, Dispatch, ReactNode, useState } from "react";
 
-interface ChatContextType {
+export interface ChatContextType {
     messages: Array<{ id: string; userId: string; data: string }>;
     setMessages: Dispatch<
         React.SetStateAction<
