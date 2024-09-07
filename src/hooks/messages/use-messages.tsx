@@ -1,5 +1,5 @@
-import { useSocketAuth } from "../auth/socket";
-import { useChat } from "../chat";
+import { useSocketAuth } from "../contexts-hooks/auth/socket";
+import { useChat } from "../contexts-hooks/chat";
 
 export const useMessages = () => {
     const { socket } = useSocketAuth();

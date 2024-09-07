@@ -1,6 +1,6 @@
 import React from "react";
+import { useFriends } from "../../../hooks/contexts-hooks/friends";
 import { useFriendsSelection } from "../../../hooks/friends/friends-selection";
-import { useFriends } from "../../../hooks/friends/use-friends";
 import { useUsersList } from "../../../hooks/users-list";
 import { UserDto } from "../../../types/dtos";
 import { Button } from "../../button";

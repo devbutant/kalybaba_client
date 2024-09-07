@@ -1,4 +1,4 @@
-import { useFriends } from "../use-friends";
+import { useFriends } from "../../contexts-hooks/friends";
 
 export const useFriendsList = () => {
     const { setFriends } = useFriends();

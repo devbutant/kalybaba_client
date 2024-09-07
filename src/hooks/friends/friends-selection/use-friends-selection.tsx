@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useFriends } from "../use-friends";
+import { useFriends } from "../../contexts-hooks/friends";
 import { useOutsideClick } from "./use-outside-click";
 
 export const useFriendsSelection = () => {
