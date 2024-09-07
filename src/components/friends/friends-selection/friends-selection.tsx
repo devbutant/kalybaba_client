@@ -3,6 +3,7 @@ import { useFriendsSelection } from "../../../hooks/friends/friends-selection";
 import { useFriends } from "../../../hooks/friends/use-friends";
 import { useUsersList } from "../../../hooks/users-list";
 import { UserDto } from "../../../types/dto/user.dto";
+import { Button } from "../../button";
 
 const FriendsSelection: React.FC = () => {
     const { data: users } = useUsersList();
@@ -13,12 +14,12 @@ const FriendsSelection: React.FC = () => {
 
     return (
         <div className="relative p-4" ref={containerRef}>
-            <button
+            <Button
                 onClick={() => setIsOpen(!isOpen)}
-                className="bg-blue-500 text-white px-4 py-2 rounded"
+                className="bg-blue-500 text-white"
             >
                 Select Friends
-            </button>
+            </Button>
 
             {isOpen && (
                 <div className="absolute top-full mt-2 w-full bg-white shadow-lg rounded border border-gray-200">

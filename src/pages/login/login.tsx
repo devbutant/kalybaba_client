@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { Button } from "../../components/button";
 import { useAppAuth } from "../../hooks/auth/app";
 
 type LoginData = {
@@ -105,14 +106,12 @@ const Login: React.FC = () => {
                             </a>
                         </div>
                     </div>
-                    <div>
-                        <button
-                            type="submit"
-                            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
-                        >
-                            Connexion
-                        </button>
-                    </div>
+                    <Button
+                        type="submit"
+                        className="mt-2 w-full bg-indigo-600 text-white shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                    >
+                        Connexion
+                    </Button>
                 </form>
                 <p className="mt-6 text-center text-gray-600">
                     Pas encore de compte ?{" "}

@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Button } from "../../components/button";
 
 const Register: React.FC = () => {
     return (
@@ -29,12 +30,12 @@ const Register: React.FC = () => {
                         placeholder="Confirmer le mot de passe"
                         className="w-full p-3 border border-gray-300 rounded-lg"
                     />
-                    <button
+                    <Button
                         type="submit"
-                        className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition duration-300"
+                        className="mt-2 w-full bg-indigo-600 text-white shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
                     >
                         S'inscrire
-                    </button>
+                    </Button>
                 </form>
                 <p className="mt-4 text-sm text-gray-600 text-center">
                     Vous avez déjà un compte ?{" "}
