@@ -1,4 +1,5 @@
 import React from "react";
+import { useAppAuth } from "../../../hooks/contexts-hooks/auth/app";
 import { useFriends } from "../../../hooks/contexts-hooks/friends";
 import { useFriendsSelection } from "../../../hooks/friends/friends-selection";
 import { useUsersList } from "../../../hooks/users-list";
@@ -8,6 +9,8 @@ import { Button } from "../../button";
 const FriendsSelection: React.FC = () => {
     const { data: users } = useUsersList();
     const { friends } = useFriends();
+
+    const { userId: currentUserId } = useAppAuth();
 
     const { handleSelectUser, isOpen, setIsOpen, containerRef } =
         useFriendsSelection();
@@ -24,9 +27,18 @@ const FriendsSelection: React.FC = () => {
             {isOpen && (
                 <div className="absolute top-full mt-2 w-full bg-white shadow-lg rounded border border-gray-200">
                     <ul className="max-h-60 overflow-y-auto">
-                        {users?.map((user: UserDto) => (
-                            <li key={user.id} className="p-2 hover:bg-gray-100">
-                                <label className="flex items-center">
+                        {users
+                            ?.filter(
+                                (user) =>
+                                    user.id !== currentUserId &&
+                                    !friends.includes(user.id)
+                            )
+                            .map((user: UserDto) => (
+                                <li
+                                    key={user.id}
+                                    className="p-2 hover:bg-gray-100 flex items-center"
+                                    onClick={() => handleSelectUser(user.id)}
+                                >
                                     <input
                                         type="checkbox"
                                         checked={friends.includes(user.id)}
@@ -35,10 +47,12 @@ const FriendsSelection: React.FC = () => {
                                         }
                                         className="mr-2"
                                     />
-                                    {user.name}
-                                </label>
-                            </li>
-                        ))}
+                                    <span>{user.name} </span>
+                                    {user.connected && (
+                                        <span className="w-2 h-2 bg-green-500 rounded-full ml-1" />
+                                    )}
+                                </li>
+                            ))}
                     </ul>
                 </div>
             )}
