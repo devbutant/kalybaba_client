@@ -14,7 +14,7 @@ export const useSocket = () => {
 
     const connectSocket = useCallback(() => {
         if (token && !socket) {
-            const newSocket = io(`${process.env.VITE_APP_API_URL}`);
+            const newSocket = io(`${import.meta.env.VITE_APP_API_URL}`);
 
             newSocket.on("connect", () => {
                 console.log("Connected to server");

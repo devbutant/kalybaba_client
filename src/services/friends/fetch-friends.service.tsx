@@ -5,7 +5,7 @@ export const fetchFriendList = async (
     token: string | null
 ): Promise<UserDto[]> => {
     const { data: friendList } = await axios.get(
-        `${process.env.VITE_APP_API_URL}/friends/list`,
+        `${import.meta.env.VITE_APP_API_URL}/friends/list`,
         {
             headers: {
                 Authorization: `Bearer ${token}`,
