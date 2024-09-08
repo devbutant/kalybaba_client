@@ -5,7 +5,7 @@ export const loginUser = async (
     userData: LoginDto
 ): Promise<LoginResponseDto> => {
     const response = await axios.post(
-        "http://localhost:3001/auth/login",
+        `${process.env.VITE_APP_API_URL}/auth/login`,
         userData
     );
     return response.data;
@@ -17,7 +17,7 @@ export const updateUserConnectionStatus = async (
 ): Promise<void> => {
     if (!token) return;
     await axios.patch(
-        `http://localhost:3001/users/connected`,
+        `${process.env.VITE_APP_API_URL}/users/connected`,
         { connected },
         {
             headers: {

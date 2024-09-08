@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CombinedAuthContext } from "../../../contexts/auth/combined-auth";
+import { CombinedAuthContext } from "../../../../contexts/auth/combined-auth";
 
 export const useCombinedAuth = () => {
     const context = useContext(CombinedAuthContext);
