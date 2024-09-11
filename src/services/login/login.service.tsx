@@ -1,13 +1,11 @@
 import axios from "axios";
 import { LoginDto, LoginResponseDto } from "../../types/dtos";
+import { API } from "../../utils/environment/variables";
 
 export const loginUser = async (
     userData: LoginDto
 ): Promise<LoginResponseDto> => {
-    const response = await axios.post(
-        `${import.meta.env.VITE_APP_API_URL}/auth/login`,
-        userData
-    );
+    const response = await axios.post(`${API.URL}/auth/login`, userData);
     return response.data;
 };
 
@@ -17,7 +15,7 @@ export const updateUserConnectionStatus = async (
 ): Promise<void> => {
     if (!token) return;
     await axios.patch(
-        `${import.meta.env.VITE_APP_API_URL}/users/connected`,
+        `${API.URL}/users/connected`,
         { connected },
         {
             headers: {

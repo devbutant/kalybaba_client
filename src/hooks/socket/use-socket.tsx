@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import io from "socket.io-client";
+import { API } from "../../utils/environment/variables";
 import { useAppAuth } from "../contexts-hooks/auth/app";
 import { useSocketAuth } from "../contexts-hooks/auth/socket";
 
@@ -14,7 +15,7 @@ export const useSocket = () => {
 
     const connectSocket = useCallback(() => {
         if (token && !socket) {
-            const newSocket = io(`${import.meta.env.VITE_APP_API_URL}`);
+            const newSocket = io(`${API.URL}`);
 
             newSocket.on("connect", () => {
                 console.log("Connected to server");
