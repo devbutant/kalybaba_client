@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import io from "socket.io-client";
-import { API } from "../../utils/environment/variables";
+import { API } from "../../utils/environment";
 import { useAppAuth } from "../contexts-hooks/auth/app";
 import { useSocketAuth } from "../contexts-hooks/auth/socket";
 

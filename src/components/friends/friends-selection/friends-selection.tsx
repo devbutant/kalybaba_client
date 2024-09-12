@@ -1,13 +1,13 @@
 import React from "react";
+import { useFriendListQuery } from "../../../api/queries/friends";
 import { useAppAuth } from "../../../hooks/contexts-hooks/auth/app";
 import { useFriends } from "../../../hooks/contexts-hooks/friends";
 import { useFriendsSelection } from "../../../hooks/friends/friends-selection";
-import { useFriendList } from "../../../hooks/users-list";
 import { UserDto } from "../../../types/dtos";
 import { Button } from "../../button";
 
 const FriendsSelection: React.FC = () => {
-    const { data: friendList } = useFriendList();
+    const { data: friendList } = useFriendListQuery();
     const { friends } = useFriends();
 
     const { userId: currentUserId } = useAppAuth();

@@ -1,6 +1,6 @@
 import axios from "axios";
-import { UserDto } from "../../types/dtos";
-import { API } from "../../utils/environment/variables";
+import { UserDto } from "../../../types";
+import { API } from "../../../utils/environment";
 
 export const fetchFriendList = async (
     token: string | null

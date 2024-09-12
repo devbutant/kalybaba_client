@@ -1,6 +1,6 @@
 import axios from "axios";
-import { LoginDto, LoginResponseDto } from "../../types/dtos";
-import { API } from "../../utils/environment/variables";
+import { LoginDto, LoginResponseDto } from "../../../types/dtos";
+import { API } from "../../../utils/environment";
 
 export const loginUser = async (
     userData: LoginDto

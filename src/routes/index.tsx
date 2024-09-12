@@ -2,6 +2,7 @@
 import React from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 import { useAppAuth } from "../hooks/contexts-hooks/auth/app";
+import { Chat } from "../pages/chat";
 import { Homepage } from "../pages/homepage";
 import { Login } from "../pages/login";
 import { Register } from "../pages/register/register";
@@ -25,6 +26,10 @@ export function Router() {
         {
             path: "/",
             element: <PrivateRoute element={<Homepage />} />,
+        },
+        {
+            path: "/chat",
+            element: <PrivateRoute element={<Chat />} />,
         },
         {
             path: "/connexion",

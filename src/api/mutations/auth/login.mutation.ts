@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { useAppAuth } from "../../hooks/contexts-hooks/auth/app";
+import { useAppAuth } from "../../../hooks/contexts-hooks/auth/app";
+import { LoginDto, LoginResponseDto } from "../../../types/dtos";
 import { loginUser } from "../../services/login/login.service";
-import { LoginDto, LoginResponseDto } from "../../types/dtos";
 import { useUpdateStatusMutation } from "./connection-mutation";
 
 export const useLoginMutation = () => {
