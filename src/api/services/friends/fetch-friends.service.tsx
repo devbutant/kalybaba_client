@@ -5,7 +5,7 @@ import { API } from "../../../utils/environment";
 export const fetchFriendList = async (
     token: string | null
 ): Promise<UserDto[]> => {
-    const { data: friendList } = await axios.get(`${API.URL}/friends/list`, {
+    const { data: friendList } = await axios.get(`${API.URL}/friends`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
