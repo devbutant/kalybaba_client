@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { updateUserConnectionStatus } from "../../api/services/login";
 import { Button } from "../../components/button";
 import { ChatContent } from "../../components/chat/chat-content/chat-content";
 import { FriendsList } from "../../components/friends/friends-list";
@@ -11,11 +10,10 @@ import { useSocket } from "../../hooks/socket";
 
 const Chat: React.FC = () => {
     const [message, setMessage] = useState<string>("");
-    const { userId: currentUser, setToken, token } = useAppAuth();
-    const { connectSocket, disconnectSocket } = useSocket();
+    const { userId: currentUser } = useAppAuth();
+    const { connectSocket } = useSocket();
     const { isSocketAuthenticated } = useSocketAuth();
-    const { sendMessage, listenToMessages, stopListeningToMessages } =
-        useMessages();
+    const { sendMessage, listenToMessages } = useMessages();
 
     useEffect(() => {
         if (currentUser) {
@@ -33,26 +31,12 @@ const Chat: React.FC = () => {
         setMessage("");
     };
 
-    const handleLogout = async () => {
-        await updateUserConnectionStatus(token, false);
-        disconnectSocket();
-        stopListeningToMessages();
-        localStorage.removeItem("access_token");
-        setToken(null);
-    };
-
     return (
         <div className="h-screen py-20">
             <div className="flex flex-col justify-center h-full w-2/5 min-w-[40rem] shadow-md mx-auto">
                 <div className="flex-1 overflow-auto p-4">
                     <FriendsList />
                     <FriendsSelection />
-                    <Button
-                        onClick={handleLogout}
-                        className="bg-red-500 text-white"
-                    >
-                        Déconnexion
-                    </Button>
 
                     <hr className="my-5" />
                     <ChatContent />
