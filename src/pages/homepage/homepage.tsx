@@ -5,13 +5,7 @@ const Homepage: React.FC = () => {
     const { data: ads } = useAdListQuery();
 
     return (
-        <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-            <header className="bg-blue-600 text-white py-4 w-full shadow-md">
-                <h1 className="text-center text-3xl font-bold">
-                    Bienvenue sur Yadetout
-                </h1>
-            </header>
-
+        <div className="min-h-screenflex flex-col items-center justify-center">
             <main className="flex flex-col items-center justify-center flex-1 text-center px-4">
                 <h2 className="text-2xl font-semibold mb-6">
                     Dernières annonces
@@ -36,10 +30,6 @@ const Homepage: React.FC = () => {
                         ))}
                 </div>
             </main>
-
-            <footer className="bg-gray-800 text-white py-4 w-full text-center">
-                <p>&copy; 2024 Yadetout</p>
-            </footer>
         </div>
     );
 };

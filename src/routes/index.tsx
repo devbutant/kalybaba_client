@@ -2,6 +2,7 @@
 import React from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 import { useAppAuth } from "../hooks/contexts-hooks/auth/app";
+import { CompactLayout } from "../layouts/compact";
 import { Chat } from "../pages/chat";
 import { Homepage } from "../pages/homepage";
 import { Login } from "../pages/login";
@@ -25,11 +26,11 @@ export function Router() {
     return useRoutes([
         {
             path: "/",
-            element: <PrivateRoute element={<Homepage />} />,
-        },
-        {
-            path: "/chat",
-            element: <PrivateRoute element={<Chat />} />,
+            element: <PrivateRoute element={<CompactLayout />} />,
+            children: [
+                { path: "/", element: <Homepage /> },
+                { path: "chat", element: <Chat /> },
+            ],
         },
         {
             path: "/connexion",
