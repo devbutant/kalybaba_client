@@ -1,9 +1,5 @@
 import React from "react";
-
-// TODO: a mettre dans les types
-interface ProfileButtonProps {
-    onClick: () => void;
-}
+import { ProfileButtonProps } from "../../../../../types/component-props";
 
 const ProfileButton: React.FC<ProfileButtonProps> = ({ onClick }) => (
     <button
