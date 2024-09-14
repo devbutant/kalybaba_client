@@ -1,4 +1,4 @@
-import { ChatContextType } from "./chat-context.type";
+import { ChatContextType } from "./chat.context.type";
 import { FriendsContextType } from "./friends.context.type";
 
 export interface CombinedChatContextType {

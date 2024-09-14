@@ -3,8 +3,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
-import { CombinedAuthProvider } from "./contexts/auth/combined-auth";
-import { CombinedChatProvider } from "./contexts/chat/combined-chat";
+import { CombinedAuthProvider } from "./contexts/auth";
+import { CombinedChatProvider } from "./contexts/chat";
 import "./index.css";
 
 const queryClient = new QueryClient();

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useLoginMutation } from "../../api/mutations/auth/login.mutation";
-import { LoginForm } from "../../components/login/form/login-form";
+import { LoginForm } from "../../components/login";
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState("");

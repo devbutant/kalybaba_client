@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 
-// Hook to detect clicks outside of a component
 export function useOutsideClick(handler: () => void) {
     const ref = useRef<HTMLDivElement>(null);
 

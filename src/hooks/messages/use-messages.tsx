@@ -1,7 +1,7 @@
-import { useSocketAuth } from "../contexts-hooks/auth/socket";
+import { useSocketAuth } from "../contexts-hooks/auth";
 import { useChat } from "../contexts-hooks/chat";
 
-export const useMessages = () => {
+const useMessages = () => {
     const { socket } = useSocketAuth();
     const { setMessages } = useChat();
 
@@ -32,3 +32,7 @@ export const useMessages = () => {
 
     return { sendMessage, listenToMessages, stopListeningToMessages };
 };
+
+useMessages.displayName = "useMessages";
+
+export { useMessages };

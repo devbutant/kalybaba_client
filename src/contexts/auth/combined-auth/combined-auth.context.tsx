@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useContext } from "react";
 import { CombinedAuthContextType } from "../../../types/contexts";
-import { AppAuthContext, AppAuthProvider } from "../app-auth";
+import { AppAuthContext, AppAuthProvider } from "../index";
 import {
     SocketAuthContext,
     SocketAuthProvider,
