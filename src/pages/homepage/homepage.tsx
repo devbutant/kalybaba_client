@@ -1,5 +1,6 @@
 import React from "react";
 import { useAdListQuery } from "../../api/queries/ads";
+import { AdCard } from "../../components/ad-card";
 
 const Homepage: React.FC = () => {
     const { data: ads } = useAdListQuery();
@@ -12,22 +13,7 @@ const Homepage: React.FC = () => {
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {ads &&
-                        ads.map((ad, index) => (
-                            <div
-                                key={index}
-                                className="bg-white shadow-lg rounded-lg p-6 max-w-sm"
-                            >
-                                <h3 className="text-xl font-bold mb-2">
-                                    {ad.title}
-                                </h3>
-                                <p className="text-gray-700 mb-4">
-                                    {ad.description}
-                                </p>
-                                <span className="text-green-600 font-semibold">
-                                    {ad.price}
-                                </span>
-                            </div>
-                        ))}
+                        ads.map((ad, index) => <AdCard key={index} ad={ad} />)}
                 </div>
             </main>
         </div>

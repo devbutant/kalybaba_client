@@ -3,7 +3,7 @@ export interface AdDto {
     title: string;
     description: string;
     address: string;
-    price: string;
+    price: number;
     authorId: string;
     categoryId: string;
     typeId: string;
