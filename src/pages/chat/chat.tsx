@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { Button } from "../../components/button";
 import { ChatContent } from "../../components/chat";
-import { FriendsList } from "../../components/friends/friends-list";
-import { FriendsSelection } from "../../components/friends/friends-selection";
+import { FriendsList } from "../../components/chat/friends/friends-list";
+import { FriendsSelection } from "../../components/chat/friends/friends-selection";
 import { useSocketAuth } from "../../hooks/contexts-hooks/auth";
 import { useAppAuth } from "../../hooks/contexts-hooks/auth/app";
 import { useMessages } from "../../hooks/messages";
