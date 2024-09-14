@@ -7,7 +7,7 @@ const Homepage: React.FC = () => {
 
     return (
         <div className="min-h-screenflex flex-col items-center justify-center">
-            <main className="flex flex-col items-center justify-center flex-1 text-center px-4">
+            <main className="flex flex-col items-center justify-center flex-1 px-4">
                 <h2 className="text-2xl font-semibold mb-6">
                     Dernières annonces
                 </h2>

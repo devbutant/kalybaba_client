@@ -19,4 +19,12 @@ export interface AdDto {
         name: string;
         description: string;
     };
+    author: {
+        id: string;
+        email: string;
+        name: string;
+        address: string;
+        phone: string;
+        connected: boolean;
+    };
 }

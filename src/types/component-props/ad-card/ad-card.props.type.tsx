@@ -4,5 +4,10 @@ export interface AdCardProps {
         title: string;
         description: string;
         price: number;
+        author: {
+            id: string;
+            name: string;
+            address: string;
+        };
     };
 }

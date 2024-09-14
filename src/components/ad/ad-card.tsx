@@ -9,11 +9,28 @@ const AdCard: React.FC<React.PropsWithChildren<AdCardProps>> = ({
     return (
         <NavLink
             to={`/ads/${ad.id}`}
-            className={"bg-white shadow-lg rounded-lg p-6 max-w-sm"}
+            className="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:bg-gray-200 flex flex-col h-50"
         >
-            <h3 className="text-xl font-bold mb-2">{ad.title}</h3>
-            <p className="text-gray-700 mb-4">{ad.description}</p>
-            <span className="text-green-600 font-semibold">{ad.price}</span>
+            <div className="p-6 flex-1">
+                <h3 className="text-2xl font-semibold mb-2 text-gray-800">
+                    {ad.title}
+                </h3>
+                <p className="text-gray-600 mb-4 truncate-multiline">
+                    {ad.description}
+                </p>
+            </div>
+
+            <div className="bg-gray-100 p-4 border-t border-gray-200">
+                <div className="flex justify-between items-center">
+                    <span className="text-lg text-gray-500">
+                        {ad.author.name}
+                    </span>
+                    <span className="text-lg font-bold text-green-600">
+                        ${ad.price.toFixed(2)}
+                    </span>
+                </div>
+            </div>
+
             {children}
         </NavLink>
     );
