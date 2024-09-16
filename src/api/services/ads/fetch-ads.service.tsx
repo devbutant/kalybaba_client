@@ -4,6 +4,7 @@ import { API } from "../../../utils/environment";
 
 export const fetchAdList = async (): Promise<AdDto[]> => {
     const { data: adList } = await axios.get(`${API.URL}/ads`, {
+        method: "GET",
         withCredentials: true,
     });
 

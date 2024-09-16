@@ -11,7 +11,7 @@ const useLogout = () => {
     const handleLogout = async (): Promise<void> => {
         if (token) {
             try {
-                await updateUserConnectionStatus(token, false);
+                await updateUserConnectionStatus(false);
                 disconnectSocket();
                 stopListeningToMessages();
                 localStorage.removeItem("access_token");
