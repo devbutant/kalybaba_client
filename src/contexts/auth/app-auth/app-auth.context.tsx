@@ -27,6 +27,7 @@ export const AppAuthProvider: React.FC<{ children: ReactNode }> = ({
 
     const isAuthenticated = token !== null;
 
+    // Voir si c'est utilisé ça
     const logout = () => {
         setToken(null);
     };
