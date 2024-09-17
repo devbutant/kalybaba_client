@@ -7,15 +7,32 @@ const LoginSubmitButton: React.FC<
     React.PropsWithChildren<LoginSubmitButtonProps>
 > = (props) => {
     const { isSubmitting, errors } = props;
-
     const handleTest = async () => {
         try {
-            const rs = await axios.get(`${API.URL}/auth/test`, {
+            const response = await axios.get(`${API.URL}/auth/test`, {
                 withCredentials: true,
             });
-            console.log(rs);
+
+            // Req avec fetch:
+            const res = fetch(`${API.URL}/auth/test`, {
+                method: "GET",
+                credentials: "include",
+            });
+            console.log(res);
+
+            console.log("Response data:", response.data); // Affichage de la réponse du serveur
+
+            // Afficher les en-têtes de réponse pour vérifier les cookies
+            console.log("Response headers:", response.headers);
         } catch (error) {
-            console.error("Error during request:", error);
+            if (axios.isAxiosError(error)) {
+                console.error(
+                    "Axios error:",
+                    error.response?.data || error.message
+                );
+            } else {
+                console.error("Unknown error:", error);
+            }
         }
     };
 

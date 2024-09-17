@@ -12,9 +12,6 @@ export const loginUser = async (
 export const updateUserConnectionStatus = async (
     connected: boolean
 ): Promise<void> => {
-    console.log("connected");
-    return;
-
     await axios.patch(
         `${API.URL}/users/connected`,
         { connected },
