@@ -1,4 +1,3 @@
-// Router.tsx
 import React from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 import { useAppAuth } from "../hooks/contexts-hooks/auth/app";
@@ -6,6 +5,7 @@ import { CompactLayout } from "../layouts/compact";
 import { Chat } from "../pages/chat";
 import { Homepage } from "../pages/homepage";
 import { Login } from "../pages/login";
+import { MyAds } from "../pages/my-ads";
 import { Register } from "../pages/register/register";
 
 const PrivateRoute: React.FC<{ element: React.ReactNode }> = ({ element }) => {
@@ -29,7 +29,8 @@ export function Router() {
             element: <PrivateRoute element={<CompactLayout />} />,
             children: [
                 { path: "/", element: <Homepage /> },
-                { path: "chat", element: <Chat /> },
+                { path: "/chat", element: <Chat /> },
+                { path: "/mes-annonces", element: <MyAds /> },
             ],
         },
         {

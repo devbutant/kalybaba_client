@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { useLogout } from "../../../../../hooks/auth";
 
 const DropdownMenu: React.FC = () => {
@@ -17,13 +18,13 @@ const DropdownMenu: React.FC = () => {
             >
                 Mon profil
             </a>
-            <a
-                href="#"
+            <NavLink
+                to="/mes-annonces"
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 role="menuitem"
             >
                 Mes annonces
-            </a>
+            </NavLink>
             <a
                 href="#"
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
