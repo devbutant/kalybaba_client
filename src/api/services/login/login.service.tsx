@@ -14,13 +14,15 @@ export const updateUserConnectionStatus = async (
     connected: boolean
 ): Promise<void> => {
     if (!token) return;
-    await axios.patch(
-        `${API.URL}/users/connected`,
-        { connected },
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }
-    );
+
+    const options = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+    const data = {
+        connected,
+    };
+
+    await axios.patch(`${API.URL}/users/connected`, data, options);
 };
