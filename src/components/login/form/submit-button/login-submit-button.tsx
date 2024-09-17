@@ -9,21 +9,15 @@ const LoginSubmitButton: React.FC<
     const { isSubmitting, errors } = props;
     const handleTest = async () => {
         try {
-            const response = await axios.get(`${API.URL}/auth/test`, {
+            const options = {
                 withCredentials: true,
-            });
+            };
 
-            // Req avec fetch:
-            const res = fetch(`${API.URL}/auth/test`, {
-                method: "GET",
-                credentials: "include",
-            });
-            console.log(res);
+            const response = await axios.get(`${API.URL}/auth/test`, options);
+
+            // return response.data;
 
             console.log("Response data:", response.data); // Affichage de la réponse du serveur
-
-            // Afficher les en-têtes de réponse pour vérifier les cookies
-            console.log("Response headers:", response.headers);
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.error(

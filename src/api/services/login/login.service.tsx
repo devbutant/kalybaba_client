@@ -10,13 +10,19 @@ export const loginUser = async (
 };
 
 export const updateUserConnectionStatus = async (
+    token: string | null,
     connected: boolean
 ): Promise<void> => {
-    await axios.patch(
-        `${API.URL}/users/connected`,
-        { connected },
-        {
-            withCredentials: true,
-        }
-    );
+    if (!token) return;
+
+    const options = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+    const data = {
+        connected,
+    };
+
+    await axios.patch(`${API.URL}/users/connected`, data, options);
 };
