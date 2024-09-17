@@ -1,27 +1,6 @@
 import { FieldValues } from "react-hook-form";
 import { InputProps } from "../../../types";
 
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-// TODO: vertical split / Voir la photo sur mon tel pour réorganiser le projet (plus logiique)
-
 // TODO: gérer les props
 const Input = <T extends FieldValues>({
     type,
