@@ -6,8 +6,8 @@ const Homepage: React.FC = () => {
     const { data: ads } = useAdListQuery();
 
     return (
-        <div className="min-h-screenflex flex-col items-center justify-center">
-            <main className="flex flex-col items-center justify-center flex-1 px-4">
+        <div className="min-h-screenflex flex-col">
+            <main className="flex flex-col flex-1">
                 <h2 className="text-2xl font-semibold mb-6">
                     Dernières annonces
                 </h2>

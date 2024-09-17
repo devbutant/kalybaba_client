@@ -6,17 +6,15 @@ import { DropdownMenuProvider } from "../../contexts/header";
 
 export const CompactLayout: React.FunctionComponent = () => {
     return (
-        <>
+        <div className="min-h-screen flex flex-1 flex-col">
             <DropdownMenuProvider>
                 <Header />
             </DropdownMenuProvider>
-            <main>
-                <div className="my-4 mx-auto max-w-screen-xl min-h-screen">
-                    <Outlet />
-                </div>
+            <main className="my-4 flex-grow mx-auto max-w-screen-xl">
+                <Outlet />
             </main>
 
             <Footer />
-        </>
+        </div>
     );
 };

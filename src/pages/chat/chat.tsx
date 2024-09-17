@@ -32,31 +32,29 @@ const Chat: React.FC = () => {
     };
 
     return (
-        <div className="h-screen py-20">
-            <div className="flex flex-col justify-center h-full w-2/5 min-w-[40rem] shadow-md mx-auto">
-                <div className="flex-1 overflow-auto p-4">
-                    <FriendsList />
-                    <FriendsSelection />
+        <div className="flex flex-col justify-center h-full w-2/5 min-w-[40rem] shadow-md mx-auto">
+            <div className="flex-1 overflow-auto p-4">
+                <FriendsList />
+                <FriendsSelection />
 
-                    <hr className="my-5" />
-                    <ChatContent />
-                </div>
+                <hr className="my-5" />
+                <ChatContent />
+            </div>
 
-                <div className="p-4 border-t border-gray-200 bg-white flex items-center">
-                    <input
-                        type="text"
-                        value={message}
-                        onChange={handleChange}
-                        placeholder="Enter your message"
-                        className="border p-2 flex-1 rounded-lg mr-2"
-                    />
-                    <Button
-                        onClick={handleSendMsg}
-                        className="bg-blue-500 text-white"
-                    >
-                        Envoyer
-                    </Button>
-                </div>
+            <div className="p-4 border-t border-gray-200 bg-white flex items-center">
+                <input
+                    type="text"
+                    value={message}
+                    onChange={handleChange}
+                    placeholder="Ecrire un nouveau message"
+                    className="border p-2 flex-1 rounded-lg mr-2"
+                />
+                <Button
+                    onClick={handleSendMsg}
+                    className="bg-blue-500 text-white"
+                >
+                    Envoyer
+                </Button>
             </div>
         </div>
     );
