@@ -7,8 +7,6 @@ export const fetchAdList = async (token: string | null): Promise<AdDto[]> => {
         headers: {
             Authorization: `Bearer ${token}`,
         },
-        method: "GET",
-        withCredentials: true,
     });
 
     return adList;
