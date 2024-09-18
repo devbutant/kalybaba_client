@@ -11,7 +11,6 @@ export const fetchSingleAd = async (
             Authorization: `Bearer ${token}`,
         },
     });
-    console.log("singleAd", singleAd);
 
     return singleAd;
 };
