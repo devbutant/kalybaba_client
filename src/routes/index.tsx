@@ -7,6 +7,7 @@ import { Homepage } from "../pages/homepage";
 import { Login } from "../pages/login";
 import { MyAds } from "../pages/my-ads";
 import { Register } from "../pages/register/register";
+import { SingleAd } from "../pages/single-ad";
 
 const PrivateRoute: React.FC<{ element: React.ReactNode }> = ({ element }) => {
     const { isAuthenticated } = useAppAuth();
@@ -31,6 +32,7 @@ export function Router() {
                 { path: "/", element: <Homepage /> },
                 { path: "/chat", element: <Chat /> },
                 { path: "/mes-annonces", element: <MyAds /> },
+                { path: "/ads/:id", element: <SingleAd /> },
             ],
         },
         {
