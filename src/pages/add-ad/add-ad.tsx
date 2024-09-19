@@ -1,21 +1,11 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppAuth } from "../../hooks/contexts-hooks/auth";
+import { AdDto } from "../../types";
 import { API } from "../../utils/environment";
 
 type FormValues = {
-    title: string;
-    description: string;
-    address: string; // Ajout de l'adresse
-    price: number;
-    authorId: string; // Ajout de l'ID de l'auteur
-    categoryId: string; // Ajout de l'ID de la catégorie
-    typeId: string; // Ajout de l'ID du type
-};
-
-type PostAdResponseDto = {
-    id: string;
     title: string;
     description: string;
     address: string;
@@ -23,33 +13,20 @@ type PostAdResponseDto = {
     authorId: string;
     categoryId: string;
     typeId: string;
-    createdAt: string; // Utiliser string car c'est un format ISO
-    updatedAt: string; // Utiliser string car c'est un format ISO
-    type: {
-        id: string;
-        name: string;
-        description: string;
-    };
-    category: {
-        id: string;
-        name: string;
-        description: string;
-    };
-    author?: {
-        id: string;
-        email: string;
-        name: string;
-        password?: string; // À éviter de renvoyer pour des raisons de sécurité
-        address: string;
-        phone: string;
-        connected: boolean;
-        createdAt: string; // Utiliser string car c'est un format ISO
-        updatedAt: string; // Utiliser string car c'est un format ISO
-    };
+};
+
+type Category = {
+    id: string;
+    name: string;
+};
+
+type Type = {
+    id: string;
+    name: string;
 };
 
 const AddAd = () => {
-    const { token } = useAppAuth();
+    const { token, userId } = useAppAuth();
 
     const {
         register,
@@ -57,51 +34,67 @@ const AddAd = () => {
         formState: { errors },
     } = useForm<FormValues>();
 
-    const addNewAd = async (newAd: FormValues) => {
-        const response = await axios.post<PostAdResponseDto>(
-            `${API.URL}/ads`,
-            {
-                title: newAd.title,
-                description: newAd.description,
-                address: newAd.address, // Assure-toi que newAd contient aussi l'adresse
-                price: newAd.price,
-                authorId: newAd.authorId, // Assure-toi que newAd contient authorId
-                categoryId: newAd.categoryId, // Assure-toi que newAd contient categoryId
-                typeId: newAd.typeId, // Assure-toi que newAd contient typeId
-                createdAt: new Date().toISOString(), // Date actuelle au format ISO
-                updatedAt: new Date().toISOString(), // Date actuelle au format ISO
-            },
-            {
+    const { data: categories, isLoading: loadingCategories } = useQuery<
+        Category[]
+    >({
+        queryKey: ["categories"],
+        queryFn: async () => {
+            const response = await axios.get<Category[]>(
+                `${API.URL}/categories`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            return response.data;
+        },
+    });
+
+    const { data: types, isLoading: loadingTypes } = useQuery<Type[]>({
+        queryKey: ["types"],
+        queryFn: async () => {
+            const response = await axios.get<Type[]>(`${API.URL}/types`, {
                 headers: {
-                    Authorization: `Bearer ${token}`, // Ajouter le token à l'en-tête Authorization
+                    Authorization: `Bearer ${token}`,
                 },
-            }
-        );
+            });
+            return response.data;
+        },
+    });
+
+    const addNewAd = async (newAd: FormValues) => {
+        console.log("newAd", newAd);
+        const response = await axios.post<AdDto>(`${API.URL}/ads`, newAd, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
         return response.data;
     };
 
-    const mutation = useMutation<PostAdResponseDto, Error, FormValues>({
+    const mutation = useMutation<AdDto, Error, FormValues>({
         mutationFn: addNewAd,
-        onSuccess: async (data) => {
+        onSuccess: (data) => {
             console.log("Annonce déposée avec succès :", data);
         },
         onError: (error) => {
             console.error("Erreur de connexion :", error);
         },
     });
-
     const onSubmit: SubmitHandler<FormValues> = (data) => {
-        mutation.mutate(data, {
-            onSuccess: (response) => {
-                console.log("Annonce déposée avec succès :", response.title);
-                // Rediriger ou afficher un message de succès
-            },
-            onError: (error) => {
-                console.error("Erreur lors du dépôt de l'annonce :", error);
-                // Gérer les erreurs (afficher un message, etc.)
-            },
-        });
+        if (!token || !userId) {
+            console.error("Token non disponible");
+            return;
+        }
+
+        const adWithAuthorId = { ...data, authorId: userId }; // Ajout de authorId
+        mutation.mutate(adWithAuthorId);
     };
+
+    if (loadingCategories || loadingTypes) {
+        return <p>Chargement des données...</p>;
+    }
 
     return (
         <div className="max-w-2xl mx-auto p-6 bg-white rounded-md shadow-md mt-8">
@@ -114,10 +107,9 @@ const AddAd = () => {
                         htmlFor="title"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        Titre de l'annonce
+                        Titre
                     </label>
                     <input
-                        type="text"
                         id="title"
                         {...register("title", {
                             required: "Le titre est requis",
@@ -131,6 +123,7 @@ const AddAd = () => {
                     )}
                 </div>
 
+                {/* Champ description */}
                 <div>
                     <label
                         htmlFor="description"
@@ -152,22 +145,42 @@ const AddAd = () => {
                     )}
                 </div>
 
+                {/* Champ address */}
+                <div>
+                    <label
+                        htmlFor="address"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Adresse
+                    </label>
+                    <input
+                        id="address"
+                        {...register("address", {
+                            required: "L'adresse est requise",
+                        })}
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    />
+                    {errors.address && (
+                        <span className="text-red-500 text-sm">
+                            {errors.address.message}
+                        </span>
+                    )}
+                </div>
+
+                {/* Champ price */}
                 <div>
                     <label
                         htmlFor="price"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        Prix (en €)
+                        Prix
                     </label>
                     <input
-                        type="number"
                         id="price"
+                        type="number"
                         {...register("price", {
                             required: "Le prix est requis",
-                            min: {
-                                value: 0,
-                                message: "Le prix doit être positif",
-                            },
+                            valueAsNumber: true,
                         })}
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                     />
@@ -178,11 +191,74 @@ const AddAd = () => {
                     )}
                 </div>
 
+                {/* Champ typeId avec une liste déroulante */}
+                <div>
+                    <label
+                        htmlFor="typeId"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Type
+                    </label>
+                    <select
+                        id="typeId"
+                        {...register("typeId", {
+                            required: "Le type est requis",
+                        })}
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    >
+                        <option value="">Sélectionnez un type</option>
+                        {types?.map((type) => (
+                            <option key={type.id} value={type.id}>
+                                {type.name}
+                            </option>
+                        ))}
+                    </select>
+                    {errors.typeId && (
+                        <span className="text-red-500 text-sm">
+                            {errors.typeId.message}
+                        </span>
+                    )}
+                </div>
+
+                {/* Champ categoryId avec une liste déroulante */}
+                <div>
+                    <label
+                        htmlFor="categoryId"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Catégorie
+                    </label>
+                    <select
+                        id="categoryId"
+                        {...register("categoryId", {
+                            required: "La catégorie est requise",
+                        })}
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    >
+                        <option value="">Sélectionnez une catégorie</option>
+                        {categories?.map((category) => (
+                            <option key={category.id} value={category.id}>
+                                {category.name}
+                            </option>
+                        ))}
+                    </select>
+                    {errors.categoryId && (
+                        <span className="text-red-500 text-sm">
+                            {errors.categoryId.message}
+                        </span>
+                    )}
+                </div>
+
+                {/* Soumission du formulaire */}
                 <button
                     type="submit"
                     className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
-                    Déposer l'annonce
+                    {mutation.isPending ? (
+                        <p>Envoi de l'annonce...</p>
+                    ) : (
+                        <p>Déposer l'annonce</p>
+                    )}
                 </button>
             </form>
 
