@@ -2,6 +2,7 @@ import React from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 import { useAppAuth } from "../hooks/contexts-hooks/auth/app";
 import { CompactLayout } from "../layouts/compact";
+import { AddAd } from "../pages/add-ad";
 import { Chat } from "../pages/chat";
 import { Homepage } from "../pages/homepage";
 import { Login } from "../pages/login";
@@ -33,6 +34,7 @@ export function Router() {
                 { path: "/chat", element: <Chat /> },
                 { path: "/mes-annonces", element: <MyAds /> },
                 { path: "/ads/:id", element: <SingleAd /> },
+                { path: "/deposer-une-annonce", element: <AddAd /> },
             ],
         },
         {
