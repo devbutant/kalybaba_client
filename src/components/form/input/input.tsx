@@ -1,13 +1,39 @@
-import { FieldValues } from "react-hook-form";
-import { InputProps } from "../../../types";
+import {
+    FieldError,
+    FieldValues,
+    Path,
+    UseFormRegister,
+} from "react-hook-form";
 
-// TODO: gérer les props
+interface Option {
+    value: string;
+    label: string;
+}
+
+interface InputProps<T extends FieldValues> {
+    type: string;
+    placeholder?: string;
+    name: Path<T>;
+    register: UseFormRegister<T>;
+    error?: FieldError | string;
+    valueAsNumber?: boolean;
+    requiredMsg?: string;
+    min?: number;
+    step?: number;
+    options?: Option[];
+}
+
 const Input = <T extends FieldValues>({
     type,
     placeholder,
     name,
     register,
     error,
+    valueAsNumber = false,
+    requiredMsg,
+    min,
+    step,
+    options,
 }: InputProps<T>) => {
     return (
         <div>
@@ -17,12 +43,33 @@ const Input = <T extends FieldValues>({
             >
                 {placeholder}
             </label>
-            <input
-                {...register(name)}
-                type={type}
-                placeholder={placeholder}
-                className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            />
+
+            {options && options.length > 0 ? (
+                <select
+                    id={String(name)}
+                    {...register(name, { valueAsNumber })}
+                    className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                >
+                    <option value="">Sélectionnez une option</option>
+                    {options.map((option) => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
+            ) : (
+                <input
+                    {...register(name, {
+                        required: requiredMsg || "Ce champ est requis",
+                        valueAsNumber: valueAsNumber,
+                    })}
+                    type={type}
+                    placeholder={placeholder}
+                    min={min}
+                    step={step}
+                    className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                />
+            )}
             {error && (
                 <p className="text-red-700 text-sm">
                     {typeof error === "string" ? error : error.message}

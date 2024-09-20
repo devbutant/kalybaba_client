@@ -1,7 +1,21 @@
+import { FiPlusCircle } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import { SearchBar } from "../search-bar";
 import { ChatButton } from "./chat";
 import { ProfileMenuDropdown } from "./profile";
 import { HeaderTitle } from "./title";
+
+const CreateAdButton = () => {
+    return (
+        <Link
+            to="/deposer-une-annonce"
+            className="flex items-center bg-blue-900 text-white mx-2 px-4 py-2 rounded-md hover:bg-blue-800 transition-colors"
+        >
+            <FiPlusCircle className="mr-2 text-xl" />
+            Déposer une annonce
+        </Link>
+    );
+};
 
 const Header = () => {
     return (
@@ -10,6 +24,7 @@ const Header = () => {
                 <HeaderTitle />
                 <div className="nav-buttons flex">
                     <SearchBar />
+                    <CreateAdButton />
                     <ChatButton />
                     <ProfileMenuDropdown />
                 </div>

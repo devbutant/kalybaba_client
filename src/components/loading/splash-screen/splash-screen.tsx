@@ -12,7 +12,7 @@
 export const SplashScreen = () => {
     return (
         <div className="h-full w-full flex flex-col gap-xxl items-center justify-center bg-bluegrey-25">
-            <h1> Chargement...</h1>
+            <h1> Chargement des données...</h1>
             {/* Prefer rendering animations and images */}
         </div>
     );

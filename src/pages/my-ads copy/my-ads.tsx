@@ -1,5 +1,5 @@
 import React from "react";
-import { useMyAdListQuery } from "../../api/queries/ads/my-ads";
+import { useMyAdListQuery } from "../../api/queries/my-ads";
 import { AdCard } from "../../components/ad/ad-card";
 
 const MyAds: React.FC = () => {
