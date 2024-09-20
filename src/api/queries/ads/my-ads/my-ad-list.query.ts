@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { useAppAuth } from "../../../hooks/contexts-hooks/auth/app";
-import { AdDto } from "../../../types";
-import { fetchMyAdList } from "../../services/my-ads";
+import { useAppAuth } from "../../../../hooks/contexts-hooks/auth/app";
+import { AdDto } from "../../../../types";
+import { fetchMyAdList } from "../../../services/my-ads";
 
 export const useMyAdListQuery = () => {
     const { token, userId } = useAppAuth();

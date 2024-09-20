@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useSingleAdQuery } from "../../api/queries/single-ad";
+import { useSingleAdQuery } from "../../api/queries/ads/single-ad";
 
 const SingleAd: React.FC = () => {
     const { id } = useParams<{ id: string }>();
