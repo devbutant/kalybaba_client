@@ -1,79 +1,23 @@
-import { useQuery } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import { useCategoryListQuery } from "../../api/queries/ads/categories/categories.query";
+import { Button } from "../../components/button";
 import { Input } from "../../components/form";
-import createAxiosInstance from "../../config/axios/axiosConfig";
+import { SplashScreen } from "../../components/loading";
+import { useCategory } from "../../hooks/ads/category";
 import { useCreateAd } from "../../hooks/ads/create";
-import { useAppAuth } from "../../hooks/contexts-hooks/auth";
-import { CreateAdDto } from "../../types";
+import { useType } from "../../hooks/ads/type";
 
-// type Category = {
-//     id: string;
-//     name: string;
-// };
-
-type Type = {
-    id: string;
-    name: string;
-};
-
-interface Option {
-    value: string;
-    label: string;
-}
-
-const AddAd: React.FC = () => {
-    const { token } = useAppAuth();
-    const axiosInstance = createAxiosInstance(token);
-
-    const { onFormSubmit, isSubmitting, mutationError, isSuccess } =
-        useCreateAd();
-
+const CreateAdd: React.FC = () => {
+    const { onFormSubmit, mutationError, isSuccess, form } = useCreateAd();
     const {
-        register,
         handleSubmit,
-        formState: { errors },
-    } = useForm<CreateAdDto>();
+        formState: { errors, isSubmitting },
+        register,
+    } = form;
 
-    // Aide moi a extraire ceci
-    // const { data: categories, isLoading: loadingCategories } = useQuery<
-    //     Category[]
-    // >({
-    //     queryKey: ["categories"],
-    //     queryFn: async () => {
-    //         const { data: categoryList } = await axiosInstance.get(
-    //             `/categories`
-    //         );
-    //         return categoryList;
-    //     },
-    // });
-    // fin
-
-    const { data: categories, isLoading: loadingCategories } =
-        useCategoryListQuery();
-
-    const categoryOptions: Option[] | undefined = categories?.map(
-        (category) => ({
-            value: category.id,
-            label: category.name,
-        })
-    );
-
-    const { data: types, isLoading: loadingTypes } = useQuery<Type[]>({
-        queryKey: ["types"],
-        queryFn: async () => {
-            const { data: typeList } = await axiosInstance.get(`/types`);
-            return typeList;
-        },
-    });
-
-    const typeOptions: Option[] | undefined = types?.map((type) => ({
-        value: type.id,
-        label: type.name,
-    }));
+    const { typeOptions, loadingTypes } = useType();
+    const { categoryOptions, loadingCategories } = useCategory();
 
     if (loadingCategories || loadingTypes) {
-        return <p>Chargement des données...</p>;
+        return <SplashScreen />;
     }
 
     return (
@@ -130,7 +74,7 @@ const AddAd: React.FC = () => {
                     options={categoryOptions}
                 />
 
-                <button
+                <Button
                     type="submit"
                     className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
@@ -139,7 +83,7 @@ const AddAd: React.FC = () => {
                     ) : (
                         <p>Déposer l'annonce</p>
                     )}
-                </button>
+                </Button>
             </form>
 
             {mutationError && (
@@ -157,6 +101,6 @@ const AddAd: React.FC = () => {
     );
 };
 
-AddAd.displayName = "AddAd";
+CreateAdd.displayName = "CreateAdd";
 
-export { AddAd };
+export { CreateAdd };

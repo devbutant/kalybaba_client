@@ -1,6 +1,6 @@
 import React from "react";
 import { useAdListQuery } from "../../api/queries/ads/ad-list";
-import { AdCard } from "../../components/ad";
+import { AdCard } from "../../components/ad/ad-card";
 
 const Homepage: React.FC = () => {
     const { data: ads } = useAdListQuery();

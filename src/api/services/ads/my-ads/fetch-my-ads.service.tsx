@@ -1,5 +1,5 @@
-import createAxiosInstance from "../../../config/axios/axiosConfig";
-import { AdDto } from "../../../types";
+import createAxiosInstance from "../../../../config/axios/axiosConfig";
+import { AdDto } from "../../../../types";
 
 export const fetchMyAdList = async (
     token: string | null,

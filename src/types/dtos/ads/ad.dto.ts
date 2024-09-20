@@ -32,3 +32,5 @@ export const adSchema = z.object({
 });
 
 export type AdDto = z.infer<typeof adSchema>;
+
+// TODO: voir pour utiliser des interfaces au lieu des types pour pouvoir étendre les types

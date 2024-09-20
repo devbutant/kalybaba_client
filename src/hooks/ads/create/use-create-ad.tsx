@@ -1,40 +1,33 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useCreateAdMutation } from "../../../api/mutations/ads/create/create-new-ad.mutation";
+import { useCreateAdMutation } from "../../../api/mutations/ads/create/create-ad.mutation";
 import { CreateAdDto } from "../../../types";
-import { createAdSchema } from "../../../types/dtos/ads";
 import { useAppAuth } from "../../contexts-hooks/auth/app";
 
 const useCreateAd = () => {
     const { userId } = useAppAuth();
 
-    const form = useForm<CreateAdDto>({
-        resolver: zodResolver(createAdSchema),
-    });
+    if (!userId) {
+        throw new Error("Vous devez être authentifié pour créer une annonce");
+    }
 
-    const {
-        register,
-        handleSubmit,
-        setError,
-        formState: { errors, isSubmitting },
-    } = form;
+    // TODO le useForm est censé utilié le schema de validation
+    const form = useForm<CreateAdDto>();
+    const { setError } = form;
 
     const createNewAdMutation = useCreateAdMutation();
 
     const onFormSubmit: SubmitHandler<CreateAdDto> = async (newAd) => {
-        if (userId) {
-            try {
-                const adWithAuthorId = { ...newAd, authorId: userId };
-                await createNewAdMutation.mutateAsync(adWithAuthorId);
-            } catch (error: unknown) {
-                setError("root", {
-                    type: "manual",
-                    message:
-                        error instanceof Error
-                            ? error.message
-                            : "An error occurred",
-                });
-            }
+        try {
+            const adWithAuthorId = { ...newAd, authorId: userId };
+            await createNewAdMutation.mutateAsync(adWithAuthorId);
+        } catch (error: unknown) {
+            setError("root", {
+                type: "manual",
+                message:
+                    error instanceof Error
+                        ? error.message
+                        : "Une erreur est survenue",
+            });
         }
     };
 
@@ -42,14 +35,10 @@ const useCreateAd = () => {
     const mutationError = createNewAdMutation.error;
 
     return {
-        register,
-        handleSubmit,
-        setError,
-        errors,
-        isSubmitting,
         onFormSubmit,
         isSuccess,
         mutationError,
+        form,
     };
 };
 

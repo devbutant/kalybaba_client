@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { AdCardProps } from "../../types/component-props";
+import { AdCardProps } from "../../../types/component-props";
 
 const AdCard: React.FC<React.PropsWithChildren<AdCardProps>> = ({
     children,
