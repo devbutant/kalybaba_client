@@ -1,13 +1,9 @@
-import axios from "axios";
+import createAxiosInstance from "../../../config/axios/axiosConfig";
 import { AdDto } from "../../../types";
-import { API } from "../../../utils/environment";
 
 export const fetchAdList = async (token: string | null): Promise<AdDto[]> => {
-    const { data: adList } = await axios.get(`${API.URL}/ads`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
+    const axiosInstance = createAxiosInstance(token);
+    const { data: adList } = await axiosInstance.get(`/ads`);
 
     return adList;
 };

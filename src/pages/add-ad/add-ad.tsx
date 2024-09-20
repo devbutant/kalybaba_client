@@ -1,9 +1,9 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Input } from "../../components/form";
+import createAxiosInstance from "../../config/axios/axiosConfig";
 import { useAppAuth } from "../../hooks/contexts-hooks/auth";
 import { AdDto } from "../../types";
-import { API } from "../../utils/environment";
 
 type FormValues = {
     title: string;
@@ -25,8 +25,14 @@ type Type = {
     name: string;
 };
 
+interface Option {
+    value: string;
+    label: string;
+}
+
 const AddAd = () => {
     const { token, userId } = useAppAuth();
+    const axiosInstance = createAxiosInstance(token);
 
     const {
         register,
@@ -39,38 +45,35 @@ const AddAd = () => {
     >({
         queryKey: ["categories"],
         queryFn: async () => {
-            const response = await axios.get<Category[]>(
-                `${API.URL}/categories`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
+            const { data: categoryList } = await axiosInstance.get(
+                `/categories`
             );
-            return response.data;
+            return categoryList;
         },
     });
 
     const { data: types, isLoading: loadingTypes } = useQuery<Type[]>({
         queryKey: ["types"],
         queryFn: async () => {
-            const response = await axios.get<Type[]>(`${API.URL}/types`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            return response.data;
+            const { data: typeList } = await axiosInstance.get(`/types`);
+            return typeList;
         },
     });
+    const typeOptions: Option[] | undefined = types?.map((type) => ({
+        value: type.id,
+        label: type.name,
+    }));
+
+    const categoryOptions: Option[] | undefined = categories?.map(
+        (category) => ({
+            value: category.id,
+            label: category.name,
+        })
+    );
 
     const addNewAd = async (newAd: FormValues) => {
-        console.log("newAd", newAd);
-        const response = await axios.post<AdDto>(`${API.URL}/ads`, newAd, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-        return response.data;
+        const { data: ad } = await axiosInstance.post<AdDto>("/ads", newAd);
+        return ad;
     };
 
     const mutation = useMutation<AdDto, Error, FormValues>({
@@ -83,12 +86,13 @@ const AddAd = () => {
         },
     });
     const onSubmit: SubmitHandler<FormValues> = (data) => {
+        console.log("data", data);
         if (!token || !userId) {
             console.error("Token non disponible");
             return;
         }
 
-        const adWithAuthorId = { ...data, authorId: userId }; // Ajout de authorId
+        const adWithAuthorId = { ...data, authorId: userId };
         mutation.mutate(adWithAuthorId);
     };
 
@@ -102,154 +106,54 @@ const AddAd = () => {
                 Déposer une nouvelle annonce
             </h1>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                <div>
-                    <label
-                        htmlFor="title"
-                        className="block text-sm font-medium text-gray-700"
-                    >
-                        Titre
-                    </label>
-                    <input
-                        id="title"
-                        {...register("title", {
-                            required: "Le titre est requis",
-                        })}
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    />
-                    {errors.title && (
-                        <span className="text-red-500 text-sm">
-                            {errors.title.message}
-                        </span>
-                    )}
-                </div>
+                <Input
+                    type="text"
+                    placeholder="Titre"
+                    name="title"
+                    register={register}
+                    error={errors.title}
+                />
+                <Input
+                    type="text"
+                    placeholder="Description"
+                    name="description"
+                    register={register}
+                    error={errors.description}
+                />
+                <Input
+                    type="text"
+                    placeholder="Adresse"
+                    name="address"
+                    register={register}
+                    error={errors.address}
+                />
+                <Input
+                    type="number"
+                    placeholder="Prix"
+                    name="price"
+                    register={register}
+                    error={errors.price}
+                    valueAsNumber={true}
+                    min={0}
+                    step={0.01}
+                />
+                <Input
+                    type="text"
+                    placeholder="Sélectionnez un type"
+                    name="typeId"
+                    register={register}
+                    error={errors.typeId}
+                    options={typeOptions} // Passer les options pour le sélecteur
+                />
+                <Input
+                    type="text"
+                    placeholder="Sélectionnez une catégorie"
+                    name="categoryId"
+                    register={register}
+                    error={errors.categoryId}
+                    options={categoryOptions} // Passer les options pour le sélecteur
+                />
 
-                {/* Champ description */}
-                <div>
-                    <label
-                        htmlFor="description"
-                        className="block text-sm font-medium text-gray-700"
-                    >
-                        Description
-                    </label>
-                    <textarea
-                        id="description"
-                        {...register("description", {
-                            required: "La description est requise",
-                        })}
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    />
-                    {errors.description && (
-                        <span className="text-red-500 text-sm">
-                            {errors.description.message}
-                        </span>
-                    )}
-                </div>
-
-                {/* Champ address */}
-                <div>
-                    <label
-                        htmlFor="address"
-                        className="block text-sm font-medium text-gray-700"
-                    >
-                        Adresse
-                    </label>
-                    <input
-                        id="address"
-                        {...register("address", {
-                            required: "L'adresse est requise",
-                        })}
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    />
-                    {errors.address && (
-                        <span className="text-red-500 text-sm">
-                            {errors.address.message}
-                        </span>
-                    )}
-                </div>
-
-                {/* Champ price */}
-                <div>
-                    <label
-                        htmlFor="price"
-                        className="block text-sm font-medium text-gray-700"
-                    >
-                        Prix
-                    </label>
-                    <input
-                        id="price"
-                        type="number"
-                        {...register("price", {
-                            required: "Le prix est requis",
-                            valueAsNumber: true,
-                        })}
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    />
-                    {errors.price && (
-                        <span className="text-red-500 text-sm">
-                            {errors.price.message}
-                        </span>
-                    )}
-                </div>
-
-                {/* Champ typeId avec une liste déroulante */}
-                <div>
-                    <label
-                        htmlFor="typeId"
-                        className="block text-sm font-medium text-gray-700"
-                    >
-                        Type
-                    </label>
-                    <select
-                        id="typeId"
-                        {...register("typeId", {
-                            required: "Le type est requis",
-                        })}
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    >
-                        <option value="">Sélectionnez un type</option>
-                        {types?.map((type) => (
-                            <option key={type.id} value={type.id}>
-                                {type.name}
-                            </option>
-                        ))}
-                    </select>
-                    {errors.typeId && (
-                        <span className="text-red-500 text-sm">
-                            {errors.typeId.message}
-                        </span>
-                    )}
-                </div>
-
-                {/* Champ categoryId avec une liste déroulante */}
-                <div>
-                    <label
-                        htmlFor="categoryId"
-                        className="block text-sm font-medium text-gray-700"
-                    >
-                        Catégorie
-                    </label>
-                    <select
-                        id="categoryId"
-                        {...register("categoryId", {
-                            required: "La catégorie est requise",
-                        })}
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    >
-                        <option value="">Sélectionnez une catégorie</option>
-                        {categories?.map((category) => (
-                            <option key={category.id} value={category.id}>
-                                {category.name}
-                            </option>
-                        ))}
-                    </select>
-                    {errors.categoryId && (
-                        <span className="text-red-500 text-sm">
-                            {errors.categoryId.message}
-                        </span>
-                    )}
-                </div>
-
-                {/* Soumission du formulaire */}
                 <button
                     type="submit"
                     className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"

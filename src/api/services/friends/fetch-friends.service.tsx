@@ -1,15 +1,11 @@
-import axios from "axios";
+import createAxiosInstance from "../../../config/axios/axiosConfig";
 import { UserDto } from "../../../types";
-import { API } from "../../../utils/environment";
 
 export const fetchFriendList = async (
     token: string | null
 ): Promise<UserDto[]> => {
-    const { data: friendList } = await axios.get(`${API.URL}/friends`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
+    const axiosInstance = createAxiosInstance(token);
+    const { data: friendList } = await axiosInstance.get(`/friends`);
 
     return friendList;
 };
