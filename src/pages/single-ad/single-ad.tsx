@@ -37,13 +37,12 @@ const SingleAd: React.FC<SingleAdProps> = (props) => {
 
     const handleSaveEdit = async () => {
         setIsEditing(false);
-        await refetch(); // Refetch l'annonce après la modification
+        await refetch();
     };
 
     const handleDelete = async () => {
         console.log("Deleting ad...");
 
-        // Implement the delete logic
         if (!token || !singleAd) throw new Error("Token not found");
 
         try {
