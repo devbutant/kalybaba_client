@@ -36,7 +36,7 @@ const Input = <T extends FieldValues>({
     options,
 }: InputProps<T>) => {
     return (
-        <div>
+        <div className="min-w-96">
             <label
                 htmlFor={String(name)}
                 className="block text-sm font-medium text-gray-700"
@@ -53,7 +53,8 @@ const Input = <T extends FieldValues>({
                     <option value="">Sélectionnez une option</option>
                     {options.map((option) => (
                         <option key={option.value} value={option.value}>
-                            {option.label}
+                            {option.label.charAt(0).toUpperCase() +
+                                option.label.slice(1)}
                         </option>
                     ))}
                 </select>

@@ -10,4 +10,5 @@ export interface AdCardProps {
             address: string;
         };
     };
+    mine?: boolean;
 }
