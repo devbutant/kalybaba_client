@@ -32,8 +32,12 @@ export function Router() {
             children: [
                 { path: "/", element: <Homepage /> },
                 { path: "/chat", element: <Chat /> },
+                { path: "/annonces/:id", element: <SingleAd /> },
+                {
+                    path: "/mes-annonces/:id",
+                    element: <SingleAd mine={true} />,
+                },
                 { path: "/mes-annonces", element: <MyAds /> },
-                { path: "/ads/:id", element: <SingleAd /> },
                 {
                     path: "/deposer-une-annonce",
                     element: <CreateAd />,
