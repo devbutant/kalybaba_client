@@ -19,8 +19,7 @@ interface Ad {
 interface EditAdFormProps {
     ad: Ad;
     onCancel: () => void;
-    onSave: () => void;
-    onDelete: () => void;
+    onSave: (updatedAd: Ad) => void; // Modifiez la signature pour passer l'annonce mise à jour
 }
 
 interface FormValues {
@@ -30,12 +29,15 @@ interface FormValues {
     address: string;
 }
 
-const EditAdForm: React.FC<EditAdFormProps> = ({
-    ad,
-    onCancel,
-    onSave,
-    onDelete,
-}) => {
+type EditAdFormField = {
+    type: string;
+    placeholder: string;
+    name: keyof FormValues;
+    requiredMsg: string;
+    valueAsNumber?: boolean;
+};
+
+const EditAdForm: React.FC<EditAdFormProps> = ({ ad, onCancel, onSave }) => {
     const {
         register,
         handleSubmit,
@@ -50,53 +52,74 @@ const EditAdForm: React.FC<EditAdFormProps> = ({
     });
     const { token } = useAppAuth();
 
+    const fetchAd = async () => {
+        if (!token) throw new Error("Token not found");
+
+        try {
+            const axiosInstance = createAxiosInstance(token);
+            const response = await axiosInstance.get(`/ads/${ad.id}`);
+            return response.data;
+        } catch (error) {
+            console.error("Error fetching ad:", error);
+            throw error;
+        }
+    };
+
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         if (!token) throw new Error("Token not found");
 
         try {
             const axiosInstance = createAxiosInstance(token);
             await axiosInstance.patch(`/ads/${ad.id}`, data);
-            onSave();
+            const updatedAd = await fetchAd(); // Refetch l'annonce après la modification
+            onSave(updatedAd); // Passez l'annonce mise à jour à la fonction onSave
         } catch (error) {
             console.error("Error updating ad:", error);
         }
     };
 
+    const formFields: EditAdFormField[] = [
+        {
+            type: "text",
+            placeholder: "Titre",
+            name: "title",
+            requiredMsg: "Title is required",
+        },
+        {
+            type: "textarea",
+            placeholder: "Description",
+            name: "description",
+            requiredMsg: "Description is required",
+        },
+        {
+            type: "text",
+            placeholder: "Ville",
+            name: "address",
+            requiredMsg: "Address is required",
+        },
+        {
+            type: "number",
+            placeholder: "Prix",
+            name: "price",
+            requiredMsg: "Price is required",
+            valueAsNumber: true,
+        },
+    ];
+
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="p-6">
-            <Input
-                type="text"
-                placeholder="Titre"
-                name="title"
-                register={register}
-                error={errors.title}
-                requiredMsg="Title is required"
-            />
-            <Input
-                type="textarea"
-                placeholder="Description"
-                name="description"
-                register={register}
-                error={errors.description}
-                requiredMsg="Description is required"
-            />
-            <Input
-                type="text"
-                placeholder="Ville"
-                name="address"
-                register={register}
-                error={errors.address}
-                requiredMsg="Address is required"
-            />
-            <Input
-                type="number"
-                placeholder="Prix"
-                name="price"
-                register={register}
-                error={errors.price}
-                requiredMsg="Price is required"
-                valueAsNumber
-            />
+            {formFields.map((field) => (
+                <Input
+                    key={field.name}
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    name={field.name}
+                    register={register}
+                    error={errors[field.name]}
+                    requiredMsg={field.requiredMsg}
+                    valueAsNumber={field.valueAsNumber}
+                />
+            ))}
             <div className="flex items-center justify-between">
                 <Button
                     type="submit"
@@ -110,13 +133,6 @@ const EditAdForm: React.FC<EditAdFormProps> = ({
                     className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 >
                     Cancel
-                </Button>
-                <Button
-                    type="button"
-                    onClick={onDelete}
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                >
-                    Supprimer
                 </Button>
             </div>
         </form>

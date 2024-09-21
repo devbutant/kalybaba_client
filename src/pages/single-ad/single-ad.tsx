@@ -14,7 +14,12 @@ const SingleAd: React.FC<SingleAdProps> = (props) => {
     const { mine = false } = props;
     const { token } = useAppAuth();
 
-    const { data: singleAd, isLoading, error } = useSingleAdQuery(id as string);
+    const {
+        data: singleAd,
+        isLoading,
+        error,
+        refetch,
+    } = useSingleAdQuery(id as string);
     const [isEditing, setIsEditing] = useState(false);
 
     if (!id) return <p>Erreur : l'annonce n'a pas d'ID valide.</p>;
@@ -30,9 +35,9 @@ const SingleAd: React.FC<SingleAdProps> = (props) => {
         setIsEditing(false);
     };
 
-    const handleSaveEdit = () => {
+    const handleSaveEdit = async () => {
         setIsEditing(false);
-        // Optionally, refetch the ad data here
+        await refetch(); // Refetch l'annonce après la modification
     };
 
     const handleDelete = async () => {
@@ -61,7 +66,6 @@ const SingleAd: React.FC<SingleAdProps> = (props) => {
                             ad={singleAd}
                             onCancel={handleCancelEdit}
                             onSave={handleSaveEdit}
-                            onDelete={handleDelete}
                         />
                     ) : (
                         <div className="p-6">
@@ -85,7 +89,10 @@ const SingleAd: React.FC<SingleAdProps> = (props) => {
                                     >
                                         Modifier
                                     </button>
-                                    <button className="text-red-600 hover:text-red-800">
+                                    <button
+                                        onClick={handleDelete}
+                                        className="text-red-600 hover:text-red-800"
+                                    >
                                         Supprimer
                                     </button>
                                 </div>
