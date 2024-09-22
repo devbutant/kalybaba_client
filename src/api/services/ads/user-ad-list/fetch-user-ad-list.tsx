@@ -1,7 +1,7 @@
 import createAxiosInstance from "../../../../config/axios/axiosConfig";
 import { AdDto } from "../../../../types";
 
-export const fetchMyAdList = async (
+export const fetchUserAdList = async (
     token: string | null,
     userId: string | null
 ): Promise<AdDto[]> => {

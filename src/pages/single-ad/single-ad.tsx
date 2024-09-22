@@ -5,21 +5,20 @@ import createAxiosInstance from "../../config/axios/axiosConfig";
 import { useAppAuth } from "../../hooks/contexts-hooks/auth";
 import { EditAdForm } from "../edit-ad-form";
 
-interface SingleAdProps {
-    mine?: boolean;
-}
-
-const SingleAd: React.FC<SingleAdProps> = (props) => {
+const SingleAd: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-    const { mine = false } = props;
-    const { token } = useAppAuth();
+    const { token, userId } = useAppAuth();
 
+    // Todo separate
     const {
         data: singleAd,
         isLoading,
         error,
         refetch,
     } = useSingleAdQuery(id as string);
+
+    const isMine = singleAd?.author.id === userId;
+
     const [isEditing, setIsEditing] = useState(false);
 
     if (!id) return <p>Erreur : l'annonce n'a pas d'ID valide.</p>;
@@ -27,6 +26,7 @@ const SingleAd: React.FC<SingleAdProps> = (props) => {
     if (isLoading) return <p>Chargement...</p>;
     if (error) return <p>Erreur lors du chargement de l'annonce</p>;
 
+    // TODO:  Context
     const handleEditClick = () => {
         setIsEditing(true);
     };
@@ -52,7 +52,7 @@ const SingleAd: React.FC<SingleAdProps> = (props) => {
             console.error("Error deleting ad:", error);
         }
     };
-
+    // Fin context
     return (
         singleAd && (
             <>
@@ -80,7 +80,7 @@ const SingleAd: React.FC<SingleAdProps> = (props) => {
                             <div className="text-sm text-gray-500 mt-2">
                                 Publié par : {singleAd.author.name}
                             </div>
-                            {mine && (
+                            {isMine && (
                                 <div className="mt-4 flex justify-end space-x-4">
                                     <button
                                         onClick={handleEditClick}

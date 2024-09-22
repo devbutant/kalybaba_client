@@ -6,7 +6,7 @@ import { Chat } from "../pages/chat";
 import { CreateAd } from "../pages/create-ad";
 import { Homepage } from "../pages/homepage";
 import { Login } from "../pages/login";
-import { MyAds } from "../pages/my-ads";
+import { MyAdList } from "../pages/my-ads";
 import { Register } from "../pages/register/register";
 import { SingleAd } from "../pages/single-ad";
 
@@ -33,11 +33,7 @@ export function Router() {
                 { path: "/", element: <Homepage /> },
                 { path: "/chat", element: <Chat /> },
                 { path: "/annonces/:id", element: <SingleAd /> },
-                {
-                    path: "/mes-annonces/:id",
-                    element: <SingleAd mine={true} />,
-                },
-                { path: "/mes-annonces", element: <MyAds /> },
+                { path: "/mes-annonces", element: <MyAdList /> },
                 {
                     path: "/deposer-une-annonce",
                     element: <CreateAd />,

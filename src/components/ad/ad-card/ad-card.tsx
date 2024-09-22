@@ -2,10 +2,12 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { AdCardProps } from "../../../types/component-props";
 
-const AdCard: React.FC<AdCardProps> = ({ ad, mine = false }) => {
+const AdCard: React.FC<AdCardProps> = (props) => {
+    const { ad } = props;
+
     return (
         <NavLink
-            to={mine ? `/mes-annonces/${ad.id}` : `/annonces/${ad.id}`}
+            to={`/annonces/${ad.id}`}
             className="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:bg-gray-200 flex flex-col h-full"
         >
             <div className="p-6 flex-1 flex flex-col justify-between">
