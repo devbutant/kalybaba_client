@@ -9,6 +9,12 @@ export interface AdCardProps {
             name: string;
             address: string;
         };
+        type: {
+            name: string;
+        };
+        category: {
+            name: string;
+        };
     };
     mine?: boolean;
 }
