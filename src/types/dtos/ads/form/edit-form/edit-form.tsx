@@ -12,8 +12,6 @@ export interface Ad {
 
 export interface EditAdFormProps {
     ad: Ad;
-    onCancel: () => void;
-    onSave: () => void;
 }
 
 export interface EditAdFormValues {

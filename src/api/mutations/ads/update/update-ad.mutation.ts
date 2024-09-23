@@ -14,7 +14,8 @@ export const useUpdateAdMutation = () => {
     return useMutation<EditAdResponse, Error, EditAdFormValues>({
         mutationFn: (editedAd: EditAdFormValues) => editAd(token, editedAd),
         onSuccess: (data) => {
-            console.log("Annonce déposée avec succès :", data);
+            //TODO: toast
+            console.log("Annonce modifiée avec succès :", data);
         },
         onError: (error) => {
             console.error("Erreur de connexion :", error);

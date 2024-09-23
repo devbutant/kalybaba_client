@@ -1,9 +1,7 @@
 import { Button } from "../../components/button";
 import { Input } from "../../components/form";
 import { SplashScreen } from "../../components/loading";
-import { useCategory } from "../../hooks/ads/category";
-import { useCreateAd } from "../../hooks/ads/create";
-import { useType } from "../../hooks/ads/type";
+import { useCategory, useCreateAd, useType } from "../../hooks/ad";
 
 const CreateAd: React.FC = () => {
     const { onFormSubmit, mutationError, isSuccess, form } = useCreateAd();
@@ -29,6 +27,7 @@ const CreateAd: React.FC = () => {
                 onSubmit={handleSubmit(onFormSubmit)}
                 className="grid grid-cols-2 gap-6"
             >
+                {/* TODO: Créer un composants CreateAdInputs */}
                 <Input
                     type="text"
                     placeholder="Titre"

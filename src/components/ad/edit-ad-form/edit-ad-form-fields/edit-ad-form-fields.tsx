@@ -1,4 +1,4 @@
-import { EditAdFormField } from "../../../types";
+import { EditAdFormField } from "../../../../types";
 
 export const formFields: EditAdFormField[] = [
     {

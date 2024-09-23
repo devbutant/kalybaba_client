@@ -1,1 +1,1 @@
-export { fetchUserAdList } from "./fetch-user-ad-list";
+export { fetchUserAdList } from "./fetch-user-ad-list.service";

@@ -1,14 +1,13 @@
 import React from "react";
-import { Input } from "../../components/form";
-import { useUpdateAd } from "../../hooks/ads/update/use-update-ad";
-import { EditAdFormProps } from "../../types/dtos/ads";
-import { EditAdButtons } from "./edit-ad-form-buttons/";
-import { formFields } from "./edit-ad-form-fields";
+import { useUpdateAd } from "../../../../hooks/ad";
+import { EditAdFormProps } from "../../../../types/dtos/ads";
+import { Input } from "../../../form";
+import { EditAdButtons } from "../edit-ad-form-buttons";
+import { formFields } from "../edit-ad-form-fields";
 
 const EditAdForm: React.FC<EditAdFormProps> = (props) => {
-    const { ad, onCancel, onSave } = props;
-    // Todo: export  params from useUpdateAd
-    const { onSubmit, form } = useUpdateAd(ad, onSave);
+    const { ad } = props;
+    const { onSubmit, form } = useUpdateAd(ad);
 
     const {
         register,
@@ -30,7 +29,7 @@ const EditAdForm: React.FC<EditAdFormProps> = (props) => {
                     valueAsNumber={field.valueAsNumber}
                 />
             ))}
-            <EditAdButtons onCancel={onCancel} />
+            <EditAdButtons />
         </form>
     );
 };

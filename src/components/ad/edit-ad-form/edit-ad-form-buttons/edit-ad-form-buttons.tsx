@@ -1,11 +1,9 @@
-import { Button } from "../../../components/button";
+import { useSingleAd } from "../../../../hooks/ad";
+import { Button } from "../../../button";
 
-type EditAdButtonsProps = {
-    onCancel: () => void;
-};
-
-const EditAdButtons: React.FC<EditAdButtonsProps> = (props) => {
-    const { onCancel } = props;
+const EditAdButtons: React.FC = () => {
+    const { editFormMethods } = useSingleAd();
+    const { handleCancelEdit } = editFormMethods;
 
     return (
         <div className="flex items-center justify-between">
@@ -17,7 +15,7 @@ const EditAdButtons: React.FC<EditAdButtonsProps> = (props) => {
             </Button>
             <Button
                 type="button"
-                onClick={onCancel}
+                onClick={handleCancelEdit}
                 className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
                 Cancel
