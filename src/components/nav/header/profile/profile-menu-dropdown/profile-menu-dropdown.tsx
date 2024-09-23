@@ -9,8 +9,12 @@ const ProfileMenuDropdown: React.FC = () => {
     const { toggleMenu } = useHeader();
 
     return (
-        <div className="relative flex flex-row" ref={menuRef}>
-            <ProfileButton onClick={toggleMenu} />
+        <div
+            className="relative flex flex-row"
+            ref={menuRef}
+            onClick={toggleMenu}
+        >
+            <ProfileButton />
             {isOpen && <DropdownMenu />}
         </div>
     );

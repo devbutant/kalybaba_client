@@ -1,1 +1,1 @@
-export { SingleAd } from "./single-ad";
+export { SingleAdPage } from "./single-ad";

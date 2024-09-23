@@ -1,1 +1,1 @@
-export { CreateAdd } from "./create-ad";
+export { CreateAd } from "./create-ad";

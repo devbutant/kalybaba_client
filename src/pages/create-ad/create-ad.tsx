@@ -1,11 +1,9 @@
 import { Button } from "../../components/button";
 import { Input } from "../../components/form";
 import { SplashScreen } from "../../components/loading";
-import { useCategory } from "../../hooks/ads/category";
-import { useCreateAd } from "../../hooks/ads/create";
-import { useType } from "../../hooks/ads/type";
+import { useCategory, useCreateAd, useType } from "../../hooks/ad";
 
-const CreateAdd: React.FC = () => {
+const CreateAd: React.FC = () => {
     const { onFormSubmit, mutationError, isSuccess, form } = useCreateAd();
     const {
         handleSubmit,
@@ -21,11 +19,15 @@ const CreateAdd: React.FC = () => {
     }
 
     return (
-        <div className="max-w-2xl mx-auto p-6 bg-white rounded-md shadow-md mt-8">
-            <h1 className="text-2xl font-bold mb-6">
+        <div className="mx-auto p-8 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg shadow-lg">
+            <h1 className="text-3xl font-bold mb-8 text-blue-800">
                 Déposer une nouvelle annonce
             </h1>
-            <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-4">
+            <form
+                onSubmit={handleSubmit(onFormSubmit)}
+                className="grid grid-cols-2 gap-6"
+            >
+                {/* TODO: Créer un composants CreateAdInputs */}
                 <Input
                     type="text"
                     placeholder="Titre"
@@ -42,7 +44,7 @@ const CreateAdd: React.FC = () => {
                 />
                 <Input
                     type="text"
-                    placeholder="Adresse"
+                    placeholder="Ville"
                     name="address"
                     register={register}
                     error={errors.address}
@@ -76,7 +78,7 @@ const CreateAdd: React.FC = () => {
 
                 <Button
                     type="submit"
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    className="inline-flex justify-center py-2 px-6 border border-transparent shadow-lg text-lg font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                     {isSubmitting ? (
                         <p>Envoi de l'annonce...</p>
@@ -87,13 +89,13 @@ const CreateAdd: React.FC = () => {
             </form>
 
             {mutationError && (
-                <p className="text-red-500 mt-4">
+                <p className="text-red-500 mt-6">
                     Erreur :{" "}
                     {mutationError.message || "Une erreur est survenue."}
                 </p>
             )}
             {isSuccess && (
-                <p className="text-green-500 mt-4">
+                <p className="text-green-500 mt-6">
                     Annonce déposée avec succès !
                 </p>
             )}
@@ -101,6 +103,6 @@ const CreateAdd: React.FC = () => {
     );
 };
 
-CreateAdd.displayName = "CreateAdd";
+CreateAd.displayName = "CreateAd";
 
-export { CreateAdd };
+export { CreateAd };

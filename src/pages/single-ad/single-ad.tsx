@@ -1,47 +1,35 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { useSingleAdQuery } from "../../api/queries/ads/single-ad";
+import { EditAdForm } from "../../components/ad/edit-ad-form/edit-ad-form";
+import { SingleAd } from "../../components/ad/single-ad";
+import { useSingleAd } from "../../hooks/ad";
+import { useSingleAdContext } from "../../hooks/contexts-hooks/ad";
+import { SingleAdLayout } from "./single-ad-layout";
 
-const SingleAd: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
+const SingleAdPage: React.FC = () => {
+    const { singleAdData } = useSingleAd();
+    const { singleAd, isLoading, error, isMine, singleAdId } = singleAdData;
 
-    const { data: singleAd, isLoading, error } = useSingleAdQuery(id as string);
+    const { editFormStates } = useSingleAdContext();
+    const { isEditing } = editFormStates;
 
-    if (!id) return <p>Erreur : l'annonce n'a pas d'ID valide.</p>;
-
+    // Todo: Gérer les cas d'erreur
+    if (!singleAdId) return <p>Erreur : l'annonce n'a pas d'ID valide.</p>;
     if (isLoading) return <p>Chargement...</p>;
     if (error) return <p>Erreur lors du chargement de l'annonce</p>;
 
+    if (!singleAd) return <p>Aucune annonce trouvée</p>;
+
     return (
-        singleAd && (
-            <>
-                <div className="max-w-full mx-auto bg-white shadow-md rounded-lg overflow-hidden">
-                    <div className="p-6">
-                        <h2 className="text-3xl font-semibold text-gray-800 mb-4">
-                            {singleAd.title}
-                        </h2>
-                        <p className="text-gray-600 mb-4">
-                            {singleAd.description}
-                        </p>
-                        <div className="text-lg font-bold text-green-600">
-                            ${singleAd.price.toFixed(2)}
-                        </div>
-                        <div className="text-sm text-gray-500 mt-2">
-                            Publié par : {singleAd.author.name}
-                        </div>
-                    </div>
-                    <div className="bg-gray-100 p-4 border-t border-gray-200">
-                        <h3 className="text-lg font-semibold text-gray-800">
-                            Détails supplémentaires :
-                        </h3>
-                        <p className="text-gray-600">{singleAd.address}</p>
-                    </div>
-                </div>
-            </>
-        )
+        <SingleAdLayout ad={singleAd}>
+            {isEditing ? (
+                <EditAdForm ad={singleAd} />
+            ) : (
+                <SingleAd ad={singleAd} isMine={isMine} />
+            )}
+        </SingleAdLayout>
     );
 };
 
-SingleAd.displayName = "SingleAd";
+SingleAdPage.displayName = "SingleAdPage";
 
-export { SingleAd };
+export { SingleAdPage };

@@ -2,22 +2,23 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { AdCardProps } from "../../../types/component-props";
 
-const AdCard: React.FC<React.PropsWithChildren<AdCardProps>> = ({
-    children,
-    ad,
-}) => {
+const AdCard: React.FC<AdCardProps> = (props) => {
+    const { ad } = props;
+
     return (
         <NavLink
-            to={`/ads/${ad.id}`}
-            className="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:bg-gray-200 flex flex-col h-50"
+            to={`/annonces/${ad.id}`}
+            className="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:bg-gray-200 flex flex-col h-full"
         >
-            <div className="p-6 flex-1">
-                <h3 className="text-2xl font-semibold mb-2 text-gray-800">
-                    {ad.title}
-                </h3>
-                <p className="text-gray-600 mb-4 truncate-multiline">
-                    {ad.description}
-                </p>
+            <div className="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                    <h3 className="text-2xl font-semibold mb-2 text-gray-800">
+                        {ad.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4 truncate-multiline">
+                        {ad.description}
+                    </p>
+                </div>
             </div>
 
             <div className="bg-gray-100 p-4 border-t border-gray-200">
@@ -30,8 +31,6 @@ const AdCard: React.FC<React.PropsWithChildren<AdCardProps>> = ({
                     </span>
                 </div>
             </div>
-
-            {children}
         </NavLink>
     );
 };
