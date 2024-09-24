@@ -1,1 +1,6 @@
-export type { Ad, EditAdFormField, EditAdFormValues } from "./edit-form";
+export type {
+    Ad,
+    EditAdFormField,
+    EditAdFormProps,
+    EditAdFormValues,
+} from "./edit-form";

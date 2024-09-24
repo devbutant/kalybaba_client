@@ -1,17 +1,20 @@
+import { Link, useParams } from "react-router-dom";
 import { useSingleAd } from "../../../hooks/ad";
 
 const ActionButtons: React.FC = () => {
     const { editFormMethods } = useSingleAd();
-    const { handleEditClick, handleDelete } = editFormMethods;
+    const { handleDelete } = editFormMethods;
+
+    const { id } = useParams<{ id: string }>();
 
     return (
         <div className="mt-4 flex justify-end space-x-4">
-            <button
-                onClick={handleEditClick}
+            <Link
+                to={`/annonces/modification/${id}`}
                 className="text-blue-600 hover:text-blue-800"
             >
                 Modifier
-            </button>
+            </Link>
             <button
                 onClick={handleDelete}
                 className="text-red-600 hover:text-red-800"

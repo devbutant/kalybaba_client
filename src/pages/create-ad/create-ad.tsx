@@ -75,7 +75,7 @@ const CreateAd: React.FC = () => {
                     name="categoryEnum"
                     register={register}
                     error={errors["categoryEnum"]}
-                    requiredMsg="La catégorie est requise"
+                    requiredMessage="La catégorie est requise"
                     options={categories}
                 />
 
@@ -85,7 +85,7 @@ const CreateAd: React.FC = () => {
                     name="typeEnum"
                     register={register}
                     error={errors.typeEnum}
-                    requiredMsg="Le type est requis"
+                    requiredMessage="Le type est requis"
                     options={types}
                 />
 

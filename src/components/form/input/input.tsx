@@ -7,12 +7,6 @@ import {
 
 import { FieldErrorsImpl, Merge } from "react-hook-form";
 
-interface Option {
-    id: string;
-    value: string;
-    label: string;
-}
-
 interface InputProps<T extends FieldValues> {
     type: string;
     placeholder?: string;
@@ -21,15 +15,12 @@ interface InputProps<T extends FieldValues> {
     error?: FieldError | Merge<FieldError, FieldErrorsImpl<T>> | string;
     valueAsNumber?: boolean;
     requiredMessage?: string;
-
-    minLenght: number;
-    minLenghtVal: number;
-    validationMessage: string;
-
-    requiredMsg?: string;
+    minLength?: number;
+    maxLength?: number;
+    validationMessage?: string;
     min?: number;
     step?: number;
-    options?: Option[];
+    options?: string[];
 }
 
 const Input = <T extends FieldValues>({
@@ -40,6 +31,9 @@ const Input = <T extends FieldValues>({
     error,
     valueAsNumber = false,
     requiredMessage,
+    minLength,
+    maxLength,
+    validationMessage,
     min,
     step,
 }: InputProps<T>) => {
@@ -62,6 +56,20 @@ const Input = <T extends FieldValues>({
                 {...register(name, {
                     required: requiredMessage,
                     valueAsNumber,
+                    minLength:
+                        minLength && validationMessage
+                            ? {
+                                  value: minLength,
+                                  message: validationMessage,
+                              }
+                            : undefined,
+                    maxLength:
+                        maxLength && validationMessage
+                            ? {
+                                  value: maxLength,
+                                  message: validationMessage,
+                              }
+                            : undefined,
                 })}
                 type={type}
                 placeholder={placeholder}

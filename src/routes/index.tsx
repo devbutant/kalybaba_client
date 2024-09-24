@@ -1,7 +1,6 @@
 import React from "react";
 import { Navigate, useRoutes } from "react-router-dom";
-import { EditAdForm } from "../components/ad/edit-ad-form";
-import { SingleAdProvider } from "../contexts/ad";
+import { EditAdForm } from "../components/ad/edit-ad-form/edit-ad-form";
 import { useAppAuth } from "../hooks/contexts-hooks/auth/app";
 import { CompactLayout } from "../layouts/compact";
 import { Chat } from "../pages/chat";
@@ -36,19 +35,11 @@ export function Router() {
                 { path: "/chat", element: <Chat /> },
                 {
                     path: "/annonces/:id",
-                    element: (
-                        <SingleAdProvider>
-                            <SingleAdPage />
-                        </SingleAdProvider>
-                    ),
+                    element: <SingleAdPage />,
                 },
                 {
                     path: "/annonces/modification/:id",
-                    element: (
-                        <SingleAdProvider>
-                            <EditAdForm />
-                        </SingleAdProvider>
-                    ),
+                    element: <EditAdForm />,
                 },
                 { path: "/mes-annonces", element: <MyAdList /> },
                 {
