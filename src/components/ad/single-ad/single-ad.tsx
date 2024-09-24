@@ -11,7 +11,7 @@ const SingleAd: React.FC<SingleAdProps> = (props) => {
     const { ad, isMine } = props;
 
     return (
-        <div className="p-6">
+        <>
             <h2 className="text-3xl font-semibold text-gray-800 mb-4">
                 {ad.title}
             </h2>
@@ -24,7 +24,7 @@ const SingleAd: React.FC<SingleAdProps> = (props) => {
             </div>
 
             {isMine && <ActionButtons />}
-        </div>
+        </>
     );
 };
 

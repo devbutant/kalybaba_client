@@ -5,8 +5,10 @@ import { Option } from "../../../types/dtos/ads/form";
 const useCategory = () => {
     const { data: categories, isLoading: loadingCategories } =
         useCategoryListQuery();
+
     const categoryOptions: Option[] | undefined = categories?.map(
         (category: Category) => ({
+            id: category.id,
             value: category.id,
             label: category.name,
         })

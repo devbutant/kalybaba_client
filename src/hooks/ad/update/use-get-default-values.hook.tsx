@@ -5,6 +5,14 @@ const useGetDefaultValues = () => {
         description: string;
         price: number;
         address: string;
+        type: {
+            id: string;
+            name: string;
+        };
+        category: {
+            id: string;
+            name: string;
+        };
     };
 
     const getDefaultValues = (ad: Partial<DefaultAdValues>) => ({
@@ -13,6 +21,14 @@ const useGetDefaultValues = () => {
         description: ad.description || "",
         price: ad.price || 0,
         address: ad.address || "",
+        type: {
+            id: ad.type?.id || "",
+            value: ad.type?.name || "",
+        },
+        category: {
+            id: ad.category?.id || "",
+            value: ad.category?.name || "",
+        },
     });
 
     return {

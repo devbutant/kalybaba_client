@@ -1,1 +1,1 @@
-export type { TagProps } from "./ad-card-tag";
+export type { TagProps, TagsProps } from "./ad-card-tag";

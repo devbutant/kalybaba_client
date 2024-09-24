@@ -1,4 +1,5 @@
 import { PropsWithChildren } from "react";
+import { Tags } from "../../../components/ui/ad-card-tags";
 import { Ad } from "../../../types";
 
 interface SingleAdLayoutType {
@@ -15,7 +16,11 @@ const SingleAdLayout: React.FC<PropsWithChildren<SingleAdLayoutType>> = (
             className="mx-auto bg-white shadow-md rounded-lg overflow-hidden"
             style={{ width: "40rem" }}
         >
-            {children}
+            <div className="p-6">
+                <Tags ad={ad} />
+                {children}
+            </div>
+
             <div className="bg-gray-100 p-4 border-t border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-800">
                     Détails supplémentaires :

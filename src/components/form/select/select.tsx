@@ -6,41 +6,40 @@ import {
 } from "react-hook-form";
 
 import { FieldErrorsImpl, Merge } from "react-hook-form";
+import { Option } from "../../../types";
 
-interface Option {
-    id: string;
-    value: string;
-    label: string;
-}
-
-interface InputProps<T extends FieldValues> {
-    type: string;
+interface SelectProps<T extends FieldValues> {
     placeholder?: string;
     name: Path<T>;
     register: UseFormRegister<T>;
     error?: FieldError | Merge<FieldError, FieldErrorsImpl<T>> | string;
     valueAsNumber?: boolean;
     requiredMsg?: string;
-    min?: number;
-    step?: number;
     options?: Option[];
+    defaultValue: {
+        id: string;
+        value: string;
+    };
 }
 
-const Input = <T extends FieldValues>({
-    type,
+const Select = <T extends FieldValues>({
     placeholder,
     name,
     register,
     error,
     valueAsNumber = false,
     requiredMsg,
-    min,
-    step,
-}: InputProps<T>) => {
+    options,
+    defaultValue,
+}: SelectProps<T>) => {
     const errorMessage =
         typeof error === "string"
             ? error
             : (error?.message as string | undefined);
+
+    if (!options || options.length === 0) {
+        throw new Error("Options are required for select field");
+    }
 
     return (
         <div className="min-w-96">
@@ -51,19 +50,25 @@ const Input = <T extends FieldValues>({
             >
                 {placeholder}
             </label>
-
-            <input
-                {...register(name, {
-                    required: requiredMsg || "Ce champ est requis",
-                    valueAsNumber,
-                })}
-                type={type}
-                placeholder={placeholder}
-                min={min}
-                step={step}
+            <h2>
+                {defaultValue.value} {defaultValue.id}
+            </h2>
+            <select
+                id={String(name)}
+                {...register(name, { valueAsNumber, required: requiredMsg })}
+                defaultValue={defaultValue.id} // Utilisation de defaultValue sur le select
                 className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            />
-
+            >
+                <option value="" disabled>
+                    {placeholder}
+                </option>
+                {options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                        {option.label.charAt(0).toUpperCase() +
+                            option.label.slice(1)}
+                    </option>
+                ))}
+            </select>
             {errorMessage && (
                 <p className="text-red-700 text-sm">{errorMessage}</p>
             )}
@@ -71,6 +76,6 @@ const Input = <T extends FieldValues>({
     );
 };
 
-Input.displayName = "Input";
+Select.displayName = "Select";
 
-export { Input };
+export { Select };

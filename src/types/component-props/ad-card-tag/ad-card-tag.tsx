@@ -1,6 +1,13 @@
+import { Ad } from "../../dtos";
+
 type TagProps = {
     children: React.ReactNode;
     color?: string;
 };
 
-export type { TagProps };
+type TagsProps = {
+    ad: Pick<Ad, "category" | "type">;
+    color?: string;
+};
+
+export type { TagProps, TagsProps };

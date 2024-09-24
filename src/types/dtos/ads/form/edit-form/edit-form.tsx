@@ -8,6 +8,14 @@ export interface Ad {
     author: {
         name: string;
     };
+    category: {
+        id: string;
+        name: string;
+    };
+    type: {
+        id: string;
+        name: string;
+    };
 }
 
 export interface EditAdFormProps {
@@ -20,6 +28,14 @@ export interface EditAdFormValues {
     description: string;
     price: number;
     address: string;
+    type: {
+        id: string;
+        name: string;
+    };
+    category: {
+        id: string;
+        name: string;
+    };
 }
 
 export interface EditAdFormField {
