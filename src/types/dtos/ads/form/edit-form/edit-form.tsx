@@ -12,10 +12,6 @@ export interface Ad {
     categoryEnum: string;
 }
 
-export interface EditAdFormProps {
-    ad: Ad;
-}
-
 export interface EditAdFormValues {
     id: string;
     title: string;
@@ -32,4 +28,7 @@ export interface EditAdFormField {
     name: keyof EditAdFormValues;
     requiredMsg: string;
     valueAsNumber?: boolean;
+    minLength?: number;
+    maxLength?: number;
+    validationMessage?: string;
 }

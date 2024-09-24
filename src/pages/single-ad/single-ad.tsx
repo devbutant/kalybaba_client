@@ -1,5 +1,5 @@
 import React from "react";
-import { EditAdForm } from "../../components/ad/edit-ad-form/edit-ad-form";
+import { EditAdForm } from "../../components/ad/edit-ad-form/ok-edit-ad-form";
 import { SingleAd } from "../../components/ad/single-ad";
 import { useSingleAd } from "../../hooks/ad";
 import { useSingleAdContext } from "../../hooks/contexts-hooks/ad";

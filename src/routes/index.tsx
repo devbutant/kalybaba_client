@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate, useRoutes } from "react-router-dom";
+import { EditAdForm } from "../components/ad/edit-ad-form";
 import { SingleAdProvider } from "../contexts/ad";
 import { useAppAuth } from "../hooks/contexts-hooks/auth/app";
 import { CompactLayout } from "../layouts/compact";
@@ -38,6 +39,14 @@ export function Router() {
                     element: (
                         <SingleAdProvider>
                             <SingleAdPage />
+                        </SingleAdProvider>
+                    ),
+                },
+                {
+                    path: "/annonces/modification/:id",
+                    element: (
+                        <SingleAdProvider>
+                            <EditAdForm />
                         </SingleAdProvider>
                     ),
                 },

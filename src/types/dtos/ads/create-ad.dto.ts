@@ -19,6 +19,6 @@ export type CreateAdDto = Pick<
     | "city"
     | "price"
     | "authorId"
-    | "categoryId"
-    | "typeId"
+    | "categoryEnum"
+    | "typeEnum"
 >;

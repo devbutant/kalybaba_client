@@ -1,15 +1,16 @@
 import React from "react";
-import { useUpdateAd } from "../../../../hooks/ad";
-import { EditAdFormProps } from "../../../../types/dtos/ads";
+import { useSingleAd, useUpdateAd } from "../../../../hooks/ad";
 import { Input, Select } from "../../../form";
 import { EditAdButtons } from "../edit-ad-form-buttons";
 import { formFields } from "../edit-ad-form-fields";
 
-const EditAdForm: React.FC<EditAdFormProps> = (props) => {
-    const { ad } = props; // Assurez-vous que ad contient l'annonce à éditer
+const EditAdForm: React.FC = () => {
+    const { singleAdData } = useSingleAd();
+    const { singleAd, isLoading, error, isMine, singleAdId } = singleAdData;
 
-    // TODO: Voir avec Laulau
-    const { onSubmit, form } = useUpdateAd(ad);
+    console.log(isMine);
+
+    const { onSubmit, form } = useUpdateAd(singleAd || {});
 
     const {
         register,
@@ -17,7 +18,11 @@ const EditAdForm: React.FC<EditAdFormProps> = (props) => {
         formState: { errors },
     } = form;
 
-    // TODO: mettre les types et les catégories dans un fichier séparé
+    if (!singleAdId) return <p>Erreur : l'annonce n'a pas d'ID valide.</p>;
+    if (isLoading) return <p>Chargement...</p>;
+    if (error) return <p>Erreur lors du chargement de l'annonce</p>;
+    if (!singleAd) return <p>Annonce non trouvée</p>;
+
     const types = ["OFFER", "DEMAND"];
 
     const categories = [
@@ -42,12 +47,24 @@ const EditAdForm: React.FC<EditAdFormProps> = (props) => {
                     type={field.type}
                     placeholder={field.placeholder}
                     name={field.name}
-                    register={register}
+                    register={register(field.name, {
+                        minLength: {
+                            value: field.minLength,
+                            message: field.validationMessage,
+                        },
+                    })}
                     error={errors[field.name]}
                     requiredMsg={field.requiredMsg}
                     valueAsNumber={field.valueAsNumber}
                 />
             ))}
+            {/* <div>
+                {errors[field.name] && (
+                    <p className="error-message">
+                        {errors[field.name].message}
+                    </p>
+                )}
+            </div> */}
 
             <Select
                 key="category"

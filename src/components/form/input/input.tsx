@@ -20,6 +20,12 @@ interface InputProps<T extends FieldValues> {
     register: UseFormRegister<T>;
     error?: FieldError | Merge<FieldError, FieldErrorsImpl<T>> | string;
     valueAsNumber?: boolean;
+    requiredMessage?: string;
+
+    minLenght: number;
+    minLenghtVal: number;
+    validationMessage: string;
+
     requiredMsg?: string;
     min?: number;
     step?: number;
@@ -33,7 +39,7 @@ const Input = <T extends FieldValues>({
     register,
     error,
     valueAsNumber = false,
-    requiredMsg,
+    requiredMessage,
     min,
     step,
 }: InputProps<T>) => {
@@ -54,7 +60,7 @@ const Input = <T extends FieldValues>({
 
             <input
                 {...register(name, {
-                    required: requiredMsg || "Ce champ est requis",
+                    required: requiredMessage,
                     valueAsNumber,
                 })}
                 type={type}

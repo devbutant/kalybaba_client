@@ -22,6 +22,8 @@ const useUpdateAd = (ad: Partial<EditAdFormValues>) => {
     const { handleSaveEdit } = editFormMethods;
 
     const onSubmit: SubmitHandler<EditAdFormValues> = async (data) => {
+        console.log("hehe");
+
         if (!token) throw new Error("Token not found");
 
         try {

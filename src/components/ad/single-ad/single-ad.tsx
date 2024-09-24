@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Ad } from "../../../types";
 import { ActionButtons } from "../action-buttons";
 
+// TODO: export
 interface SingleAdProps {
     ad: Ad;
     isMine: boolean;
@@ -11,7 +13,7 @@ const SingleAd: React.FC<SingleAdProps> = (props) => {
     const { ad, isMine } = props;
 
     return (
-        <>
+        <Link to={`/annonces/modification/${ad.id}`}>
             <h2 className="text-3xl font-semibold text-gray-800 mb-4">
                 {ad.title}
             </h2>
@@ -24,7 +26,7 @@ const SingleAd: React.FC<SingleAdProps> = (props) => {
             </div>
 
             {isMine && <ActionButtons />}
-        </>
+        </Link>
     );
 };
 

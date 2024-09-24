@@ -7,22 +7,6 @@ export const adSchema = z.object({
     city: z.string(),
     price: z.number(),
     authorId: z.string(),
-    categoryId: z.string(),
-    typeId: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-    type: z.object({
-        id: z.string(),
-        name: z.string(),
-        description: z.string(),
-    }),
-    category: z.object({
-        id: z.string(),
-        name: z.string(),
-        description: z.string(),
-    }),
-    typeEnum: z.string(),
-    categoryEnum: z.string(),
     author: z.object({
         id: z.string(),
         email: z.string(),
@@ -31,6 +15,10 @@ export const adSchema = z.object({
         phone: z.string(),
         connected: z.boolean(),
     }),
+    typeEnum: z.string(),
+    categoryEnum: z.string(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
 });
 
 export type AdDto = z.infer<typeof adSchema>;

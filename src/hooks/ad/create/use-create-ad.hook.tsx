@@ -11,13 +11,25 @@ const useCreateAd = () => {
     }
 
     // TODO le useForm est censé utilié le schema de validation
-    const form = useForm<CreateAdDto>();
+    const form = useForm<CreateAdDto>({
+        defaultValues: {
+            title: "",
+            description: "",
+            city: "",
+            price: 0,
+            authorId: userId,
+            categoryEnum: "",
+            typeEnum: "",
+        },
+    });
     const { setError } = form;
 
     const createNewAdMutation = useCreateAdMutation();
 
     const onFormSubmit: SubmitHandler<CreateAdDto> = async (newAd) => {
         try {
+            console.log(newAd);
+
             const adWithAuthorId = { ...newAd, authorId: userId };
             await createNewAdMutation.mutateAsync(adWithAuthorId);
         } catch (error: unknown) {
