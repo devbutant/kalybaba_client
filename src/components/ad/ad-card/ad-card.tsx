@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { AdCardProps } from "../../../types/component-props";
+import { Tags } from "../../ui/ad-card-tags";
 
 const AdCard: React.FC<AdCardProps> = (props) => {
     const { ad } = props;
@@ -12,7 +13,11 @@ const AdCard: React.FC<AdCardProps> = (props) => {
         >
             <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
-                    <h3 className="text-2xl font-semibold mb-2 text-gray-800">
+                    <Tags
+                        typeEnum={ad.typeEnum}
+                        categoryEnum={ad.categoryEnum}
+                    />
+                    <h3 className="text-2xl font-semibold mb-2 text-gray-800 truncate-multiline">
                         {ad.title}
                     </h3>
                     <p className="text-gray-600 mb-4 truncate-multiline">

@@ -1,12 +1,13 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDeleteAdMutation } from "../../../api/mutations/ads/delete/delete-ad.mutation";
 import { useSingleAdQuery } from "../../../api/queries/ads/single-ad";
-import { useSingleAdContext } from "../../contexts-hooks/ad";
 import { useAppAuth } from "../../contexts-hooks/auth";
 
 const useSingleAd = () => {
     const { id: singleAdId } = useParams<{ id: string }>();
     const { token, userId } = useAppAuth();
+
+    const navigate = useNavigate();
 
     const {
         data: singleAd,
@@ -15,24 +16,7 @@ const useSingleAd = () => {
         refetch,
     } = useSingleAdQuery(singleAdId as string);
 
-    const isMine = singleAd?.author.id === userId;
-
-    const { editFormStates } = useSingleAdContext();
-    const { setIsEditing } = editFormStates;
-
-    const handleEditClick = () => {
-        setIsEditing(true);
-    };
-
-    const handleCancelEdit = () => {
-        setIsEditing(false);
-    };
-
-    const handleSaveEdit = async () => {
-        setIsEditing(false);
-        await refetch();
-    };
-
+    const isMine = singleAd?.authorId === userId;
     const deleteAdMutation = useDeleteAdMutation();
 
     const handleDelete = async () => {
@@ -42,13 +26,12 @@ const useSingleAd = () => {
             await deleteAdMutation.mutateAsync(singleAd.id);
         } catch (error) {
             console.error("Error deleting ad:", error);
+        } finally {
+            navigate(-1);
         }
     };
 
     const editFormMethods = {
-        handleEditClick,
-        handleCancelEdit,
-        handleSaveEdit,
         handleDelete,
     };
 
@@ -58,6 +41,7 @@ const useSingleAd = () => {
         error,
         isMine,
         singleAdId,
+        refetch,
     };
 
     return { editFormMethods, singleAdData };

@@ -4,14 +4,12 @@ export interface Ad {
     title: string;
     description: string;
     price: number;
-    address: string;
+    city: string;
     author: {
         name: string;
     };
-}
-
-export interface EditAdFormProps {
-    ad: Ad;
+    typeEnum: string;
+    categoryEnum: string;
 }
 
 export interface EditAdFormValues {
@@ -19,13 +17,22 @@ export interface EditAdFormValues {
     title: string;
     description: string;
     price: number;
-    address: string;
+    city: string;
+    typeEnum: string;
+    categoryEnum: string;
+}
+
+export interface EditAdFormProps {
+    ad: Ad;
 }
 
 export interface EditAdFormField {
     type: string;
     placeholder: string;
     name: keyof EditAdFormValues;
-    requiredMsg: string;
+    requiredMessage: string;
     valueAsNumber?: boolean;
+    minLength?: number;
+    maxLength?: number;
+    validationMessage?: string;
 }

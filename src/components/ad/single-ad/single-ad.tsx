@@ -2,6 +2,7 @@ import React from "react";
 import { Ad } from "../../../types";
 import { ActionButtons } from "../action-buttons";
 
+// TODO: export
 interface SingleAdProps {
     ad: Ad;
     isMine: boolean;
@@ -11,7 +12,7 @@ const SingleAd: React.FC<SingleAdProps> = (props) => {
     const { ad, isMine } = props;
 
     return (
-        <div className="p-6">
+        <div>
             <h2 className="text-3xl font-semibold text-gray-800 mb-4">
                 {ad.title}
             </h2>

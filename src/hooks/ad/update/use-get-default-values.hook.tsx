@@ -1,18 +1,26 @@
+import { EditAdFormValues } from "../../../types";
+
 const useGetDefaultValues = () => {
     type DefaultAdValues = {
         id: string;
         title: string;
         description: string;
         price: number;
-        address: string;
+        city: string;
+        typeEnum: string;
+        categoryEnum: string;
     };
 
-    const getDefaultValues = (ad: Partial<DefaultAdValues>) => ({
+    const getDefaultValues = (
+        ad: Pick<EditAdFormValues, keyof DefaultAdValues>
+    ): DefaultAdValues => ({
         id: ad.id || "",
         title: ad.title || "",
         description: ad.description || "",
         price: ad.price || 0,
-        address: ad.address || "",
+        city: ad.city || "",
+        categoryEnum: ad.categoryEnum || "",
+        typeEnum: ad.typeEnum || "",
     });
 
     return {

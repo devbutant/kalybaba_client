@@ -1,7 +1,6 @@
 import { Button } from "../../components/button";
-import { Input } from "../../components/form";
-import { SplashScreen } from "../../components/loading";
-import { useCategory, useCreateAd, useType } from "../../hooks/ad";
+import { Input, Select } from "../../components/form";
+import { useCreateAd } from "../../hooks/ad";
 
 const CreateAd: React.FC = () => {
     const { onFormSubmit, mutationError, isSuccess, form } = useCreateAd();
@@ -11,12 +10,22 @@ const CreateAd: React.FC = () => {
         register,
     } = form;
 
-    const { typeOptions, loadingTypes } = useType();
-    const { categoryOptions, loadingCategories } = useCategory();
+    // TODO: mettre les types et les catégories dans un fichier séparé
+    const types = ["OFFER", "DEMAND"];
 
-    if (loadingCategories || loadingTypes) {
-        return <SplashScreen />;
-    }
+    const categories = [
+        "VEHICLE",
+        "REAL_ESTATE",
+        "MULTIMEDIA",
+        "HOME",
+        "LEISURE",
+        "FASHION",
+        "CHILDREN",
+        "ANIMALS",
+        "SERVICES",
+        "EMPLOYMENT",
+        "OTHERS",
+    ];
 
     return (
         <div className="mx-auto p-8 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg shadow-lg">
@@ -45,9 +54,9 @@ const CreateAd: React.FC = () => {
                 <Input
                     type="text"
                     placeholder="Ville"
-                    name="address"
+                    name="city"
                     register={register}
-                    error={errors.address}
+                    error={errors.city}
                 />
                 <Input
                     type="number"
@@ -59,7 +68,28 @@ const CreateAd: React.FC = () => {
                     min={0}
                     step={0.01}
                 />
-                <Input
+
+                <Select
+                    key="category"
+                    placeholder="Sélectionnez une catégorie"
+                    name="categoryEnum"
+                    register={register}
+                    error={errors["categoryEnum"]}
+                    requiredMessage="La catégorie est requise"
+                    options={categories}
+                />
+
+                <Select
+                    key="type"
+                    placeholder="Sélectionnez un type"
+                    name="typeEnum"
+                    register={register}
+                    error={errors.typeEnum}
+                    requiredMessage="Le type est requis"
+                    options={types}
+                />
+
+                {/* <Input
                     type="text"
                     placeholder="Sélectionnez un type"
                     name="typeId"
@@ -74,7 +104,7 @@ const CreateAd: React.FC = () => {
                     register={register}
                     error={errors.categoryId}
                     options={categoryOptions}
-                />
+                /> */}
 
                 <Button
                     type="submit"
