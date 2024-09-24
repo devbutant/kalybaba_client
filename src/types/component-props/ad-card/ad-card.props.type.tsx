@@ -7,14 +7,10 @@ export interface AdCardProps {
         author: {
             id: string;
             name: string;
-            address: string;
+            city: string;
         };
-        type: {
-            name: string;
-        };
-        category: {
-            name: string;
-        };
+        typeEnum: string;
+        categoryEnum: string;
     };
     mine?: boolean;
 }

@@ -17,7 +17,7 @@ const SingleAdLayout: React.FC<PropsWithChildren<SingleAdLayoutType>> = (
             style={{ width: "40rem" }}
         >
             <div className="p-6">
-                <Tags ad={ad} />
+                <Tags typeEnum={ad.typeEnum} categoryEnum={ad.categoryEnum} />
                 {children}
             </div>
 
@@ -25,7 +25,7 @@ const SingleAdLayout: React.FC<PropsWithChildren<SingleAdLayoutType>> = (
                 <h3 className="text-lg font-semibold text-gray-800">
                     Détails supplémentaires :
                 </h3>
-                <p className="text-gray-600">{ad.address}</p>
+                <p className="text-gray-600">{ad.city}</p>
             </div>
         </div>
     );

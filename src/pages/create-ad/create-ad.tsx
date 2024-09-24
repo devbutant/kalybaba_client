@@ -45,9 +45,9 @@ const CreateAd: React.FC = () => {
                 <Input
                     type="text"
                     placeholder="Ville"
-                    name="address"
+                    name="city"
                     register={register}
-                    error={errors.address}
+                    error={errors.city}
                 />
                 <Input
                     type="number"

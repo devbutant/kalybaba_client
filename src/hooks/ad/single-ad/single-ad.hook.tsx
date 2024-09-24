@@ -15,7 +15,7 @@ const useSingleAd = () => {
         refetch,
     } = useSingleAdQuery(singleAdId as string);
 
-    const isMine = singleAd?.author.id === userId;
+    const isMine = singleAd?.authorId === userId;
 
     const { editFormStates } = useSingleAdContext();
     const { setIsEditing } = editFormStates;

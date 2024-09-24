@@ -13,7 +13,10 @@ const AdCard: React.FC<AdCardProps> = (props) => {
         >
             <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
-                    <Tags ad={ad} />
+                    <Tags
+                        typeEnum={ad.typeEnum}
+                        categoryEnum={ad.categoryEnum}
+                    />
                     <h3 className="text-2xl font-semibold mb-2 text-gray-800 truncate-multiline">
                         {ad.title}
                     </h3>

@@ -16,8 +16,8 @@ export const formFields: EditAdFormField[] = [
     {
         type: "text",
         placeholder: "Ville",
-        name: "address",
-        requiredMsg: "Address is required",
+        name: "city",
+        requiredMsg: "City is required",
     },
     {
         type: "number",

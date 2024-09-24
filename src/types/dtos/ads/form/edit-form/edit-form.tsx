@@ -4,18 +4,12 @@ export interface Ad {
     title: string;
     description: string;
     price: number;
-    address: string;
+    city: string;
     author: {
         name: string;
     };
-    category: {
-        id: string;
-        name: string;
-    };
-    type: {
-        id: string;
-        name: string;
-    };
+    typeEnum: string;
+    categoryEnum: string;
 }
 
 export interface EditAdFormProps {
@@ -27,15 +21,9 @@ export interface EditAdFormValues {
     title: string;
     description: string;
     price: number;
-    address: string;
-    type: {
-        id: string;
-        name: string;
-    };
-    category: {
-        id: string;
-        name: string;
-    };
+    city: string;
+    typeEnum: string;
+    categoryEnum: string;
 }
 
 export interface EditAdFormField {

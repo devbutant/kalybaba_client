@@ -6,7 +6,6 @@ import {
 } from "react-hook-form";
 
 import { FieldErrorsImpl, Merge } from "react-hook-form";
-import { Option } from "../../../types";
 
 interface SelectProps<T extends FieldValues> {
     placeholder?: string;
@@ -15,11 +14,7 @@ interface SelectProps<T extends FieldValues> {
     error?: FieldError | Merge<FieldError, FieldErrorsImpl<T>> | string;
     valueAsNumber?: boolean;
     requiredMsg?: string;
-    options?: Option[];
-    defaultValue: {
-        id: string;
-        value: string;
-    };
+    options?: string[];
 }
 
 const Select = <T extends FieldValues>({
@@ -30,7 +25,6 @@ const Select = <T extends FieldValues>({
     valueAsNumber = false,
     requiredMsg,
     options,
-    defaultValue,
 }: SelectProps<T>) => {
     const errorMessage =
         typeof error === "string"
@@ -50,25 +44,25 @@ const Select = <T extends FieldValues>({
             >
                 {placeholder}
             </label>
-            <h2>
-                {defaultValue.value} {defaultValue.id}
-            </h2>
+            {/*  */}
+
             <select
                 id={String(name)}
                 {...register(name, { valueAsNumber, required: requiredMsg })}
-                defaultValue={defaultValue.id} // Utilisation de defaultValue sur le select
                 className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             >
-                <option value="" disabled>
+                <option disabled value="">
                     {placeholder}
                 </option>
+
                 {options.map((option) => (
-                    <option key={option.value} value={option.value}>
-                        {option.label.charAt(0).toUpperCase() +
-                            option.label.slice(1)}
+                    <option key={option} value={option}>
+                        {option.charAt(0).toUpperCase() + option.slice(1)}
                     </option>
                 ))}
             </select>
+
+            {/* TODO: composant error  */}
             {errorMessage && (
                 <p className="text-red-700 text-sm">{errorMessage}</p>
             )}
