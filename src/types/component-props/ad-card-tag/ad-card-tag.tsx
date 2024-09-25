@@ -1,6 +1,6 @@
 type TagProps = {
     children: React.ReactNode;
-    color?: string;
+    color: string;
 };
 
 type TagsProps = {

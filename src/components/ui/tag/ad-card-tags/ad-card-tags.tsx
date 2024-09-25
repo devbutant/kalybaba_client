@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
-import { TagsProps } from "../../../types";
-import { Tag } from "../ad-card-tag/ad-card-tag";
+import { TagsProps } from "../../../../types";
+import { Tag } from "../ad-card-tag";
 
 const Tags: React.FC<PropsWithChildren<TagsProps>> = (props) => {
     const { typeEnum, categoryEnum } = props;

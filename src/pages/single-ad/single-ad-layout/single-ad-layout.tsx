@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { Tags } from "../../../components/ui/ad-card-tags";
+import { Tags } from "../../../components/ui/tag";
 import { Ad } from "../../../types";
 
 interface SingleAdLayoutType {

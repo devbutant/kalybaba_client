@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { AdCardProps } from "../../../types/component-props";
-import { Tags } from "../../ui/ad-card-tags";
+import { Tags } from "../../ui/tag";
 
 const AdCard: React.FC<AdCardProps> = (props) => {
     const { ad } = props;
