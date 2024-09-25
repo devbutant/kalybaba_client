@@ -1,12 +1,17 @@
+import { useSingleAd } from "@/hooks/ad";
+import { useEditAd } from "@/hooks/ad/update";
 import React from "react";
-import { useEditAd } from "../../../../hooks/ad/update";
 import { EditAdFormValues } from "../../../../types";
 import { Input, Select } from "../../../form";
 import { EditAdButtons } from "../edit-ad-form-buttons";
 import { formFields } from "../edit-ad-form-fields";
 
 const EditAdForm: React.FC = () => {
-    const { onSubmit, form } = useEditAd();
+    const { singleAdData } = useSingleAd();
+    const { singleAd } = singleAdData;
+    console.log(singleAd);
+
+    const { onSubmit, form } = useEditAd(singleAd);
 
     const {
         register,
@@ -16,7 +21,6 @@ const EditAdForm: React.FC = () => {
 
     // TODO: mettre les types et les catégories dans un fichier séparé
     const types = ["OFFER", "DEMAND"];
-
     const categories = [
         "VEHICLE",
         "REAL_ESTATE",

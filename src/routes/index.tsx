@@ -1,7 +1,7 @@
+import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
 import React from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 import { EditAdForm } from "../components/ad/edit-ad-form/edit-ad-form";
-import { useAppAuth } from "../hooks/contexts-hooks/auth/app";
 import { CompactLayout } from "../layouts/compact";
 import { Chat } from "../pages/chat";
 import { CreateAd } from "../pages/create-ad";

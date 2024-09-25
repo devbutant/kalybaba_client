@@ -1,7 +1,7 @@
-import React from "react";
+import { ButtonHTMLAttributes, FC, PropsWithChildren } from "react";
 
-const Button: React.FC<
-    React.PropsWithChildren<React.ButtonHTMLAttributes<HTMLButtonElement>>
+const Button: FC<
+    PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>
 > = ({ children, className = "", ...props }) => {
     return (
         <button className={`py-2 px-4 rounded ${className}`} {...props}>

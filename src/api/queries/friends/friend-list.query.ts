@@ -1,5 +1,5 @@
+import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
 import { useQuery } from "@tanstack/react-query";
-import { useAppAuth } from "../../../hooks/contexts-hooks/auth/app";
 import { UserDto } from "../../../types";
 import { fetchFriendList } from "../../services/friends";
 

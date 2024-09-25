@@ -1,5 +1,5 @@
+import { useOutsideClick } from "@/hooks/outside-click";
 import React, { createContext, ReactNode, useState } from "react";
-import { useOutsideClick } from "../../../hooks/outside-click";
 import { DropdownMenuContextType } from "../../../types/contexts";
 
 export const DropdownMenuContext = createContext<

@@ -1,12 +1,12 @@
+import { useSocketAuth } from "@/hooks/contexts-hooks/auth";
+import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
+import { useMessages } from "@/hooks/messages";
+import { useSocket } from "@/hooks/socket";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { Button } from "../../components/button";
 import { ChatContent } from "../../components/chat";
 import { FriendsList } from "../../components/chat/friends/friends-list";
 import { FriendsSelection } from "../../components/chat/friends/friends-selection";
-import { useSocketAuth } from "../../hooks/contexts-hooks/auth";
-import { useAppAuth } from "../../hooks/contexts-hooks/auth/app";
-import { useMessages } from "../../hooks/messages";
-import { useSocket } from "../../hooks/socket";
 
 const Chat: React.FC = () => {
     const [message, setMessage] = useState<string>("");

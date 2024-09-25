@@ -1,31 +1,26 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useUpdateAdMutation } from "../../../api/mutations/ads/update/update-ad.mutation";
-import { EditAdFormValues } from "../../../types";
-import { useSingleAd } from "../single-ad";
+import { AdDto, EditAdFormValues } from "../../../types";
 import { useGetDefaultValues } from "./use-get-default-values.hook";
 
-const useEditAd = () => {
-    const { singleAdData } = useSingleAd();
-    const { singleAd, refetch } = singleAdData;
-
+const useEditAd = (ad: AdDto | undefined) => {
     const { getDefaultValues } = useGetDefaultValues();
     const editAdMutation = useUpdateAdMutation();
 
     const navigate = useNavigate();
 
-    if (!singleAd) {
-        throw new Error("Annonce non trouvée");
+    if (!ad) {
+        console.log("Annonce non trouvée");
     }
 
     const form = useForm<EditAdFormValues>({
-        defaultValues: getDefaultValues(singleAd),
+        defaultValues: getDefaultValues(ad),
     });
 
     const onSubmit: SubmitHandler<EditAdFormValues> = async (data) => {
         try {
             await editAdMutation.mutateAsync(data);
-            refetch();
         } catch (error) {
             console.error("Error updating ad:", error);
         } finally {

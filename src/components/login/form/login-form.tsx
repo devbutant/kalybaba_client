@@ -1,6 +1,6 @@
+import { useLoginForm } from "@/hooks/auth";
 import React from "react";
 import { Input } from "../../../components/form";
-import { useLoginForm } from "../../../hooks/auth";
 import { fields } from "./fields";
 import { ForgetPassword } from "./forget-password";
 import { RememberMe } from "./remember-me";

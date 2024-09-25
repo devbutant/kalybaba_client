@@ -1,6 +1,6 @@
+import { useFriends } from "@/hooks/contexts-hooks/friends";
+import { useFriendsList } from "@/hooks/friends/friends-list";
 import React from "react";
-import { useFriends } from "../../../../hooks/contexts-hooks/friends";
-import { useFriendsList } from "../../../../hooks/friends/friends-list";
 
 const FriendsList: React.FC = () => {
     const { friends } = useFriends();

@@ -12,15 +12,15 @@ const useGetDefaultValues = () => {
     };
 
     const getDefaultValues = (
-        ad: Pick<EditAdFormValues, keyof DefaultAdValues>
+        ad: Pick<EditAdFormValues, keyof DefaultAdValues> | undefined
     ): DefaultAdValues => ({
-        id: ad.id || "",
-        title: ad.title || "",
-        description: ad.description || "",
-        price: ad.price || 0,
-        city: ad.city || "",
-        categoryEnum: ad.categoryEnum || "",
-        typeEnum: ad.typeEnum || "",
+        id: ad?.id || "",
+        title: ad?.title || "",
+        description: ad?.description || "",
+        price: ad?.price || 0,
+        city: ad?.city || "",
+        categoryEnum: ad?.categoryEnum || "",
+        typeEnum: ad?.typeEnum || "",
     });
 
     return {

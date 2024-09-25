@@ -1,6 +1,6 @@
+import { useCreateAd } from "@/hooks/ad";
 import { Button } from "../../components/button";
 import { Input, Select } from "../../components/form";
-import { useCreateAd } from "../../hooks/ad";
 
 const CreateAd: React.FC = () => {
     const { onFormSubmit, mutationError, isSuccess, form } = useCreateAd();

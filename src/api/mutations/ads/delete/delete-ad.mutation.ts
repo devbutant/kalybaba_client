@@ -1,6 +1,6 @@
+import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAppAuth } from "../../../../hooks/contexts-hooks/auth/app";
 import { deleteAd } from "../../../services/ads/delete";
 
 export const useDeleteAdMutation = () => {

@@ -1,5 +1,5 @@
+import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
 import { useQuery } from "@tanstack/react-query";
-import { useAppAuth } from "../../../../hooks/contexts-hooks/auth/app";
 import { AdDto } from "../../../../types";
 import { fetchSingleAd } from "../../../services/ads/single-ad";
 

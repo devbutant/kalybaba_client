@@ -1,5 +1,5 @@
+import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
 import { useMutation } from "@tanstack/react-query";
-import { useAppAuth } from "../../../../hooks/contexts-hooks/auth/app";
 import { EditAdFormValues } from "../../../../types/dtos";
 import { editAd } from "../../../services/ads/edit/edit-ad.service";
 
