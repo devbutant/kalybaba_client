@@ -1,7 +1,7 @@
+import { editAd } from "@/api/services/ads/edit/edit-ad.service";
 import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
+import { EditAdFormValues } from "@/types/dtos";
 import { useMutation } from "@tanstack/react-query";
-import { EditAdFormValues } from "../../../../types/dtos";
-import { editAd } from "../../../services/ads/edit/edit-ad.service";
 
 export const useUpdateAdMutation = () => {
     const { token } = useAppAuth();

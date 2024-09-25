@@ -1,8 +1,8 @@
+import { createAd } from "@/api/services/ads/create";
 import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
+import { AdDto, CreateAdDto } from "@/types/dtos";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { AdDto, CreateAdDto } from "../../../../types/dtos";
-import { createAd } from "../../../services/ads/create";
 
 export const useCreateAdMutation = () => {
     const { token } = useAppAuth();
@@ -11,7 +11,7 @@ export const useCreateAdMutation = () => {
     return useMutation<AdDto, Error, CreateAdDto>({
         mutationFn: (newAd: CreateAdDto) => createAd(newAd, token),
         onSuccess: () => {
-            navigate(-1);
+            navigate("/mes-annonces");
         },
         onError: (error) => {
             console.error("Erreur de connexion :", error);

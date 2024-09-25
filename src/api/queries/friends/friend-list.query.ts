@@ -1,7 +1,7 @@
+import { fetchFriendList } from "@/api/services/friends";
 import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
+import { UserDto } from "@/types";
 import { useQuery } from "@tanstack/react-query";
-import { UserDto } from "../../../types";
-import { fetchFriendList } from "../../services/friends";
 
 export const useFriendListQuery = () => {
     const { token } = useAppAuth();

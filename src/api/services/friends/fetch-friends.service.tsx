@@ -1,5 +1,5 @@
-import createAxiosInstance from "../../../config/axios/axiosConfig";
-import { UserDto } from "../../../types";
+import createAxiosInstance from "@/config/axios/axiosConfig";
+import { UserDto } from "@/types";
 
 export const fetchFriendList = async (
     token: string | null

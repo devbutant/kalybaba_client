@@ -1,7 +1,8 @@
 import { useSingleAd } from "@/hooks/ad";
+import { FC } from "react";
 import { Link, useParams } from "react-router-dom";
 
-const ActionButtons: React.FC = () => {
+const ActionButtons: FC = () => {
     const { editFormMethods } = useSingleAd();
     const { handleDelete } = editFormMethods;
 

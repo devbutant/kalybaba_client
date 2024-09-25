@@ -1,5 +1,5 @@
-import React, { createContext, ReactNode, useContext } from "react";
-import { CombinedAuthContextType } from "../../../types/contexts";
+import { CombinedAuthContextType } from "@/types/contexts";
+import { createContext, FC, ReactNode, useContext } from "react";
 import { AppAuthContext, AppAuthProvider } from "../index";
 import {
     SocketAuthContext,
@@ -10,7 +10,7 @@ export const CombinedAuthContext = createContext<
     CombinedAuthContextType | undefined
 >(undefined);
 
-export const CombinedAuthProvider: React.FC<{ children: ReactNode }> = ({
+export const CombinedAuthProvider: FC<{ children: ReactNode }> = ({
     children,
 }) => {
     return (
@@ -24,7 +24,7 @@ export const CombinedAuthProvider: React.FC<{ children: ReactNode }> = ({
     );
 };
 
-const CombinedAuthContextWrapper: React.FC<{ children: ReactNode }> = ({
+const CombinedAuthContextWrapper: FC<{ children: ReactNode }> = ({
     children,
 }) => {
     const socketAuth = useContext(SocketAuthContext);

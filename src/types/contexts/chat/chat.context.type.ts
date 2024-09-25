@@ -1,10 +1,8 @@
-import { Dispatch } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 export interface ChatContextType {
     messages: Array<{ id: string; userId: string; data: string }>;
     setMessages: Dispatch<
-        React.SetStateAction<
-            Array<{ id: string; userId: string; data: string }>
-        >
+        SetStateAction<Array<{ id: string; userId: string; data: string }>>
     >;
 }

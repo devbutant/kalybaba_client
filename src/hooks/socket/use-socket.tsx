@@ -1,8 +1,8 @@
+import { useSocketAuth } from "@/hooks/contexts-hooks/auth";
+import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
+import { API } from "@/utils/environment";
 import { useCallback } from "react";
 import io from "socket.io-client";
-import { API } from "../../utils/environment";
-import { useSocketAuth } from "../contexts-hooks/auth";
-import { useAppAuth } from "../contexts-hooks/auth/app";
 
 export const useSocket = () => {
     const {

@@ -1,7 +1,7 @@
+import { useLoginMutation } from "@/api/mutations/auth/login.mutation";
+import { LoginFormFields, loginSchema } from "@/types/auth/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useLoginMutation } from "../../../api/mutations/auth/login.mutation";
-import { LoginFormFields, loginSchema } from "../../../types/auth/schemas";
 
 const useLoginForm = () => {
     const form = useForm<LoginFormFields>({

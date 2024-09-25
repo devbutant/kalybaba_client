@@ -1,6 +1,6 @@
-import React from "react";
+import { FC } from "react";
 
-const RememberMe: React.FC = () => {
+const RememberMe: FC = () => {
     return (
         <div className="flex items-center">
             <input

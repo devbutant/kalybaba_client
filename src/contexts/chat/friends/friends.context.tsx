@@ -1,13 +1,11 @@
-import React, { createContext, ReactNode, useState } from "react";
-import { FriendsContextType } from "../../../types/contexts";
+import { FriendsContextType } from "@/types/contexts";
+import { createContext, FC, ReactNode, useState } from "react";
 
 export const FriendsContext = createContext<FriendsContextType | undefined>(
     undefined
 );
 
-export const FriendsProvider: React.FC<{ children: ReactNode }> = ({
-    children,
-}) => {
+export const FriendsProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [friends, setFriends] = useState<string[]>([]);
 
     return (

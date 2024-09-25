@@ -1,8 +1,8 @@
-import React from "react";
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
 import chatSvg from "../../../../../../public/img/icons/chat.svg";
 
-const ChatButton: React.FC = () => (
+const ChatButton: FC = () => (
     <NavLink
         to="/chat"
         type="button"

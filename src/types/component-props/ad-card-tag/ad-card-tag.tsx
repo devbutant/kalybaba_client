@@ -1,5 +1,7 @@
+import { ReactNode } from "react";
+
 type TagProps = {
-    children: React.ReactNode;
+    children: ReactNode;
     color: string;
 };
 

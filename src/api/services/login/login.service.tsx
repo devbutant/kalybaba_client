@@ -1,5 +1,5 @@
-import createAxiosInstance from "../../../config/axios/axiosConfig";
-import { LoginDto, LoginResponseDto } from "../../../types/dtos";
+import createAxiosInstance from "@/config/axios/axiosConfig";
+import { LoginDto, LoginResponseDto } from "@/types/dtos";
 
 export const loginUser = async (
     userData: LoginDto

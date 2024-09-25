@@ -1,5 +1,5 @@
-import React from "react";
-import { Ad } from "../../../types";
+import { Ad } from "@/types";
+import { FC } from "react";
 import { ActionButtons } from "../action-buttons";
 
 // TODO: export
@@ -8,7 +8,7 @@ interface SingleAdProps {
     isMine: boolean;
 }
 
-const SingleAd: React.FC<SingleAdProps> = (props) => {
+const SingleAd: FC<SingleAdProps> = (props) => {
     const { ad, isMine } = props;
 
     return (

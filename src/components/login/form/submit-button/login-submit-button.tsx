@@ -1,9 +1,10 @@
-import { LoginSubmitButtonProps } from "../../../../types/component-props/login-submit-button";
-import { Button } from "../../../button";
+import { Button } from "@/components/button";
+import { LoginSubmitButtonProps } from "@/types/component-props/login-submit-button";
+import { FC, PropsWithChildren } from "react";
 
-const LoginSubmitButton: React.FC<
-    React.PropsWithChildren<LoginSubmitButtonProps>
-> = (props) => {
+const LoginSubmitButton: FC<PropsWithChildren<LoginSubmitButtonProps>> = (
+    props
+) => {
     const { isSubmitting, errors } = props;
 
     return (

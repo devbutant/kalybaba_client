@@ -1,8 +1,8 @@
-import React, { PropsWithChildren } from "react";
-import { TagsProps } from "../../../../types";
+import { TagsProps } from "@/types";
+import { FC, PropsWithChildren } from "react";
 import { Tag } from "../ad-card-tag";
 
-const Tags: React.FC<PropsWithChildren<TagsProps>> = (props) => {
+const Tags: FC<PropsWithChildren<TagsProps>> = (props) => {
     const { typeEnum, categoryEnum } = props;
 
     return (

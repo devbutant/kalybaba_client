@@ -1,15 +1,13 @@
+import { DecodedToken } from "@/types";
+import { AppAuthContextType } from "@/types/contexts";
 import { jwtDecode } from "jwt-decode";
-import React, { createContext, ReactNode, useEffect, useState } from "react";
-import { DecodedToken } from "../../../types";
-import { AppAuthContextType } from "../../../types/contexts";
+import { createContext, FC, ReactNode, useEffect, useState } from "react";
 
 export const AppAuthContext = createContext<AppAuthContextType | undefined>(
     undefined
 );
 
-export const AppAuthProvider: React.FC<{ children: ReactNode }> = ({
-    children,
-}) => {
+export const AppAuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [token, setToken] = useState<string | null>(
         localStorage.getItem("access_token")
     );

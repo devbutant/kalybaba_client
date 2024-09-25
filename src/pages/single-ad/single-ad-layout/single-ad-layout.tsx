@@ -1,14 +1,12 @@
-import { PropsWithChildren } from "react";
-import { Tags } from "../../../components/ui/tag";
-import { Ad } from "../../../types";
+import { Tags } from "@/components/ui/tag";
+import { Ad } from "@/types";
+import { FC, PropsWithChildren } from "react";
 
 interface SingleAdLayoutType {
     ad: Ad;
 }
 
-const SingleAdLayout: React.FC<PropsWithChildren<SingleAdLayoutType>> = (
-    props
-) => {
+const SingleAdLayout: FC<PropsWithChildren<SingleAdLayoutType>> = (props) => {
     const { children, ad } = props;
 
     return (

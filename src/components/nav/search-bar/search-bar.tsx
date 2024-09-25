@@ -1,6 +1,6 @@
-import React from "react";
+import { FC } from "react";
 
-const SearchBar: React.FC = () => {
+const SearchBar: FC = () => {
     return (
         <input
             type="text"

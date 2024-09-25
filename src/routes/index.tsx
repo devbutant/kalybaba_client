@@ -1,5 +1,5 @@
 import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
-import React from "react";
+import { FC, ReactNode } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 import { EditAdForm } from "../components/ad/edit-ad-form/edit-ad-form";
 import { CompactLayout } from "../layouts/compact";
@@ -11,7 +11,7 @@ import { MyAdList } from "../pages/my-ad-list";
 import { Register } from "../pages/register/register";
 import { SingleAdPage } from "../pages/single-ad";
 
-const PrivateRoute: React.FC<{ element: React.ReactNode }> = ({ element }) => {
+const PrivateRoute: FC<{ element: ReactNode }> = ({ element }) => {
     const { isAuthenticated } = useAppAuth();
     return isAuthenticated ? (
         <>{element}</>
@@ -20,7 +20,7 @@ const PrivateRoute: React.FC<{ element: React.ReactNode }> = ({ element }) => {
     );
 };
 
-const PublicRoute: React.FC<{ element: React.ReactNode }> = ({ element }) => {
+const PublicRoute: FC<{ element: ReactNode }> = ({ element }) => {
     const { isAuthenticated } = useAppAuth();
     return !isAuthenticated ? <>{element}</> : <Navigate to="/" replace />;
 };

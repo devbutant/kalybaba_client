@@ -1,7 +1,7 @@
-import React from "react";
-import { LoginForm } from "../../components/login";
+import { LoginForm } from "@/components/login";
+import { FC } from "react";
 
-const Login: React.FC = () => {
+const Login: FC = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 to-indigo-300">
             <LoginForm />

@@ -1,6 +1,6 @@
-import React from "react";
+import { FC } from "react";
 
-const ProfileButton: React.FC = () => (
+const ProfileButton: FC = () => (
     <button
         type="button"
         className="relative flex items-center justify-center rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white"

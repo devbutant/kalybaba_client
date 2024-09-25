@@ -1,7 +1,8 @@
+import { Button } from "@/components/button";
+import { FC } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "../../../button";
 
-const EditAdButtons: React.FC = () => {
+const EditAdButtons: FC = () => {
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
 

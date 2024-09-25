@@ -1,12 +1,12 @@
 import { useOutsideClick } from "@/hooks/outside-click";
-import React, { createContext, ReactNode, useState } from "react";
-import { DropdownMenuContextType } from "../../../types/contexts";
+import { DropdownMenuContextType } from "@/types/contexts";
+import { createContext, FC, ReactNode, useState } from "react";
 
 export const DropdownMenuContext = createContext<
     DropdownMenuContextType | undefined
 >(undefined);
 
-export const DropdownMenuProvider: React.FC<{ children: ReactNode }> = ({
+export const DropdownMenuProvider: FC<{ children: ReactNode }> = ({
     children,
 }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);

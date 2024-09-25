@@ -1,5 +1,5 @@
+import { updateUserConnectionStatus } from "@/api/services/login";
 import { useMutation } from "@tanstack/react-query";
-import { updateUserConnectionStatus } from "../../services/login";
 
 export const useUpdateStatusMutation = () => {
     return useMutation<void, Error, { token: string; connected: boolean }>({

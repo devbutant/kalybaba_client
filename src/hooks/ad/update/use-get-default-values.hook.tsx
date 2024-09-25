@@ -1,4 +1,4 @@
-import { EditAdFormValues } from "../../../types";
+import { EditAdFormValues } from "@/types";
 
 const useGetDefaultValues = () => {
     type DefaultAdValues = {

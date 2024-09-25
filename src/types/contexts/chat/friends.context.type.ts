@@ -1,6 +1,6 @@
-import React from "react";
+import { Dispatch, SetStateAction } from "react";
 
 export interface FriendsContextType {
     friends: string[];
-    setFriends: React.Dispatch<React.SetStateAction<string[]>>;
+    setFriends: Dispatch<SetStateAction<string[]>>;
 }

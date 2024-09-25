@@ -1,14 +1,14 @@
+import { Input, Select } from "@/components/form";
 import { useSingleAd } from "@/hooks/ad";
 import { useEditAd } from "@/hooks/ad/update";
-import { categories } from "@/types/enums/categories";
-import { types } from "@/types/enums/types";
-import React from "react";
-import { EditAdFormValues } from "../../../../types";
-import { Input, Select } from "../../../form";
+import { EditAdFormValues } from "@/types";
+import { categories } from "@/types/enums/category";
+import { types } from "@/types/enums/category/types";
+import { FC } from "react";
 import { EditAdButtons } from "../edit-ad-form-buttons";
 import { formFields } from "../edit-ad-form-fields";
 
-const EditAdForm: React.FC = () => {
+const EditAdForm: FC = () => {
     const { singleAdData } = useSingleAd();
     const { singleAd } = singleAdData;
 

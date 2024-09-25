@@ -1,7 +1,7 @@
-import React from "react";
+import { FC } from "react";
 import { UserAdList } from "../user-ad-list";
 
-const MyAdList: React.FC = () => {
+const MyAdList: FC = () => {
     return (
         <div className="min-h-screen flex flex-col">
             <main className="flex flex-col flex-1">

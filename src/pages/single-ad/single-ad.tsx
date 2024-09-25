@@ -1,9 +1,9 @@
+import { SingleAd } from "@/components/ad/single-ad";
 import { useSingleAd } from "@/hooks/ad";
-import React from "react";
-import { SingleAd } from "../../components/ad/single-ad";
+import { FC } from "react";
 import { SingleAdLayout } from "./single-ad-layout";
 
-const SingleAdPage: React.FC = () => {
+const SingleAdPage: FC = () => {
     const { singleAdData } = useSingleAd();
     const { singleAd, isLoading, error, isMine, singleAdId } = singleAdData;
 

@@ -1,7 +1,7 @@
+import { useUpdateAdMutation } from "@/api/mutations/ads/update/update-ad.mutation";
+import { AdDto, EditAdFormValues } from "@/types";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useUpdateAdMutation } from "../../../api/mutations/ads/update/update-ad.mutation";
-import { AdDto, EditAdFormValues } from "../../../types";
 import { useGetDefaultValues } from "./use-get-default-values.hook";
 
 const useEditAd = (ad: AdDto | undefined) => {

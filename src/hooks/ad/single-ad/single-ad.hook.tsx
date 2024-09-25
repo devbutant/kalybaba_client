@@ -1,7 +1,7 @@
+import { useDeleteAdMutation } from "@/api/mutations/ads/delete/delete-ad.mutation";
+import { useSingleAdQuery } from "@/api/queries/ads/single-ad";
+import { useAppAuth } from "@/hooks/contexts-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDeleteAdMutation } from "../../../api/mutations/ads/delete/delete-ad.mutation";
-import { useSingleAdQuery } from "../../../api/queries/ads/single-ad";
-import { useAppAuth } from "../../contexts-hooks/auth";
 
 const useSingleAd = () => {
     const { id: singleAdId } = useParams<{ id: string }>();

@@ -1,4 +1,4 @@
-import { LoginFormFields } from "../../../../types";
+import { LoginFormFields } from "@/types";
 
 export const fields: {
     name: keyof LoginFormFields;

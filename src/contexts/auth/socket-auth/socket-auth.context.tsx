@@ -1,12 +1,12 @@
-import React, { createContext, ReactNode, useState } from "react";
+import { SocketAuthContextType } from "@/types/contexts";
+import { createContext, FC, ReactNode, useState } from "react";
 import { Socket } from "socket.io-client";
-import { SocketAuthContextType } from "../../../types/contexts";
 
 export const SocketAuthContext = createContext<
     SocketAuthContextType | undefined
 >(undefined);
 
-export const SocketAuthProvider: React.FC<{ children: ReactNode }> = ({
+export const SocketAuthProvider: FC<{ children: ReactNode }> = ({
     children,
 }) => {
     const [socket, setSocket] = useState<Socket | null>(null);

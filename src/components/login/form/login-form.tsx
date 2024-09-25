@@ -1,12 +1,12 @@
+import { Input } from "@/components/form";
 import { useLoginForm } from "@/hooks/auth";
-import React from "react";
-import { Input } from "../../../components/form";
+import { FC } from "react";
 import { fields } from "./fields";
 import { ForgetPassword } from "./forget-password";
 import { RememberMe } from "./remember-me";
 import { LoginSubmitButton } from "./submit-button/login-submit-button";
 
-const LoginForm: React.FC = () => {
+const LoginForm: FC = () => {
     const { register, handleSubmit, errors, isSubmitting, onFormSubmit } =
         useLoginForm();
 

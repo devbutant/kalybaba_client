@@ -1,8 +1,8 @@
-import React from "react";
-import { TagProps } from "../../../../types";
+import { TagProps } from "@/types";
+import { FC } from "react";
 import { colorVariants } from "./ad-card-tag-colors";
 
-const Tag: React.FC<TagProps> = (props) => {
+const Tag: FC<TagProps> = (props) => {
     const { children, color } = props;
 
     return (

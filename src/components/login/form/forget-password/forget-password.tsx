@@ -1,6 +1,6 @@
-import React from "react";
+import { FC } from "react";
 
-const ForgetPassword: React.FC = () => {
+const ForgetPassword: FC = () => {
     return (
         <div className="text-sm">
             <a

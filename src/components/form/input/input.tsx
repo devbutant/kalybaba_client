@@ -1,10 +1,18 @@
-import { FieldValues, Path, UseFormRegister } from "react-hook-form";
+import {
+    FieldError,
+    FieldValues,
+    Path,
+    UseFormRegister,
+} from "react-hook-form";
+
+import { FieldErrorsImpl, Merge } from "react-hook-form";
 
 interface InputProps<T extends FieldValues> {
     type: string;
     placeholder?: string;
     name: Path<T>;
     register: UseFormRegister<T>;
+    error?: FieldError | Merge<FieldError, FieldErrorsImpl<T>> | string;
     valueAsNumber?: boolean;
     requiredMessage?: string;
     minLength?: number;
@@ -20,6 +28,7 @@ const Input = <T extends FieldValues>({
     placeholder,
     name,
     register,
+    error,
     valueAsNumber = false,
     requiredMessage,
     minLength,
@@ -28,6 +37,11 @@ const Input = <T extends FieldValues>({
     min,
     step,
 }: InputProps<T>) => {
+    const errorMessage =
+        typeof error === "string"
+            ? error
+            : (error?.message as string | undefined);
+
     return (
         <div className="min-w-96">
             {/* Todo: label component */}
@@ -63,6 +77,10 @@ const Input = <T extends FieldValues>({
                 step={step}
                 className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
+
+            {errorMessage && (
+                <p className="text-red-700 text-sm">{errorMessage}</p>
+            )}
         </div>
     );
 };

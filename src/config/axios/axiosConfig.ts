@@ -1,5 +1,5 @@
+import { API } from "@/utils/environment";
 import axios from "axios";
-import { API } from "../../utils/environment";
 
 const createAxiosInstance = (token: string | null) => {
     return axios.create({

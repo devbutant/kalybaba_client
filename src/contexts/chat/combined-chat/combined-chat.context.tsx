@@ -1,5 +1,5 @@
-import React, { createContext, ReactNode, useContext } from "react";
-import { CombinedChatContextType } from "../../../types/contexts";
+import { CombinedChatContextType } from "@/types/contexts";
+import { createContext, FC, ReactNode, useContext } from "react";
 import {
     ChatContext,
     ChatProvider,
@@ -11,7 +11,7 @@ export const CombinedChatContext = createContext<
     CombinedChatContextType | undefined
 >(undefined);
 
-export const CombinedChatProvider: React.FC<{ children: ReactNode }> = ({
+export const CombinedChatProvider: FC<{ children: ReactNode }> = ({
     children,
 }) => {
     return (
@@ -25,7 +25,7 @@ export const CombinedChatProvider: React.FC<{ children: ReactNode }> = ({
     );
 };
 
-const CombinedChatContextWrapper: React.FC<{ children: ReactNode }> = ({
+const CombinedChatContextWrapper: FC<{ children: ReactNode }> = ({
     children,
 }) => {
     const chatMessages = useContext(ChatContext);

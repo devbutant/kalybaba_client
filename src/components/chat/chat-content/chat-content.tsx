@@ -1,8 +1,8 @@
 import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
 import { useChat } from "@/hooks/contexts-hooks/chat";
-import React from "react";
+import { FC } from "react";
 
-const ChatContent: React.FC = () => {
+const ChatContent: FC = () => {
     const { messages } = useChat();
     const { userId: currentUser } = useAppAuth();
 

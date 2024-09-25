@@ -1,8 +1,8 @@
-import React from "react";
+import { Button } from "@/components/button";
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
-import { Button } from "../../components/button";
 
-const Register: React.FC = () => {
+const Register: FC = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 to-indigo-300">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">

@@ -1,5 +1,5 @@
-import createAxiosInstance from "../../../../config/axios/axiosConfig";
-import { EditAdFormValues } from "../../../../types";
+import createAxiosInstance from "@/config/axios/axiosConfig";
+import { EditAdFormValues } from "@/types";
 
 interface EditAdResponse {
     title: string;

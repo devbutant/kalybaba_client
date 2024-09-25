@@ -1,8 +1,8 @@
 import { useFriends } from "@/hooks/contexts-hooks/friends";
 import { useFriendsList } from "@/hooks/friends/friends-list";
-import React from "react";
+import { FC } from "react";
 
-const FriendsList: React.FC = () => {
+const FriendsList: FC = () => {
     const { friends } = useFriends();
     const { handleSelectFriend } = useFriendsList();
 

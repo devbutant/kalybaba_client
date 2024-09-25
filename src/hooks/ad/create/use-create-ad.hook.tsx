@@ -1,7 +1,7 @@
+import { useCreateAdMutation } from "@/api/mutations/ads/create/create-ad.mutation";
+import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
+import { CreateAdDto } from "@/types";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useCreateAdMutation } from "../../../api/mutations/ads/create/create-ad.mutation";
-import { CreateAdDto } from "../../../types";
-import { useAppAuth } from "../../contexts-hooks/auth/app";
 
 const useCreateAd = () => {
     const { userId } = useAppAuth();

@@ -1,8 +1,8 @@
 import { useLogout } from "@/hooks/auth";
-import React from "react";
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
 
-const DropdownMenu: React.FC = () => {
+const DropdownMenu: FC = () => {
     const { handleLogout } = useLogout();
 
     return (

@@ -1,7 +1,7 @@
-import React from "react";
+import { Dispatch, RefObject, SetStateAction } from "react";
 
 export interface DropdownMenuContextType {
     isOpen: boolean;
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    menuRef: React.RefObject<HTMLDivElement>;
+    setIsOpen: Dispatch<SetStateAction<boolean>>;
+    menuRef: RefObject<HTMLDivElement>;
 }

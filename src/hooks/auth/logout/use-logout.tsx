@@ -1,7 +1,7 @@
-import { updateUserConnectionStatus } from "../../../api/services/login";
-import { useAppAuth } from "../../contexts-hooks/auth/app";
-import { useMessages } from "../../messages";
-import { useSocket } from "../../socket";
+import { updateUserConnectionStatus } from "@/api/services/login";
+import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
+import { useMessages } from "@/hooks/messages";
+import { useSocket } from "@/hooks/socket";
 
 const useLogout = () => {
     const { setToken, token } = useAppAuth();

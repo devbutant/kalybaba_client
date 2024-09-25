@@ -1,9 +1,9 @@
-import React from "react";
+import { Tags } from "@/components/ui/tag";
+import { AdCardProps } from "@/types/component-props";
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
-import { AdCardProps } from "../../../types/component-props";
-import { Tags } from "../../ui/tag";
 
-const AdCard: React.FC<AdCardProps> = (props) => {
+const AdCard: FC<AdCardProps> = (props) => {
     const { ad } = props;
 
     return (
