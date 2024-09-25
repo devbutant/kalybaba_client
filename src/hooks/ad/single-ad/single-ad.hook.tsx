@@ -27,7 +27,7 @@ const useSingleAd = () => {
         } catch (error) {
             console.error("Error deleting ad:", error);
         } finally {
-            navigate(-1);
+            navigate(-2);
         }
     };
 
