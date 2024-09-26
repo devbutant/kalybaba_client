@@ -10,18 +10,18 @@ const EditAdButtons: FC = () => {
         <div className="flex items-center justify-between">
             <Button
                 type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-indigo-700 hover:bg-indigo-800 focus:ring-2 focus:ring-opacity-50"
             >
-                Save
+                Enregistrer les modifications
             </Button>
             <Button
                 type="button"
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-red-600 hover:bg-red-700 focus:ring-2 focus:ring-opacity-50"
                 onClick={() => {
                     navigate(`/annonces/${id}`);
                 }}
             >
-                Cancel
+                Annuler
             </Button>
         </div>
     );

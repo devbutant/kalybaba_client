@@ -32,7 +32,7 @@ const Register: FC = () => {
                     />
                     <Button
                         type="submit"
-                        className="mt-2 w-full bg-indigo-600 text-white shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                        className="w-full bg-indigo-700 hover:bg-indigo-800 focus:ring-2 focus:ring-opacity-50"
                     >
                         S'inscrire
                     </Button>

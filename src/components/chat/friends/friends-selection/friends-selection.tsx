@@ -19,7 +19,7 @@ const FriendsSelection: FC = () => {
         <div className="relative p-4" ref={containerRef}>
             <Button
                 onClick={() => setIsOpen(!isOpen)}
-                className="bg-blue-500 text-white"
+                className="bg-indigo-700 hover:bg-indigo-800 focus:ring-2 focus:ring-opacity-50"
             >
                 Inviter
             </Button>

@@ -3,7 +3,7 @@ import { useSingleAd } from "@/hooks/ad";
 import { useEditAd } from "@/hooks/ad/update";
 import { EditAdFormValues } from "@/types";
 import { categories } from "@/types/enums/category";
-import { types } from "@/types/enums/category/types";
+import { types } from "@/types/enums/types";
 import { FC } from "react";
 import { EditAdButtons } from "../edit-ad-form-buttons";
 import { formFields } from "../edit-ad-form-fields";

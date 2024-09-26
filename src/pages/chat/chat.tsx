@@ -51,7 +51,7 @@ const Chat: FC = () => {
                 />
                 <Button
                     onClick={handleSendMsg}
-                    className="bg-blue-500 text-white"
+                    className="bg-indigo-700 hover:bg-indigo-800 focus:ring-2 focus:ring-opacity-50"
                 >
                     Envoyer
                 </Button>

@@ -1,6 +1,7 @@
 import { Input } from "@/components/form";
 import { useLoginForm } from "@/hooks/auth";
 import { FC } from "react";
+import { NavLink } from "react-router-dom";
 import { fields } from "./fields";
 import { ForgetPassword } from "./forget-password";
 import { RememberMe } from "./remember-me";
@@ -30,6 +31,17 @@ const LoginForm: FC = () => {
                 <div className="flex items-center justify-between">
                     <RememberMe />
                     <ForgetPassword />
+                </div>
+                <div>
+                    <p className="text-sm text-gray-900">
+                        Vous n'avez pas encore de compte ?{" "}
+                        <NavLink
+                            to="/inscription"
+                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                        >
+                            Inscrivez-vous
+                        </NavLink>
+                    </p>
                 </div>
 
                 <LoginSubmitButton

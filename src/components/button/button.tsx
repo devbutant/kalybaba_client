@@ -1,12 +1,13 @@
+import { Button as ShadCnButton } from "@/shadcn/components/ui/button";
 import { ButtonHTMLAttributes, FC, PropsWithChildren } from "react";
 
 const Button: FC<
     PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>
 > = ({ children, className = "", ...props }) => {
     return (
-        <button className={`py-2 px-4 rounded ${className}`} {...props}>
+        <ShadCnButton className={` ${className}`} {...props}>
             {children}
-        </button>
+        </ShadCnButton>
     );
 };
 

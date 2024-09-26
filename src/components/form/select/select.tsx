@@ -6,6 +6,7 @@ import {
 } from "react-hook-form";
 
 import { FieldErrorsImpl, Merge } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface SelectProps<T extends FieldValues> {
     placeholder?: string;
@@ -26,6 +27,8 @@ const Select = <T extends FieldValues>({
     requiredMessage,
     options,
 }: SelectProps<T>) => {
+    const { t } = useTranslation();
+
     const errorMessage =
         typeof error === "string"
             ? error
@@ -58,11 +61,13 @@ const Select = <T extends FieldValues>({
                     {placeholder}
                 </option>
 
-                {options.map((option) => (
-                    <option key={option} value={option}>
-                        {option.charAt(0).toUpperCase() + option.slice(1)}
-                    </option>
-                ))}
+                {options.map((option) => {
+                    return (
+                        <option key={option} value={option}>
+                            {t("selectOptions." + option)}
+                        </option>
+                    );
+                })}
             </select>
 
             {/* TODO: composant error  */}

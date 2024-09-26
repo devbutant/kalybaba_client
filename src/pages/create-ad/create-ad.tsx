@@ -90,26 +90,9 @@ const CreateAd: FC = () => {
                     options={types}
                 />
 
-                {/* <Input
-                    type="text"
-                    placeholder="Sélectionnez un type"
-                    name="typeId"
-                    register={register}
-                    error={errors.typeId}
-                    options={typeOptions}
-                />
-                <Input
-                    type="text"
-                    placeholder="Sélectionnez une catégorie"
-                    name="categoryId"
-                    register={register}
-                    error={errors.categoryId}
-                    options={categoryOptions}
-                /> */}
-
                 <Button
                     type="submit"
-                    className="inline-flex justify-center py-2 px-6 border border-transparent shadow-lg text-lg font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    className="bg-indigo-700 hover:bg-indigo-800 focus:ring-2 focus:ring-opacity-50"
                 >
                     {isSubmitting ? (
                         <p>Envoi de l'annonce...</p>

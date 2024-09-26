@@ -1,3 +1,4 @@
+import { Badge } from "@/shadcn/components/ui/badge";
 import { TagProps } from "@/types";
 import { FC } from "react";
 import { colorVariants } from "./ad-card-tag-colors";
@@ -6,13 +7,14 @@ const Tag: FC<TagProps> = (props) => {
     const { children, color } = props;
 
     return (
-        <div
+        <Badge
+            variant="outline"
             className={`${
                 colorVariants[color] || colorVariants.gray
-            } text-xs font-semibold mr-2 px-2.5 py-0.5 rounded`}
+            } font-semibold`}
         >
             {children}
-        </div>
+        </Badge>
     );
 };
 
