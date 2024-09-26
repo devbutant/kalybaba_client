@@ -1,10 +1,12 @@
 import { Badge } from "@/shadcn/components/ui/badge";
 import { TagProps } from "@/types";
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { colorVariants } from "./ad-card-tag-colors";
 
 const Tag: FC<TagProps> = (props) => {
     const { children, color } = props;
+    const { t } = useTranslation();
 
     return (
         <Badge
@@ -13,7 +15,7 @@ const Tag: FC<TagProps> = (props) => {
                 colorVariants[color] || colorVariants.gray
             } font-semibold`}
         >
-            {children}
+            {t(`categoryOrType.${children}`).toUpperCase()}
         </Badge>
     );
 };

@@ -64,7 +64,7 @@ const Select = <T extends FieldValues>({
                 {options.map((option) => {
                     return (
                         <option key={option} value={option}>
-                            {t("selectOptions." + option)}
+                            {t("categoryOrType." + option)}
                         </option>
                     );
                 })}
