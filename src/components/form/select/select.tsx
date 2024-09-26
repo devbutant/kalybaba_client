@@ -47,7 +47,6 @@ const Select = <T extends FieldValues>({
             >
                 {placeholder}
             </label>
-            {/*  */}
 
             <select
                 id={String(name)}
