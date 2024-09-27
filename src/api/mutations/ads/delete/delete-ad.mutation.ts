@@ -16,7 +16,7 @@ export const useDeleteAdMutation = () => {
     return useMutation<string, Error, string>({
         mutationFn: () => deleteAd(adId, token),
         onSuccess: () => {
-            navigate(-1);
+            navigate("/mes-annonces");
         },
         onError: (error) => {
             console.error("Erreur de connexion :", error);

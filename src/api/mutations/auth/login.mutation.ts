@@ -1,4 +1,4 @@
-import { loginUser } from "@/api/services/login/login.service";
+import { loginUser } from "@/api/services/login";
 import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
 import { LoginDto, LoginResponseDto } from "@/types/dtos";
 import { useMutation } from "@tanstack/react-query";
@@ -16,7 +16,7 @@ export const useLoginMutation = () => {
             updateStatusMutation.mutate({ token: newToken, connected: true });
         },
         onError: (error) => {
-            console.error("Erreur de connexion :", error);
+            console.log(error && "toast error");
         },
     });
 };

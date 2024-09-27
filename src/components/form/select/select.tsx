@@ -14,7 +14,6 @@ interface SelectProps<T extends FieldValues> {
     register: UseFormRegister<T>;
     error?: FieldError | Merge<FieldError, FieldErrorsImpl<T>> | string;
     valueAsNumber?: boolean;
-    requiredMessage?: string;
     options?: string[];
 }
 
@@ -24,7 +23,6 @@ const Select = <T extends FieldValues>({
     register,
     error,
     valueAsNumber = false,
-    requiredMessage,
     options,
 }: SelectProps<T>) => {
     const { t } = useTranslation();
@@ -52,7 +50,7 @@ const Select = <T extends FieldValues>({
                 id={String(name)}
                 {...register(name, {
                     valueAsNumber,
-                    required: requiredMessage,
+                    required: "Champ obligatoire",
                 })}
                 className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             >

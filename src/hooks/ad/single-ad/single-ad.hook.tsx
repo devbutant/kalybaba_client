@@ -1,13 +1,11 @@
 import { useDeleteAdMutation } from "@/api/mutations/ads/delete/delete-ad.mutation";
 import { useSingleAdQuery } from "@/api/queries/ads/single-ad";
 import { useAppAuth } from "@/hooks/contexts-hooks/auth";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const useSingleAd = () => {
     const { id: singleAdId } = useParams<{ id: string }>();
     const { token, userId } = useAppAuth();
-
-    const navigate = useNavigate();
 
     const {
         data: singleAd,
@@ -26,8 +24,6 @@ const useSingleAd = () => {
             await deleteAdMutation.mutateAsync(singleAd.id);
         } catch (error) {
             console.error("Error deleting ad:", error);
-        } finally {
-            navigate(-2);
         }
     };
 

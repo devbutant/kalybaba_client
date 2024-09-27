@@ -8,7 +8,7 @@ import {
 export interface InputProps<T extends FieldValues> {
     type: string;
     placeholder: string;
-    name: Path<T>; // Changement ici, on utilise Path<T>
+    name: Path<T>;
     register: UseFormRegister<T>;
     error?: string | FieldError;
 }

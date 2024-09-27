@@ -76,7 +76,6 @@ const CreateAd: FC = () => {
                     name="categoryEnum"
                     register={register}
                     error={errors["categoryEnum"]}
-                    requiredMessage="La catégorie est requise"
                     options={categories}
                 />
 
@@ -86,7 +85,6 @@ const CreateAd: FC = () => {
                     name="typeEnum"
                     register={register}
                     error={errors.typeEnum}
-                    requiredMessage="Le type est requis"
                     options={types}
                 />
 
