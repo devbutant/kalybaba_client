@@ -35,7 +35,7 @@ const Input = <T extends FieldValues>({
             : (error?.message as string | undefined);
 
     return (
-        <div className="min-w-96">
+        <div className="max-w-96">
             {/* Todo: label component */}
             <label
                 htmlFor={String(name)}
