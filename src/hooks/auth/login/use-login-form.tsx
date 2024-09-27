@@ -1,4 +1,5 @@
 import { useLoginMutation } from "@/api/mutations/auth/login.mutation";
+import { handleError } from "@/api/services/error";
 import { LoginFormFields, loginSchema } from "@/types/auth/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -23,13 +24,7 @@ const useLoginForm = () => {
         try {
             await authenticationMutation.mutateAsync(credentials);
         } catch (error: unknown) {
-            setError("root", {
-                type: "manual",
-                message:
-                    error instanceof Error
-                        ? error.message
-                        : "An error occurred",
-            });
+            handleError(error, setError);
         }
     };
 

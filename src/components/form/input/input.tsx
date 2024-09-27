@@ -14,10 +14,6 @@ interface InputProps<T extends FieldValues> {
     register: UseFormRegister<T>;
     error?: FieldError | Merge<FieldError, FieldErrorsImpl<T>> | string;
     valueAsNumber?: boolean;
-    requiredMessage?: string;
-    minLength?: number;
-    maxLength?: number;
-    validationMessage?: string;
     min?: number;
     step?: number;
     options?: string[];
@@ -30,10 +26,6 @@ const Input = <T extends FieldValues>({
     register,
     error,
     valueAsNumber = false,
-    requiredMessage,
-    minLength,
-    maxLength,
-    validationMessage,
     min,
     step,
 }: InputProps<T>) => {
@@ -54,22 +46,8 @@ const Input = <T extends FieldValues>({
 
             <input
                 {...register(name, {
-                    required: requiredMessage,
+                    required: "Merci de renseigner ce champ",
                     valueAsNumber,
-                    minLength:
-                        minLength && validationMessage
-                            ? {
-                                  value: minLength,
-                                  message: validationMessage,
-                              }
-                            : undefined,
-                    maxLength:
-                        maxLength && validationMessage
-                            ? {
-                                  value: maxLength,
-                                  message: validationMessage,
-                              }
-                            : undefined,
                 })}
                 type={type}
                 placeholder={placeholder}

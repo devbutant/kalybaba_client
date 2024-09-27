@@ -30,7 +30,6 @@ export interface EditAdFormField {
     type: string;
     placeholder: string;
     name: keyof EditAdFormValues;
-    requiredMessage: string;
     valueAsNumber?: boolean;
     minLength?: number;
     maxLength?: number;

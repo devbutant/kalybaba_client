@@ -1,1 +1,1 @@
-export { updateUserConnectionStatus } from "./login.service";
+export { loginUser, updateUserConnectionStatus } from "./login.service";

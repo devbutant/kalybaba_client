@@ -1,4 +1,4 @@
-import { Button } from "@/components/button";
+import { RegisterForm } from "@/components/register";
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -9,34 +9,7 @@ const Register: FC = () => {
                 <h1 className="text-2xl font-semibold mb-6 text-gray-800 text-center">
                     Créer un compte
                 </h1>
-                <form className="space-y-4">
-                    <input
-                        type="text"
-                        placeholder="Pseudo"
-                        className="w-full p-3 border border-gray-300 rounded-lg"
-                    />
-                    <input
-                        type="email"
-                        placeholder="Mail"
-                        className="w-full p-3 border border-gray-300 rounded-lg"
-                    />
-                    <input
-                        type="password"
-                        placeholder="Mot de passe"
-                        className="w-full p-3 border border-gray-300 rounded-lg"
-                    />
-                    <input
-                        type="password"
-                        placeholder="Confirmer le mot de passe"
-                        className="w-full p-3 border border-gray-300 rounded-lg"
-                    />
-                    <Button
-                        type="submit"
-                        className="w-full bg-indigo-700 hover:bg-indigo-800 focus:ring-2 focus:ring-opacity-50"
-                    >
-                        S'inscrire
-                    </Button>
-                </form>
+                <RegisterForm />
                 <p className="mt-4 text-sm text-gray-600 text-center">
                     Vous avez déjà un compte ?{" "}
                     <NavLink

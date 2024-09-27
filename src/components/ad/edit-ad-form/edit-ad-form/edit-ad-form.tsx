@@ -33,11 +33,7 @@ const EditAdForm: FC = () => {
                             placeholder={field.placeholder}
                             name={field.name}
                             register={register}
-                            requiredMessage={field.requiredMessage}
                             valueAsNumber={field.valueAsNumber}
-                            minLength={field.minLength}
-                            maxLength={field.maxLength}
-                            validationMessage={field.validationMessage}
                         />
                         {errors[field.name] && (
                             <span className="text-red-500 text-sm">
@@ -53,7 +49,6 @@ const EditAdForm: FC = () => {
                         name="categoryEnum"
                         register={register}
                         error={errors["categoryEnum"]}
-                        requiredMessage="La catégorie est requise"
                         options={categories}
                     />
                     {errors["categoryEnum"] && (
@@ -69,7 +64,6 @@ const EditAdForm: FC = () => {
                         name="typeEnum"
                         register={register}
                         error={errors.typeEnum}
-                        requiredMessage="Le type est requis"
                         options={types}
                     />
                     {errors.typeEnum && (
