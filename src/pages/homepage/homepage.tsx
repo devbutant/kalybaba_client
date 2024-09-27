@@ -3,7 +3,9 @@ import { AdCard } from "@/components/ad/ad-card";
 import { FC } from "react";
 
 const Homepage: FC = () => {
-    const { data: ads } = useAdListQuery();
+    const { data: ads, isLoading, error } = useAdListQuery();
+    if (isLoading) return <p>Chargement...</p>;
+    if (error) return <p>Erreur lors du chargement de l'annonce</p>;
 
     return (
         <div className="min-h-screenflex flex-col">
