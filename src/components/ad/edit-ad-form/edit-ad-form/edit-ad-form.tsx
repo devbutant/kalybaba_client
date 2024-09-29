@@ -32,6 +32,8 @@ const EditAdForm: FC = () => {
 
     const { t } = useTranslation();
 
+    console.log(singleAd);
+
     return (
         <div className="mx-auto bg-white p-8 shadow-md rounded-lg md:w-[45rem] w-screen ">
             <h2 className="text-2xl font-semibold text-gray-800 mb-6">
@@ -97,7 +99,7 @@ const EditAdForm: FC = () => {
                         />
                     ))}
 
-                    <Select>
+                    <Select defaultValue={singleAd?.typeEnum} name="typeEnum">
                         <SelectTrigger>
                             <SelectValue placeholder="Sélectionnez un type" />
                         </SelectTrigger>
@@ -109,7 +111,10 @@ const EditAdForm: FC = () => {
                             ))}
                         </SelectContent>
                     </Select>
-                    <Select>
+                    <Select
+                        defaultValue={singleAd?.categoryEnum}
+                        name="categoryEnum"
+                    >
                         <SelectTrigger>
                             <SelectValue placeholder="Sélectionnez une catégorie" />
                         </SelectTrigger>
