@@ -1,10 +1,26 @@
-import { Input, Select } from "@/components/form";
 import { useSingleAd } from "@/hooks/ad";
 import { useEditAd } from "@/hooks/ad/update";
-import { EditAdFormValues } from "@/types";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/shadcn/components/ui/form";
+import { Input } from "@/shadcn/components/ui/input";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/shadcn/components/ui/select";
+import { Textarea } from "@/shadcn/components/ui/textarea";
 import { categories } from "@/types/enums/category";
 import { types } from "@/types/enums/types";
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { EditAdButtons } from "../edit-ad-form-buttons";
 import { formFields } from "../edit-ad-form-fields";
 
@@ -14,67 +30,100 @@ const EditAdForm: FC = () => {
 
     const { onSubmit, form } = useEditAd(singleAd);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = form;
+    const { t } = useTranslation();
 
     return (
-        <div className="mx-auto bg-white p-8 shadow-md rounded-lg">
+        <div className="mx-auto bg-white p-8 shadow-md rounded-lg md:w-[45rem] w-screen ">
             <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-                Modifier l'annonce
+                Modifiez votre annonce
             </h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                {formFields.map((field) => (
-                    <div key={field.name} className="mb-4">
-                        <Input<EditAdFormValues>
-                            type={field.type}
-                            placeholder={field.placeholder}
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-8"
+                >
+                    {formFields.map((field) => (
+                        <FormField
+                            key={field.name}
+                            control={form.control}
                             name={field.name}
-                            register={register}
-                            valueAsNumber={field.valueAsNumber}
+                            render={({ field: formField }) => (
+                                <FormItem>
+                                    <FormLabel>{field.placeholder}</FormLabel>
+                                    <FormControl>
+                                        <FormControl>
+                                            {field.type === "textarea" ? (
+                                                <Textarea
+                                                    placeholder={
+                                                        field.placeholder
+                                                    }
+                                                    {...formField}
+                                                    onChange={(
+                                                        e: React.ChangeEvent<
+                                                            | HTMLInputElement
+                                                            | HTMLTextAreaElement
+                                                        >
+                                                    ) =>
+                                                        formField.onChange(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                />
+                                            ) : (
+                                                <Input
+                                                    placeholder={
+                                                        field.placeholder
+                                                    }
+                                                    {...formField}
+                                                    type={field.type}
+                                                    onChange={(e) =>
+                                                        formField.onChange(
+                                                            field.type ===
+                                                                "number"
+                                                                ? parseFloat(
+                                                                      e.target
+                                                                          .value
+                                                                  ) || 0
+                                                                : e.target.value
+                                                        )
+                                                    }
+                                                />
+                                            )}
+                                        </FormControl>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
                         />
-                        {errors[field.name] && (
-                            <span className="text-red-500 text-sm">
-                                {errors[field.name]?.message}
-                            </span>
-                        )}
-                    </div>
-                ))}
+                    ))}
 
-                <div className="mb-4">
-                    <Select
-                        placeholder="Sélectionnez une catégorie"
-                        name="categoryEnum"
-                        register={register}
-                        error={errors["categoryEnum"]}
-                        options={categories}
-                    />
-                    {errors["categoryEnum"] && (
-                        <span className="text-red-500 text-sm">
-                            {errors["categoryEnum"]?.message}
-                        </span>
-                    )}
-                </div>
-
-                <div className="mb-4">
-                    <Select
-                        placeholder="Sélectionnez un type"
-                        name="typeEnum"
-                        register={register}
-                        error={errors.typeEnum}
-                        options={types}
-                    />
-                    {errors.typeEnum && (
-                        <span className="text-red-500 text-sm">
-                            {errors.typeEnum?.message}
-                        </span>
-                    )}
-                </div>
-
-                <EditAdButtons />
-            </form>
+                    <Select>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Sélectionnez un type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {types.map((type) => (
+                                <SelectItem key={type} value={type}>
+                                    {t("categoryOrType." + type)}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    <Select>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Sélectionnez une catégorie" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {categories.map((category) => (
+                                <SelectItem key={category} value={category}>
+                                    {t("categoryOrType." + category)}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    <EditAdButtons />
+                </form>
+            </Form>
         </div>
     );
 };
