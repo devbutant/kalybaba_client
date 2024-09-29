@@ -9,12 +9,8 @@ const LoginSubmitButton: FC<PropsWithChildren<LoginSubmitButtonProps>> = (
 
     return (
         <>
-            <Button
-                type="submit"
-                className="mt-2 w-full"
-                disabled={isSubmitting}
-            >
-                {isSubmitting ? "Loading..." : "Connexion"}
+            <Button type="submit" disabled={isSubmitting} className="w-full">
+                {isSubmitting ? "Chargement..." : "Se connecter"}
             </Button>
 
             {errors.root && (

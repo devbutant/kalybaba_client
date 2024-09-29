@@ -1,3 +1,4 @@
+import { FormContainer } from "@/components/form/form-container";
 import { useSingleAd } from "@/hooks/ad";
 import { useEditAd } from "@/hooks/ad/update";
 import {
@@ -22,7 +23,6 @@ import { types } from "@/types/enums/types";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { EditAdButtons } from "../edit-ad-form-buttons";
-import { EditAdFormContainer } from "../edit-ad-form-container";
 
 const EditAdForm: FC = () => {
     const { singleAdData } = useSingleAd();
@@ -33,7 +33,7 @@ const EditAdForm: FC = () => {
     const { t } = useTranslation();
 
     return (
-        <EditAdFormContainer>
+        <FormContainer title="Modifiez votre annonce">
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
@@ -179,7 +179,7 @@ const EditAdForm: FC = () => {
                     <EditAdButtons />
                 </form>
             </Form>
-        </EditAdFormContainer>
+        </FormContainer>
     );
 };
 
