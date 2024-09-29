@@ -4,7 +4,6 @@ import { Form } from "@/shadcn/components/ui/form";
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
-import { FormContainer } from "@/components/form/form-container";
 import {
     FormControl,
     FormField,
@@ -19,66 +18,62 @@ const LoginForm: FC = () => {
     const { form, onFormSubmit, errors, isSubmitting } = useLoginForm();
 
     return (
-        <FormContainer title="Bienvenue!" className="md:w-[29rem]">
-            <Form {...form}>
-                <form
-                    onSubmit={form.handleSubmit(onFormSubmit)}
-                    className="space-y-4"
-                >
-                    <FormField
-                        control={form.control}
-                        name="email"
-                        rules={{ required: "L'identifiant est requis" }}
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Identifiant</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        placeholder="adrien.petit@exemple.fr"
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+        <Form {...form}>
+            <form
+                onSubmit={form.handleSubmit(onFormSubmit)}
+                className="space-y-4"
+            >
+                <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Identifiant</FormLabel>
+                            <FormControl>
+                                <Input
+                                    placeholder="adrien.petit@exemple.fr"
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
 
-                    <FormField
-                        control={form.control}
-                        name="password"
-                        rules={{ required: "L'identifiant est requis" }}
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Mot de passe</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="password"
-                                        placeholder="********"
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <LoginSubmitButton
-                        isSubmitting={isSubmitting}
-                        errors={errors}
-                    />
+                <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Mot de passe</FormLabel>
+                            <FormControl>
+                                <Input
+                                    type="password"
+                                    placeholder="********"
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <LoginSubmitButton
+                    isSubmitting={isSubmitting}
+                    errors={errors}
+                />
 
-                    <p>
-                        Toujours pas de compte ?{" "}
-                        <Button
-                            variant={"link"}
-                            className="m-0 p-0 text-md"
-                            asChild
-                        >
-                            <Link to="/inscription">Inscrivez-vous</Link>
-                        </Button>
-                    </p>
-                </form>
-            </Form>
-        </FormContainer>
+                <p>
+                    Toujours pas de compte ?{" "}
+                    <Button
+                        variant={"link"}
+                        className="m-0 p-0 text-md"
+                        asChild
+                    >
+                        <Link to="/inscription">Devenez membre !</Link>
+                    </Button>
+                </p>
+            </form>
+        </Form>
     );
 };
 
