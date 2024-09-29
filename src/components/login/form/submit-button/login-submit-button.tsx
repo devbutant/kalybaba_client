@@ -9,7 +9,7 @@ const LoginSubmitButton: FC<PropsWithChildren<LoginSubmitButtonProps>> = (
 
     return (
         <>
-            <Button type="submit" disabled={isSubmitting}>
+            <Button type="submit" disabled={isSubmitting} className="w-full">
                 {isSubmitting ? "Chargement..." : "Se connecter"}
             </Button>
 
