@@ -8,12 +8,7 @@ const useRegisterForm = () => {
         resolver: zodResolver(registerSchema),
     });
 
-    const {
-        register,
-        handleSubmit,
-        setError,
-        formState: { errors, isSubmitting },
-    } = form;
+    const { handleSubmit, setError } = form;
 
     const registerMutation = useRegisterMutation();
 
@@ -34,12 +29,10 @@ const useRegisterForm = () => {
     };
 
     return {
-        register,
         handleSubmit,
         setError,
-        errors,
-        isSubmitting,
         onFormSubmit,
+        form,
     };
 };
 

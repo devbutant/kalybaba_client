@@ -1,41 +1,127 @@
-import { Input } from "@/components/form";
 import { useRegisterForm } from "@/hooks/auth/register";
+import { Button } from "@/shadcn/components/ui/button";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/shadcn/components/ui/form";
+import { Input } from "@/shadcn/components/ui/input";
 import { FC } from "react";
-import { NavLink } from "react-router-dom";
-import { fields } from "./fields";
-import { RegisterSubmitButton } from "./submit-button/register-submit-button";
+import { Link } from "react-router-dom";
 
 const RegisterForm: FC = () => {
-    const { register, handleSubmit, errors, isSubmitting, onFormSubmit } =
-        useRegisterForm();
+    const { handleSubmit, onFormSubmit, form } = useRegisterForm();
+    const { formState } = form;
+    const { isSubmitting } = formState;
 
     return (
-        <form className="space-y-4" onSubmit={handleSubmit(onFormSubmit)}>
-            {fields.map((field) => (
-                <Input
-                    key={field.name}
-                    type={field.type}
-                    placeholder={field.placeholder}
-                    name={field.name}
-                    register={register}
-                    error={errors[field.name]}
+        <Form {...form}>
+            <form className="space-y-4" onSubmit={handleSubmit(onFormSubmit)}>
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Nom</FormLabel>
+                            <FormControl>
+                                <Input placeholder="Adrien" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
                 />
-            ))}
 
-            <div>
-                <p className="text-sm text-gray-900">
-                    Vous avez déjà un compte ?{" "}
-                    <NavLink
-                        to="/connexion"
-                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Email</FormLabel>
+                            <FormControl>
+                                <Input
+                                    type="email"
+                                    placeholder="adrien.petit@exemple.fr"
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Mot de passe</FormLabel>
+                            <FormControl>
+                                <Input
+                                    type="password"
+                                    placeholder="********"
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="confirmPassword"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Confirmer le mot de passe</FormLabel>
+                            <FormControl>
+                                <Input
+                                    type="password"
+                                    placeholder="********"
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="city"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Ville</FormLabel>
+                            <FormControl>
+                                <Input placeholder="Paris" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full"
+                >
+                    {isSubmitting ? "Chargement..." : "S'inscrire"}
+                </Button>
+
+                <p>
+                    Déjà membre ?{" "}
+                    <Button
+                        variant={"link"}
+                        className="m-0 p-0 text-md"
+                        asChild
                     >
-                        Connectez-vous
-                    </NavLink>
+                        <Link to="/connexion">Connectez-vous !</Link>
+                    </Button>
                 </p>
-            </div>
-
-            <RegisterSubmitButton isSubmitting={isSubmitting} errors={errors} />
-        </form>
+            </form>
+        </Form>
     );
 };
 
