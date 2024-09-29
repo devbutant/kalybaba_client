@@ -11,7 +11,7 @@ const LoginSubmitButton: FC<PropsWithChildren<LoginSubmitButtonProps>> = (
         <>
             <Button
                 type="submit"
-                className="mt-2 w-full bg-indigo-700 hover:bg-indigo-800 focus:ring-2 focus:ring-opacity-50"
+                className="mt-2 w-full"
                 disabled={isSubmitting}
             >
                 {isSubmitting ? "Loading..." : "Connexion"}

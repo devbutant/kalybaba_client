@@ -1,12 +1,28 @@
-import { Input, Select } from "@/components/form";
 import { useSingleAd } from "@/hooks/ad";
 import { useEditAd } from "@/hooks/ad/update";
-import { EditAdFormValues } from "@/types";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/shadcn/components/ui/form";
+import { Input } from "@/shadcn/components/ui/input";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/shadcn/components/ui/select";
+import { Textarea } from "@/shadcn/components/ui/textarea";
 import { categories } from "@/types/enums/category";
 import { types } from "@/types/enums/types";
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { EditAdButtons } from "../edit-ad-form-buttons";
-import { formFields } from "../edit-ad-form-fields";
+import { EditAdFormContainer } from "../edit-ad-form-container";
 
 const EditAdForm: FC = () => {
     const { singleAdData } = useSingleAd();
@@ -14,68 +30,156 @@ const EditAdForm: FC = () => {
 
     const { onSubmit, form } = useEditAd(singleAd);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = form;
+    const { t } = useTranslation();
 
     return (
-        <div className="mx-auto bg-white p-8 shadow-md rounded-lg">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-                Modifier l'annonce
-            </h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                {formFields.map((field) => (
-                    <div key={field.name} className="mb-4">
-                        <Input<EditAdFormValues>
-                            type={field.type}
-                            placeholder={field.placeholder}
-                            name={field.name}
-                            register={register}
-                            valueAsNumber={field.valueAsNumber}
-                        />
-                        {errors[field.name] && (
-                            <span className="text-red-500 text-sm">
-                                {errors[field.name]?.message}
-                            </span>
+        <EditAdFormContainer>
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-4"
+                >
+                    <FormField
+                        key="title"
+                        control={form.control}
+                        name="title"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Titre</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="Titre"
+                                        {...field}
+                                        onChange={(e) =>
+                                            field.onChange(e.target.value)
+                                        }
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
                         )}
-                    </div>
-                ))}
-
-                <div className="mb-4">
-                    <Select
-                        placeholder="Sélectionnez une catégorie"
-                        name="categoryEnum"
-                        register={register}
-                        error={errors["categoryEnum"]}
-                        options={categories}
                     />
-                    {errors["categoryEnum"] && (
-                        <span className="text-red-500 text-sm">
-                            {errors["categoryEnum"]?.message}
-                        </span>
-                    )}
-                </div>
 
-                <div className="mb-4">
-                    <Select
-                        placeholder="Sélectionnez un type"
-                        name="typeEnum"
-                        register={register}
-                        error={errors.typeEnum}
-                        options={types}
+                    <FormField
+                        key="description"
+                        control={form.control}
+                        name="description"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Description</FormLabel>
+                                <FormControl>
+                                    <Textarea
+                                        placeholder="Titre"
+                                        {...field}
+                                        onChange={(e) =>
+                                            field.onChange(e.target.value)
+                                        }
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
                     />
-                    {errors.typeEnum && (
-                        <span className="text-red-500 text-sm">
-                            {errors.typeEnum?.message}
-                        </span>
-                    )}
-                </div>
 
-                <EditAdButtons />
-            </form>
-        </div>
+                    <FormField
+                        key="city"
+                        control={form.control}
+                        name="city"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Ville</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="Ville"
+                                        {...field}
+                                        onChange={(e) =>
+                                            field.onChange(e.target.value)
+                                        }
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        key="price"
+                        control={form.control}
+                        name="price"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Prix</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="Prix"
+                                        {...field}
+                                        type="number"
+                                        onChange={(e) =>
+                                            field.onChange(
+                                                parseFloat(e.target.value)
+                                            )
+                                        }
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormItem>
+                        <FormLabel>Type</FormLabel>
+                        <FormControl>
+                            <Select
+                                defaultValue={singleAd?.typeEnum}
+                                name="typeEnum"
+                                onValueChange={(value) => {
+                                    form.setValue("typeEnum", value);
+                                }}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Sélectionnez un type" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {types.map((type) => (
+                                        <SelectItem key={type} value={type}>
+                                            {t("categoryOrType." + type)}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </FormControl>
+                    </FormItem>
+
+                    <FormItem>
+                        <FormLabel>Catégorie</FormLabel>
+                        <FormControl>
+                            <Select
+                                defaultValue={singleAd?.categoryEnum}
+                                name="categoryEnum"
+                                onValueChange={(value) => {
+                                    form.setValue("categoryEnum", value);
+                                }}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Sélectionnez une catégorie" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {categories.map((category) => (
+                                        <SelectItem
+                                            key={category}
+                                            value={category}
+                                        >
+                                            {t("categoryOrType." + category)}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </FormControl>
+                    </FormItem>
+                    <EditAdButtons />
+                </form>
+            </Form>
+        </EditAdFormContainer>
     );
 };
 

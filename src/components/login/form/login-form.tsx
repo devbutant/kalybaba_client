@@ -12,7 +12,7 @@ const LoginForm: FC = () => {
         useLoginForm();
 
     return (
-        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md mx-2">
             <h1 className="text-2xl font-bold text-center mb-6 text-gray-700">
                 Connexion
             </h1>
