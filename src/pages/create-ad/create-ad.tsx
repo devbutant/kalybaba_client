@@ -1,15 +1,32 @@
-import { Button } from "@/components/button";
-import { Input, Select } from "@/components/form";
+import { FormContainer } from "@/components/form/form-container";
 import { useCreateAd } from "@/hooks/ad";
+import { Button } from "@/shadcn/components/ui/button";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/shadcn/components/ui/form";
+import { Input } from "@/shadcn/components/ui/input";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/shadcn/components/ui/select";
+import { Textarea } from "@/shadcn/components/ui/textarea";
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 const CreateAd: FC = () => {
-    const { onFormSubmit, mutationError, isSuccess, form } = useCreateAd();
-    const {
-        handleSubmit,
-        formState: { errors, isSubmitting },
-        register,
-    } = form;
+    const { onFormSubmit, form } = useCreateAd();
+    const { handleSubmit, formState } = form;
+    const { isSubmitting } = formState;
+
+    const { t } = useTranslation();
 
     // TODO: mettre les types et les catégories dans un fichier séparé
     const types = ["OFFER", "DEMAND"];
@@ -29,89 +46,163 @@ const CreateAd: FC = () => {
     ];
 
     return (
-        <div className="mx-auto p-8 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg shadow-lg">
-            <h1 className="text-3xl font-bold mb-8 text-blue-800">
-                Déposer une nouvelle annonce
-            </h1>
-            <form
-                onSubmit={handleSubmit(onFormSubmit)}
-                className="grid grid-cols-2 gap-6"
-            >
-                {/* TODO: Créer un composants CreateAdInputs */}
-                <Input
-                    type="text"
-                    placeholder="Titre"
-                    name="title"
-                    register={register}
-                    error={errors.title}
-                />
-                <Input
-                    type="text"
-                    placeholder="Description"
-                    name="description"
-                    register={register}
-                    error={errors.description}
-                />
-                <Input
-                    type="text"
-                    placeholder="Ville"
-                    name="city"
-                    register={register}
-                    error={errors.city}
-                />
-                <Input
-                    type="number"
-                    placeholder="Prix"
-                    name="price"
-                    register={register}
-                    error={errors.price}
-                    valueAsNumber={true}
-                    min={0}
-                    step={0.01}
-                />
-
-                <Select
-                    key="category"
-                    placeholder="Sélectionnez une catégorie"
-                    name="categoryEnum"
-                    register={register}
-                    error={errors["categoryEnum"]}
-                    options={categories}
-                />
-
-                <Select
-                    key="type"
-                    placeholder="Sélectionnez un type"
-                    name="typeEnum"
-                    register={register}
-                    error={errors.typeEnum}
-                    options={types}
-                />
-
-                <Button
-                    type="submit"
-                    className="bg-indigo-700 hover:bg-indigo-800 focus:ring-2 focus:ring-opacity-50"
+        <FormContainer title="Déposer une nouvelle annonce">
+            <Form {...form}>
+                <form
+                    onSubmit={handleSubmit(onFormSubmit)}
+                    className="space-y-2"
                 >
-                    {isSubmitting ? (
-                        <p>Envoi de l'annonce...</p>
-                    ) : (
-                        <p>Déposer l'annonce</p>
-                    )}
-                </Button>
-            </form>
+                    <FormField
+                        control={form.control}
+                        name="title"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Titre</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Titre" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
 
-            {mutationError && (
-                <p className="text-red-500 mt-6">
-                    Erreur :{" "}
-                    {mutationError.message || "Une erreur est survenue."}
-                </p>
-            )}
-            {isSuccess && (
-                <p className="text-green-500 mt-6">
-                    Annonce déposée avec succès !
-                </p>
-            )}
-        </div>
+                    <FormField
+                        control={form.control}
+                        name="description"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Description</FormLabel>
+                                <FormControl>
+                                    <Textarea
+                                        placeholder="Description"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="city"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Ville</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Ville" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="price"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Prix</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        type="number"
+                                        placeholder="Prix"
+                                        {...field}
+                                        onChange={(e) => {
+                                            field.onChange(
+                                                Number(e.target.value)
+                                            );
+                                        }}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="categoryEnum"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Catégorie</FormLabel>
+                                <FormControl>
+                                    <Select
+                                        name="categoryEnum"
+                                        onValueChange={(value) => {
+                                            field.onChange(value);
+                                        }}
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Sélectionnez une catégorie" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {categories.map((category) => (
+                                                <SelectItem
+                                                    key={category}
+                                                    value={category}
+                                                >
+                                                    {t(
+                                                        "categoryOrType." +
+                                                            category
+                                                    )}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="typeEnum"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Type</FormLabel>
+                                <FormControl>
+                                    <Select
+                                        name="typeEnum"
+                                        onValueChange={(value) => {
+                                            field.onChange(value);
+                                        }}
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Sélectionnez un type" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {types.map((type) => (
+                                                <SelectItem
+                                                    key={type}
+                                                    value={type}
+                                                >
+                                                    {t(
+                                                        "categoryOrType." + type
+                                                    )}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <div>
+                        <Button type="submit" className="w-full mt-4">
+                            {isSubmitting ? (
+                                <p>Envoi de l'annonce...</p>
+                            ) : (
+                                <p>Déposer l'annonce</p>
+                            )}
+                        </Button>
+                    </div>
+                </form>
+            </Form>
+        </FormContainer>
     );
 };
 

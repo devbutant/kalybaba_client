@@ -21,7 +21,7 @@ const LoginForm: FC = () => {
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onFormSubmit)}
-                className="space-y-4"
+                className="space-y-2"
             >
                 <FormField
                     control={form.control}

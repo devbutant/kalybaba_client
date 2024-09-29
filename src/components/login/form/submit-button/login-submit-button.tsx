@@ -8,15 +8,19 @@ const LoginSubmitButton: FC<PropsWithChildren<LoginSubmitButtonProps>> = (
     const { isSubmitting, errors } = props;
 
     return (
-        <>
-            <Button type="submit" disabled={isSubmitting} className="w-full">
+        <div>
+            <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full mt-4"
+            >
                 {isSubmitting ? "Chargement..." : "Se connecter"}
             </Button>
 
             {errors.root && (
                 <p className="text-red-500 text-sm">{errors.root.message}</p>
             )}
-        </>
+        </div>
     );
 };
 
