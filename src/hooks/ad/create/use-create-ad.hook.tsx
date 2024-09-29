@@ -34,7 +34,7 @@ const useCreateAd = () => {
             title: "",
             description: "",
             city: "",
-            price: 0,
+            price: undefined,
             authorId: userId,
             categoryEnum: "",
             typeEnum: "",
