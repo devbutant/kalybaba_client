@@ -1,6 +1,4 @@
-import { Button } from "@/shadcn/components/ui/button";
 import { FC, PropsWithChildren } from "react";
-import { Link } from "react-router-dom";
 
 type FormProps = PropsWithChildren<{
     title: string;
@@ -19,13 +17,6 @@ const FormContainer: FC<PropsWithChildren & FormProps> = (props) => {
             </h2>
 
             {children}
-
-            <p>
-                Toujours pas de compte ?{" "}
-                <Button variant={"link"} className="m-0 p-0 text-md" asChild>
-                    <Link to="/inscription">Inscrivez-vous</Link>
-                </Button>
-            </p>
         </div>
     );
 };

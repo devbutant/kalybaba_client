@@ -1,6 +1,8 @@
 import { useLoginForm } from "@/hooks/auth";
+import { Button } from "@/shadcn/components/ui/button";
 import { Form } from "@/shadcn/components/ui/form";
 import { FC } from "react";
+import { Link } from "react-router-dom";
 
 import { FormContainer } from "@/components/form/form-container";
 import {
@@ -17,7 +19,7 @@ const LoginForm: FC = () => {
     const { form, onFormSubmit, errors, isSubmitting } = useLoginForm();
 
     return (
-        <FormContainer title="Bienvenue!" className="md:w-[30rem]">
+        <FormContainer title="Bienvenue!" className="md:w-[29rem]">
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onFormSubmit)}
@@ -63,6 +65,17 @@ const LoginForm: FC = () => {
                         isSubmitting={isSubmitting}
                         errors={errors}
                     />
+
+                    <p>
+                        Toujours pas de compte ?{" "}
+                        <Button
+                            variant={"link"}
+                            className="m-0 p-0 text-md"
+                            asChild
+                        >
+                            <Link to="/inscription">Inscrivez-vous</Link>
+                        </Button>
+                    </p>
                 </form>
             </Form>
         </FormContainer>
