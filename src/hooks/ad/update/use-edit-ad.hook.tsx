@@ -16,19 +16,25 @@ const useEditAd = (ad: AdDto | undefined) => {
     const editAdSchema = z.object({
         id: z.string(),
         title: z
-            .string()
-            .min(5, "Le titre doit contenir au moins 5 caractères")
-            .max(50, "Le titre doit contenir au maximum 50 caractères"),
+            .string({ required_error: "Veuillez renseigner un titre." })
+            .min(5, "Le titre doit contenir au moins 5 caractères.")
+            .max(50, "Le titre doit contenir au maximum 50 caractères."),
         description: z
-            .string()
-            .min(20, "La description doit contenir au moins 20 caractères"),
-        price: z.number().min(0, "Le prix doit être positif"),
+            .string({ required_error: "Veuillez renseigner une description." })
+            .min(20, "La description doit contenir au moins 20 caractères."),
+        price: z
+            .number({ required_error: "Veuillez renseigner un prix. " })
+            .min(0, "Le prix doit être positif"),
         city: z
-            .string()
-            .min(2, "La ville doit contenir au moins 2 caractères")
-            .max(100, "La ville doit contenir au maximum 100 caractères"),
-        typeEnum: z.string(),
-        categoryEnum: z.string(),
+            .string({ required_error: "Veuillez renseigner une ville." })
+            .min(2, "La ville doit contenir au moins 2 caractères.")
+            .max(100, "La ville doit contenir au maximum 100 caractères."),
+        typeEnum: z.string({
+            required_error: "Veuillez sélectionner un type.",
+        }),
+        categoryEnum: z.string({
+            required_error: "Veuillez sélectionner une catégorie.",
+        }),
     });
 
     const form = useForm<EditAdFormValues>({
