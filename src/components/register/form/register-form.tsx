@@ -19,7 +19,7 @@ const RegisterForm: FC = () => {
 
     return (
         <Form {...form}>
-            <form className="space-y-4" onSubmit={handleSubmit(onFormSubmit)}>
+            <form className="space-y-2" onSubmit={handleSubmit(onFormSubmit)}>
                 <FormField
                     control={form.control}
                     name="name"
@@ -102,13 +102,15 @@ const RegisterForm: FC = () => {
                     )}
                 />
 
-                <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full"
-                >
-                    {isSubmitting ? "Chargement..." : "S'inscrire"}
-                </Button>
+                <div className="div">
+                    <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full mt-4"
+                    >
+                        {isSubmitting ? "Chargement..." : "S'inscrire"}
+                    </Button>
+                </div>
 
                 <p>
                     Déjà membre ?{" "}

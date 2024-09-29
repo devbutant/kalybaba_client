@@ -10,7 +10,7 @@ const FormContainer: FC<PropsWithChildren & FormProps> = (props) => {
 
     return (
         <div
-            className={`mx-2 md:mx-auto bg-white p-4 sm:p-8 sm:shadow-md rounded-lg sm:w-[30rem] w-screen ${className} `}
+            className={`md:mx-auto bg-white p-4 sm:p-8 sm:shadow-md rounded-lg sm:w-[30rem] w-screen ${className} `}
         >
             <h2 className="text-2xl font-semibold text-gray-800 mb-6">
                 {title}

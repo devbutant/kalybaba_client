@@ -7,17 +7,19 @@ const EditAdButtons: FC = () => {
     const { id } = useParams<{ id: string }>();
 
     return (
-        <div className="flex items-center justify-between">
-            <Button type="submit">Enregistrer les modifications</Button>
-            <Button
-                type="button"
-                variant="destructive"
-                onClick={() => {
-                    navigate(`/annonces/${id}`);
-                }}
-            >
-                Annuler
-            </Button>
+        <div>
+            <div className="flex items-center justify-between mt-4">
+                <Button type="submit">Enregistrer les modifications</Button>
+                <Button
+                    type="button"
+                    variant="destructive"
+                    onClick={() => {
+                        navigate(`/annonces/${id}`);
+                    }}
+                >
+                    Annuler
+                </Button>
+            </div>
         </div>
     );
 };

@@ -37,7 +37,7 @@ const EditAdForm: FC = () => {
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-4"
+                    className="space-y-2"
                 >
                     <FormField
                         key="title"
@@ -47,13 +47,7 @@ const EditAdForm: FC = () => {
                             <FormItem>
                                 <FormLabel>Titre</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        placeholder="Titre"
-                                        {...field}
-                                        onChange={(e) =>
-                                            field.onChange(e.target.value)
-                                        }
-                                    />
+                                    <Input placeholder="Titre" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -69,11 +63,8 @@ const EditAdForm: FC = () => {
                                 <FormLabel>Description</FormLabel>
                                 <FormControl>
                                     <Textarea
-                                        placeholder="Titre"
+                                        placeholder="Description"
                                         {...field}
-                                        onChange={(e) =>
-                                            field.onChange(e.target.value)
-                                        }
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -89,13 +80,7 @@ const EditAdForm: FC = () => {
                             <FormItem>
                                 <FormLabel>Ville</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        placeholder="Ville"
-                                        {...field}
-                                        onChange={(e) =>
-                                            field.onChange(e.target.value)
-                                        }
-                                    />
+                                    <Input placeholder="Ville" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -126,56 +111,76 @@ const EditAdForm: FC = () => {
                         )}
                     />
 
-                    <FormItem>
-                        <FormLabel>Type</FormLabel>
-                        <FormControl>
-                            <Select
-                                defaultValue={singleAd?.typeEnum}
-                                name="typeEnum"
-                                onValueChange={(value) => {
-                                    form.setValue("typeEnum", value);
-                                }}
-                            >
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Sélectionnez un type" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {types.map((type) => (
-                                        <SelectItem key={type} value={type}>
-                                            {t("categoryOrType." + type)}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                        </FormControl>
-                    </FormItem>
+                    <FormField
+                        control={form.control}
+                        name="typeEnum"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Type</FormLabel>
+                                <FormControl>
+                                    <Select
+                                        defaultValue={singleAd?.typeEnum}
+                                        name="typeEnum"
+                                        onValueChange={(value) => {
+                                            field.onChange(value);
+                                        }}
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Sélectionnez un type" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {types.map((type) => (
+                                                <SelectItem
+                                                    key={type}
+                                                    value={type}
+                                                >
+                                                    {t(
+                                                        "categoryOrType." + type
+                                                    )}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </FormControl>
+                            </FormItem>
+                        )}
+                    />
 
-                    <FormItem>
-                        <FormLabel>Catégorie</FormLabel>
-                        <FormControl>
-                            <Select
-                                defaultValue={singleAd?.categoryEnum}
-                                name="categoryEnum"
-                                onValueChange={(value) => {
-                                    form.setValue("categoryEnum", value);
-                                }}
-                            >
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Sélectionnez une catégorie" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {categories.map((category) => (
-                                        <SelectItem
-                                            key={category}
-                                            value={category}
-                                        >
-                                            {t("categoryOrType." + category)}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                        </FormControl>
-                    </FormItem>
+                    <FormField
+                        control={form.control}
+                        name="categoryEnum"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Catégorie</FormLabel>
+                                <FormControl>
+                                    <Select
+                                        defaultValue={singleAd?.categoryEnum}
+                                        name="categoryEnum"
+                                        onValueChange={(value) => {
+                                            field.onChange(value);
+                                        }}
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Sélectionnez une catégorie" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {categories.map((category) => (
+                                                <SelectItem
+                                                    key={category}
+                                                    value={category}
+                                                >
+                                                    {t(
+                                                        "categoryOrType." +
+                                                            category
+                                                    )}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </FormControl>
+                            </FormItem>
+                        )}
+                    />
                     <EditAdButtons />
                 </form>
             </Form>
