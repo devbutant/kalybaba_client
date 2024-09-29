@@ -22,7 +22,7 @@ import { types } from "@/types/enums/types";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { EditAdButtons } from "../edit-ad-form-buttons";
-import { formFields } from "../edit-ad-form-fields";
+import { EditAdFormContainer } from "../edit-ad-form-container";
 
 const EditAdForm: FC = () => {
     const { singleAdData } = useSingleAd();
@@ -32,104 +32,154 @@ const EditAdForm: FC = () => {
 
     const { t } = useTranslation();
 
-    console.log(singleAd);
-
     return (
-        <div className="mx-auto bg-white p-8 shadow-md rounded-lg md:w-[45rem] w-screen ">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-                Modifiez votre annonce
-            </h2>
+        <EditAdFormContainer>
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-8"
+                    className="space-y-4"
                 >
-                    {formFields.map((field) => (
-                        <FormField
-                            key={field.name}
-                            control={form.control}
-                            name={field.name}
-                            render={({ field: formField }) => (
-                                <FormItem>
-                                    <FormLabel>{field.placeholder}</FormLabel>
-                                    <FormControl>
-                                        <FormControl>
-                                            {field.type === "textarea" ? (
-                                                <Textarea
-                                                    placeholder={
-                                                        field.placeholder
-                                                    }
-                                                    {...formField}
-                                                    onChange={(
-                                                        e: React.ChangeEvent<
-                                                            | HTMLInputElement
-                                                            | HTMLTextAreaElement
-                                                        >
-                                                    ) =>
-                                                        formField.onChange(
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                />
-                                            ) : (
-                                                <Input
-                                                    placeholder={
-                                                        field.placeholder
-                                                    }
-                                                    {...formField}
-                                                    type={field.type}
-                                                    onChange={(e) =>
-                                                        formField.onChange(
-                                                            field.type ===
-                                                                "number"
-                                                                ? parseFloat(
-                                                                      e.target
-                                                                          .value
-                                                                  ) || 0
-                                                                : e.target.value
-                                                        )
-                                                    }
-                                                />
-                                            )}
-                                        </FormControl>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    ))}
+                    <FormField
+                        key="title"
+                        control={form.control}
+                        name="title"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Titre</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="Titre"
+                                        {...field}
+                                        onChange={(e) =>
+                                            field.onChange(e.target.value)
+                                        }
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
 
-                    <Select defaultValue={singleAd?.typeEnum} name="typeEnum">
-                        <SelectTrigger>
-                            <SelectValue placeholder="Sélectionnez un type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {types.map((type) => (
-                                <SelectItem key={type} value={type}>
-                                    {t("categoryOrType." + type)}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
-                    <Select
-                        defaultValue={singleAd?.categoryEnum}
-                        name="categoryEnum"
-                    >
-                        <SelectTrigger>
-                            <SelectValue placeholder="Sélectionnez une catégorie" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {categories.map((category) => (
-                                <SelectItem key={category} value={category}>
-                                    {t("categoryOrType." + category)}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
+                    <FormField
+                        key="description"
+                        control={form.control}
+                        name="description"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Description</FormLabel>
+                                <FormControl>
+                                    <Textarea
+                                        placeholder="Titre"
+                                        {...field}
+                                        onChange={(e) =>
+                                            field.onChange(e.target.value)
+                                        }
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        key="city"
+                        control={form.control}
+                        name="city"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Ville</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="Ville"
+                                        {...field}
+                                        onChange={(e) =>
+                                            field.onChange(e.target.value)
+                                        }
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        key="price"
+                        control={form.control}
+                        name="price"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Prix</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="Prix"
+                                        {...field}
+                                        type="number"
+                                        onChange={(e) =>
+                                            field.onChange(
+                                                parseFloat(e.target.value)
+                                            )
+                                        }
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormItem>
+                        <FormLabel>Type</FormLabel>
+                        <FormControl>
+                            <Select
+                                defaultValue={singleAd?.typeEnum}
+                                name="typeEnum"
+                                onValueChange={(value) => {
+                                    form.setValue("typeEnum", value);
+                                }}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Sélectionnez un type" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {types.map((type) => (
+                                        <SelectItem key={type} value={type}>
+                                            {t("categoryOrType." + type)}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </FormControl>
+                    </FormItem>
+
+                    <FormItem>
+                        <FormLabel>Catégorie</FormLabel>
+                        <FormControl>
+                            <Select
+                                defaultValue={singleAd?.categoryEnum}
+                                name="categoryEnum"
+                                onValueChange={(value) => {
+                                    form.setValue("categoryEnum", value);
+                                }}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Sélectionnez une catégorie" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {categories.map((category) => (
+                                        <SelectItem
+                                            key={category}
+                                            value={category}
+                                        >
+                                            {t("categoryOrType." + category)}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </FormControl>
+                    </FormItem>
                     <EditAdButtons />
                 </form>
             </Form>
-        </div>
+        </EditAdFormContainer>
     );
 };
 
