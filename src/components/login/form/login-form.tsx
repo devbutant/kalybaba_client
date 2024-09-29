@@ -1,55 +1,71 @@
-import { Input } from "@/components/form";
 import { useLoginForm } from "@/hooks/auth";
+import { Form } from "@/shadcn/components/ui/form";
 import { FC } from "react";
-import { NavLink } from "react-router-dom";
-import { fields } from "./fields";
-import { ForgetPassword } from "./forget-password";
-import { RememberMe } from "./remember-me";
-import { LoginSubmitButton } from "./submit-button/login-submit-button";
+
+import { FormContainer } from "@/components/form/form-container";
+import {
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/shadcn/components/ui/form";
+import { Input } from "@/shadcn/components/ui/input";
+import { LoginSubmitButton } from "./submit-button";
 
 const LoginForm: FC = () => {
-    const { register, handleSubmit, errors, isSubmitting, onFormSubmit } =
-        useLoginForm();
+    const { form, onFormSubmit, errors, isSubmitting } = useLoginForm();
 
     return (
-        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md mx-2">
-            <h1 className="text-2xl font-bold text-center mb-6 text-gray-700">
-                Connexion
-            </h1>
-            <form className="space-y-4" onSubmit={handleSubmit(onFormSubmit)}>
-                {fields.map((field) => (
-                    <Input
-                        key={field.name}
-                        type={field.type}
-                        placeholder={field.placeholder}
-                        name={field.name}
-                        register={register}
-                        error={errors[field.name]}
+        <FormContainer title="Bienvenue!" className="md:w-[30rem]">
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onFormSubmit)}
+                    className="space-y-4"
+                >
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        rules={{ required: "L'identifiant est requis" }}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Identifiant</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="adrien.petit@exemple.fr"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
                     />
-                ))}
 
-                <div className="flex items-center justify-between">
-                    <RememberMe />
-                    <ForgetPassword />
-                </div>
-                <div>
-                    <p className="text-sm text-gray-900">
-                        Vous n'avez pas encore de compte ?{" "}
-                        <NavLink
-                            to="/inscription"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
-                        >
-                            Inscrivez-vous
-                        </NavLink>
-                    </p>
-                </div>
-
-                <LoginSubmitButton
-                    isSubmitting={isSubmitting}
-                    errors={errors}
-                />
-            </form>
-        </div>
+                    <FormField
+                        control={form.control}
+                        name="password"
+                        rules={{ required: "L'identifiant est requis" }}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Mot de passe</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        type="password"
+                                        placeholder="********"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <LoginSubmitButton
+                        isSubmitting={isSubmitting}
+                        errors={errors}
+                    />
+                </form>
+            </Form>
+        </FormContainer>
     );
 };
 

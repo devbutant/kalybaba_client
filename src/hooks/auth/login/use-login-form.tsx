@@ -10,8 +10,6 @@ const useLoginForm = () => {
     });
 
     const {
-        register,
-        handleSubmit,
         setError,
         formState: { errors, isSubmitting },
     } = form;
@@ -29,12 +27,10 @@ const useLoginForm = () => {
     };
 
     return {
-        register,
-        handleSubmit,
-        setError,
+        form,
+        onFormSubmit,
         errors,
         isSubmitting,
-        onFormSubmit,
     };
 };
 
