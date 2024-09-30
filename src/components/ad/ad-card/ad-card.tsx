@@ -9,7 +9,7 @@ const AdCard: FC<AdCardProps> = (props) => {
     return (
         <NavLink
             to={`/annonces/${ad.id}`}
-            className="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:bg-gray-200 flex flex-col h-full"
+            className="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:bg-gray-200 flex flex-col h-full min-h-[200px]"
         >
             <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
