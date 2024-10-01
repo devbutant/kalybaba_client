@@ -33,6 +33,7 @@ const LoginForm: FC = () => {
                                 <Input
                                     placeholder="adrien.petit@exemple.fr"
                                     {...field}
+                                    value={field.value || ""}
                                 />
                             </FormControl>
                             <FormMessage />
@@ -51,6 +52,7 @@ const LoginForm: FC = () => {
                                     type="password"
                                     placeholder="********"
                                     {...field}
+                                    value={field.value || ""}
                                 />
                             </FormControl>
                             <FormMessage />
