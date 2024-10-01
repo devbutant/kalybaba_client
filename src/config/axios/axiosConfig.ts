@@ -15,7 +15,7 @@ const createAxiosInstance = (token: string | null = null) => {
             if (error.response?.status === 401) {
                 // Déconnexion automatique si le serveur retourne une erreur 401
                 localStorage.removeItem("access_token");
-                window.location.href = "/connexion";
+                window.location.href = "/";
             }
 
             return Promise.reject(error); // Rejeter l'erreur pour continuer à la gérer ailleurs
