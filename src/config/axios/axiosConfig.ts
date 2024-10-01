@@ -2,12 +2,27 @@ import { API } from "@/utils/environment";
 import axios from "axios";
 
 const createAxiosInstance = (token: string | null = null) => {
-    return axios.create({
+    const axiosInstance = axios.create({
         baseURL: API.URL,
         headers: {
             Authorization: token ? `Bearer ${token}` : "",
         },
     });
+
+    axiosInstance.interceptors.response.use(
+        (response) => response,
+        (error) => {
+            if (error.response?.status === 401) {
+                // Déconnexion automatique si le serveur retourne une erreur 401
+                localStorage.removeItem("access_token");
+                window.location.href = "/connexion";
+            }
+
+            return Promise.reject(error); // Rejeter l'erreur pour continuer à la gérer ailleurs
+        }
+    );
+
+    return axiosInstance;
 };
 
 export default createAxiosInstance;
