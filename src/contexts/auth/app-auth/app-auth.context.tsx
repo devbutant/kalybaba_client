@@ -23,12 +23,25 @@ export const AppAuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
         }
     }, [token]);
 
-    const isAuthenticated = token !== null;
+    useEffect(() => {
+        // Fonction pour gérer les changements de localStorage
+        const handleStorageChange = (event: StorageEvent) => {
+            if (event.key === "access_token") {
+                const newToken = localStorage.getItem("access_token");
+                setToken(newToken);
+            }
+        };
 
-    // Voir si c'est utilisé ça
-    const logout = () => {
-        setToken(null);
-    };
+        // Écoute l'événement de changement de localStorage
+        window.addEventListener("storage", handleStorageChange);
+
+        // Nettoyage de l'écouteur lors du démontage
+        return () => {
+            window.removeEventListener("storage", handleStorageChange);
+        };
+    }, []);
+
+    const isAuthenticated = token !== null;
 
     return (
         <AppAuthContext.Provider
@@ -36,7 +49,6 @@ export const AppAuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
                 isAuthenticated,
                 token,
                 setToken,
-                logout,
                 userId,
             }}
         >
