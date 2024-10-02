@@ -1,15 +1,16 @@
+import { EditAdForm } from "@/components/ad/edit-ad-form/edit-ad-form";
 import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
+import { CompactLayout } from "@/layouts/compact";
+import { Chat } from "@/pages/chat";
+import { ConfirmEmail } from "@/pages/confirm-email";
+import { CreateAd } from "@/pages/create-ad";
+import { Homepage } from "@/pages/homepage";
+import { Login } from "@/pages/login";
+import { MyAdList } from "@/pages/my-ad-list";
+import { Register } from "@/pages/register/register";
+import { SingleAdPage } from "@/pages/single-ad";
 import { FC, ReactNode } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
-import { EditAdForm } from "../components/ad/edit-ad-form/edit-ad-form";
-import { CompactLayout } from "../layouts/compact";
-import { Chat } from "../pages/chat";
-import { CreateAd } from "../pages/create-ad";
-import { Homepage } from "../pages/homepage";
-import { Login } from "../pages/login";
-import { MyAdList } from "../pages/my-ad-list";
-import { Register } from "../pages/register/register";
-import { SingleAdPage } from "../pages/single-ad";
 
 const PrivateRoute: FC<{ element: ReactNode }> = ({ element }) => {
     const { isAuthenticated } = useAppAuth();
@@ -55,6 +56,11 @@ export function Router() {
         {
             path: "/inscription",
             element: <PublicRoute element={<Register />} />,
+        },
+        // TODO: pour l'instant /confirmation-email est accessible par tout le monde mais une redirection vers "/" sera fait après la validation du token reçu en paramètre
+        {
+            path: "/confirmation-email/:accessToken?",
+            element: <PublicRoute element={<ConfirmEmail />} />,
         },
         { path: "*", element: <Navigate to="/404" replace /> },
     ]);

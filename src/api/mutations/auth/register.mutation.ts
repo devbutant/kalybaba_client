@@ -19,8 +19,12 @@ export const useRegisterMutation = () => {
         RegisterDto
     >({
         mutationFn: registerUser,
+        // TODO: ici je dois faire une requete vers un endpoint qui mettra le statut de l'utilisateur à "pending" et lui enverra un mail de confirmation
+        // Une fois le mail de confirmation reçu, l'utilisateur pourra se connecter et choisir un mot de passe pour finaliser son inscription
+        // Son statut passera à "active"
+        // Les utilisateurs avec un statut "pending" seront supprimés après 24h
         onSuccess: async () => {
-            navigate("/connexion");
+            navigate("/confirmation-email");
         },
         onError: (error) => {
             console.error("Erreur de connexion :", error);
