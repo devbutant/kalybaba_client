@@ -1,4 +1,4 @@
-import { FormContainer } from "@/components/form/form-container";
+import { FormContainer } from "@/components/form";
 import { RegisterForm } from "@/components/register";
 import { FC } from "react";
 

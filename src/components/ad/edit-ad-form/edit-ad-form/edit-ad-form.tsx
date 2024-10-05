@@ -1,4 +1,4 @@
-import { FormContainer } from "@/components/form/form-container";
+import { FormContainer } from "@/components/form";
 import { useSingleAd } from "@/hooks/ad";
 import { useEditAd } from "@/hooks/ad/update";
 import {
