@@ -5,8 +5,10 @@ type RegisterDto = {
     name: string;
     password: string;
     confirmPassword: string;
+    phone?: string;
     city: string;
     token: string;
+    userId: string;
 };
 
 export const useRegisterMutation = () => {
@@ -28,6 +30,7 @@ export const useRegisterMutation = () => {
         // Une fois le code entré : définir un mot de passe etc
 
         onSuccess: async () => {
+            // TODO: faire une request pour update le ROLE de l'utilisateur
             console.log("Utilisateur enregistré avec succès");
 
             // navigate("/confirmation-email");

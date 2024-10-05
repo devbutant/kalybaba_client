@@ -6,7 +6,7 @@ const ConfirmEmail: FC = () => {
     const { token } = useParams<{ token: string }>();
 
     const confirmEmailMutation = useConfirmEmailMutation();
-    const { isSuccess, isError, isPending, data } = confirmEmailMutation;
+    const { isSuccess, isError, isPending } = confirmEmailMutation;
 
     let welcome;
 
@@ -28,8 +28,6 @@ const ConfirmEmail: FC = () => {
     }
 
     if (isSuccess) {
-        console.log("data :", data);
-
         welcome = (
             <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 to-indigo-300">
                 <h1>Bienvenue</h1>

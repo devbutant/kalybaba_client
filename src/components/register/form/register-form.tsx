@@ -49,6 +49,7 @@ const RegisterForm: FC = () => {
                                     type="password"
                                     placeholder="********"
                                     {...field}
+                                    value={field.value || ""}
                                 />
                             </FormControl>
                             <FormMessage />
@@ -67,7 +68,27 @@ const RegisterForm: FC = () => {
                                     type="password"
                                     placeholder="********"
                                     {...field}
+                                    value={field.value || ""}
                                 />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Numéro de téléphone</FormLabel>
+                            <FormControl>
+                                <Input
+                                    placeholder="07 00 00 00 00"
+                                    {...field}
+                                    value={field.value || ""}
+                                />
+                                {/* TODO: trim() pour éviter les espaces */}
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -81,7 +102,11 @@ const RegisterForm: FC = () => {
                         <FormItem>
                             <FormLabel>Ville</FormLabel>
                             <FormControl>
-                                <Input placeholder="Paris" {...field} />
+                                <Input
+                                    placeholder="Paris"
+                                    {...field}
+                                    value={field.value || ""}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
