@@ -14,9 +14,9 @@ export const fields: RegisterFormFieldsInterface[] = [
         placeholder: "Nom",
     },
     {
-        name: "email",
+        name: "phone",
         type: "text",
-        placeholder: "Email",
+        placeholder: "06 00 00 00 00",
     },
     {
         name: "password",
