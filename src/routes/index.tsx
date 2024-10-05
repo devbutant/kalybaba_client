@@ -11,6 +11,7 @@ import { Register } from "@/pages/register/register";
 import { SingleAdPage } from "@/pages/single-ad";
 import { FC, ReactNode } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
+import { CreateAccount } from "../pages/create-account";
 
 const PrivateRoute: FC<{ element: ReactNode }> = ({ element }) => {
     const { isAuthenticated } = useAppAuth();
@@ -50,16 +51,19 @@ export function Router() {
             ],
         },
         {
+            path: "/derniere-etape",
+            element: <PrivateRoute element={<Register />} />,
+        },
+        {
             path: "/connexion",
             element: <PublicRoute element={<Login />} />,
         },
         {
             path: "/inscription",
-            element: <PublicRoute element={<Register />} />,
+            element: <PublicRoute element={<CreateAccount />} />,
         },
-        // TODO: pour l'instant /confirmation-email est accessible par tout le monde mais une redirection vers "/" sera fait après la validation du token reçu en paramètre
         {
-            path: "/confirmation-email/:accessToken?",
+            path: "/confirmation-email/:token?",
             element: <PublicRoute element={<ConfirmEmail />} />,
         },
         { path: "*", element: <Navigate to="/404" replace /> },
