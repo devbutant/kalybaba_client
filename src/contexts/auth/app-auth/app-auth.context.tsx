@@ -53,7 +53,6 @@ export const AppAuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
             const localStorageToken = localStorage.getItem("access_token");
             if (localStorageToken) {
                 setToken(localStorageToken);
-                console.log("Token initial:", localStorageToken);
             }
         };
 

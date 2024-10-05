@@ -17,15 +17,12 @@ const useRegisterForm = () => {
         userData
     ) => {
         try {
-            console.log(userData);
-
             if (!token || !userId) {
                 throw new Error("Token not found");
             }
 
-            const userDataWithToken = { ...userData, token, userId };
-
-            await registerMutation.mutateAsync(userDataWithToken);
+            const completeUser = { ...userData, token, userId };
+            await registerMutation.mutateAsync(completeUser);
         } catch (error: unknown) {
             setError("root", {
                 type: "manual",

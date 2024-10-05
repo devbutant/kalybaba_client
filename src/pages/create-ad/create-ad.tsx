@@ -28,7 +28,6 @@ const CreateAd: FC = () => {
 
     const { t } = useTranslation();
 
-    // TODO: mettre les types et les catégories dans un fichier séparé
     const types = ["OFFER", "DEMAND"];
 
     const categories = [

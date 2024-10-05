@@ -2,7 +2,6 @@ import { Ad } from "@/types";
 import { FC } from "react";
 import { ActionButtons } from "../action-buttons";
 
-// TODO: export
 interface SingleAdProps {
     ad: Ad;
     isMine: boolean;

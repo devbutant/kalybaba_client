@@ -15,16 +15,12 @@ export const confirmEmail = async (
         );
 
         if (response.status !== 201) {
-            console.log("error", response.status);
-
-            // throw new Error("Une erreur est survenue, veuillez réessayer");
+            throw new Error("Une erreur est survenue, veuillez réessayer");
         }
 
         const accessToken = response.data.access_token;
         return accessToken;
     } catch (error: unknown) {
-        console.log("error", error);
-
         throw new Error(
             error as string | "Une erreur est survenue, veuillez réessayer"
         );

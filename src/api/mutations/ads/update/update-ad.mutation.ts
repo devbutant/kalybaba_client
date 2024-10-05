@@ -18,7 +18,6 @@ export const useUpdateAdMutation = () => {
         mutationFn: (editedAd: EditAdFormValues) => editAd(token, editedAd),
         onSuccess: (data) => {
             navigate(-1);
-            //TODO: toast
             console.log("Annonce modifiée avec succès :", data);
         },
         onError: (error) => {

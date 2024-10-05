@@ -1,6 +1,5 @@
 import createAxiosInstance from "@/config/axios/axiosConfig";
 
-//TODO: redondance, centraliser les types
 type RegisterDto = {
     name: string;
     password: string;
@@ -13,7 +12,6 @@ type RegisterDto = {
 
 export const registerUser = async (userData: RegisterDto): Promise<void> => {
     const { confirmPassword, token, userId, ...user } = userData;
-    console.log(user);
 
     const checkPassword = (password: string, confirmPassword: string) => {
         if (password !== confirmPassword) {
@@ -25,14 +23,8 @@ export const registerUser = async (userData: RegisterDto): Promise<void> => {
 
     try {
         const axiosInstance = createAxiosInstance(token);
-        // TODO: Ici je veux patcher l'utilisateur pour lui ajouter un statut "pending"
-        // Récup de l'id du token
-        // patch vers /users/:id
-        // body : { userInfos, status: "active" }
-        // OU PLUTOT : Role ['USER_CONFIRMED]
-        // const response = await axiosInstance.post(`/auth/pre-register`, user);
-
-        await axiosInstance.patch(`/users/${userId}`, user);
+        const userWithRole = { ...user, role: "USER" };
+        await axiosInstance.patch(`/users/${userId}`, userWithRole);
     } catch (error: unknown) {
         throw new Error(
             error as string | "Une erreur est survenue, veuillez réessayer"

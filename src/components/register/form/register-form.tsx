@@ -88,7 +88,6 @@ const RegisterForm: FC = () => {
                                     {...field}
                                     value={field.value || ""}
                                 />
-                                {/* TODO: trim() pour éviter les espaces */}
                             </FormControl>
                             <FormMessage />
                         </FormItem>

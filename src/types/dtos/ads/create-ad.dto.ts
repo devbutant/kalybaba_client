@@ -11,7 +11,6 @@ export const createAdSchema = z.object({
     typeId: z.string().min(1, { message: "Le type est requis" }),
 });
 
-// TODO utiliser un e interface et l'étendre
 export type CreateAdDto = Pick<
     AdDto,
     | "title"

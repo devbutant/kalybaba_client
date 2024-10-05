@@ -1,6 +1,6 @@
 import createAxiosInstance from "@/config/axios/axiosConfig";
+import axios from "axios";
 
-//TODO: redondance, centraliser les types
 type PreRegisterDto = {
     email: string;
 };
@@ -17,8 +17,10 @@ export const preRegisterUser = async (
 
         return response.data;
     } catch (error: unknown) {
-        throw new Error(
-            error as string | "Une erreur est survenue, veuillez réessayer"
-        );
+        if (axios.isAxiosError(error)) {
+            throw new Error(error.response?.data.message);
+        } else {
+            console.error(error);
+        }
     }
 };
