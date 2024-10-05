@@ -13,26 +13,52 @@ export const AppAuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     );
     const [userId, setUserId] = useState<string | null>(null);
 
-    useEffect(() => {
-        if (token) {
-            localStorage.setItem("access_token", token);
-            const decodedToken = jwtDecode<DecodedToken>(token);
+    const handleTokenUpdate = (newToken: string) => {
+        if (newToken) {
+            localStorage.setItem("access_token", newToken);
+            // TODO: Ici faire une requête vers le serveur pour valider le token
+            // /token-validate
+
+            const decodedToken = jwtDecode<DecodedToken>(newToken);
             setUserId(decodedToken.id);
         } else {
             localStorage.removeItem("access_token");
+            setUserId(null);
         }
+    };
+
+    useEffect(() => {
+        if (!token) {
+            setUserId(null);
+            return;
+        }
+        handleTokenUpdate(token);
     }, [token]);
 
     useEffect(() => {
-        // Fonction pour gérer les changements de localStorage
         const handleStorageChange = (event: StorageEvent) => {
             if (event.key === "access_token") {
                 const newToken = localStorage.getItem("access_token");
+                // TODO: Mais ici aussi j'ai besoin d'une requête vers le serveur pour valider le token (comme dans handleTokenUpdate) ??
+                console.log(
+                    "Changement détecté dans localStorage (autre onglet):",
+                    newToken
+                );
                 setToken(newToken);
             }
         };
 
-        // Écoute l'événement de changement de localStorage
+        // Vérifie si un token est déjà présent au montage initial
+        const checkInitialToken = () => {
+            const localStorageToken = localStorage.getItem("access_token");
+            if (localStorageToken) {
+                setToken(localStorageToken);
+            }
+        };
+
+        checkInitialToken();
+
+        // Ajoute l'écouteur pour détecter les changements de localStorage
         window.addEventListener("storage", handleStorageChange);
 
         // Nettoyage de l'écouteur lors du démontage

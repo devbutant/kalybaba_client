@@ -1,18 +1,17 @@
 import createAxiosInstance from "@/config/axios/axiosConfig";
 
-//TODO: redondance, centraliser les types
 type RegisterDto = {
     name: string;
-    email: string;
     password: string;
     confirmPassword: string;
     city: string;
+    phone?: string;
+    token: string;
+    userId: string;
 };
 
-export const registerUser = async (
-    userData: RegisterDto
-): Promise<Omit<RegisterDto, "confirmPassword">> => {
-    const { confirmPassword, ...user } = userData;
+export const registerUser = async (userData: RegisterDto): Promise<void> => {
+    const { confirmPassword, token, userId, ...user } = userData;
 
     const checkPassword = (password: string, confirmPassword: string) => {
         if (password !== confirmPassword) {
@@ -23,10 +22,9 @@ export const registerUser = async (
     checkPassword(userData.password, confirmPassword);
 
     try {
-        const axiosInstance = createAxiosInstance();
-        const response = await axiosInstance.post(`/auth/register`, user);
-
-        return response.data;
+        const axiosInstance = createAxiosInstance(token);
+        const userWithRole = { ...user, role: "USER" };
+        await axiosInstance.patch(`/users/${userId}`, userWithRole);
     } catch (error: unknown) {
         throw new Error(
             error as string | "Une erreur est survenue, veuillez réessayer"

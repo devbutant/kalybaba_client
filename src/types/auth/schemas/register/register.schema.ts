@@ -13,11 +13,6 @@ export const registerSchema = z
             .string({ required_error: "Veuillez renseigner un nom." })
             .min(3, "Le nom doit contenir au moins 3 caractères.")
             .max(20, "Le nom doit contenir au plus 20 caractères."),
-        email: z
-            .string({
-                required_error: "Veuillez renseigner une adresse e-mail.",
-            })
-            .email("Merci de renseigner un email valide."),
         password: z
             .string({ required_error: "Veuillez renseigner un mot de passe." })
             .min(8, "Le mot de passe doit contenir au moins 8 caractères.")
@@ -34,6 +29,13 @@ export const registerSchema = z
                 passwordRegex,
                 "Le mot de passe doit contenir au moins un chiffre et un caractère spécial"
             ),
+        phone: z
+            .string()
+            .min(
+                10,
+                "Le numéro de téléphone doit contenir au moins 10 caractères."
+            )
+            .optional(),
         city: z
             .string({ required_error: "Veuillez renseigner une ville." })
             .min(3, "La ville doit contenir au moins 2 caractères.")

@@ -27,24 +27,10 @@ const RegisterForm: FC = () => {
                         <FormItem>
                             <FormLabel>Nom</FormLabel>
                             <FormControl>
-                                <Input placeholder="Adrien" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Email</FormLabel>
-                            <FormControl>
                                 <Input
-                                    type="email"
-                                    placeholder="adrien.petit@exemple.fr"
+                                    placeholder="Adrien"
                                     {...field}
+                                    value={field.value || ""}
                                 />
                             </FormControl>
                             <FormMessage />
@@ -63,6 +49,7 @@ const RegisterForm: FC = () => {
                                     type="password"
                                     placeholder="********"
                                     {...field}
+                                    value={field.value || ""}
                                 />
                             </FormControl>
                             <FormMessage />
@@ -81,6 +68,25 @@ const RegisterForm: FC = () => {
                                     type="password"
                                     placeholder="********"
                                     {...field}
+                                    value={field.value || ""}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Numéro de téléphone</FormLabel>
+                            <FormControl>
+                                <Input
+                                    placeholder="07 00 00 00 00"
+                                    {...field}
+                                    value={field.value || ""}
                                 />
                             </FormControl>
                             <FormMessage />
@@ -95,7 +101,11 @@ const RegisterForm: FC = () => {
                         <FormItem>
                             <FormLabel>Ville</FormLabel>
                             <FormControl>
-                                <Input placeholder="Paris" {...field} />
+                                <Input
+                                    placeholder="Paris"
+                                    {...field}
+                                    value={field.value || ""}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

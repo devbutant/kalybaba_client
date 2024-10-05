@@ -1,4 +1,3 @@
-// Todo voir si on peut pas utiliser une même interface à chaque fois pour une annonce
 export interface Ad {
     id: string;
     title: string;
