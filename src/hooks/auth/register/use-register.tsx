@@ -10,7 +10,9 @@ const useRegisterForm = () => {
     });
     const { handleSubmit, setError } = form;
 
-    const { token, userId } = useAppAuth();
+    const { token, user } = useAppAuth();
+    const userId = user?.userId ?? null;
+
     const registerMutation = useRegisterMutation();
 
     const onFormSubmit: SubmitHandler<RegisterFormFields> = async (

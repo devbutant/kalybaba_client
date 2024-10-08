@@ -14,17 +14,29 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { CreateAccount } from "../pages/create-account";
 
 const PrivateRoute: FC<{ element: ReactNode }> = ({ element }) => {
-    const { isAuthenticated } = useAppAuth();
-    return isAuthenticated ? (
-        <>{element}</>
-    ) : (
-        <Navigate to="/connexion" replace />
-    );
+    const { user } = useAppAuth();
+    const isAuthorized = user?.role === "USER";
+
+    return isAuthorized ? <>{element}</> : <Navigate to="/connexion" replace />;
 };
 
 const PublicRoute: FC<{ element: ReactNode }> = ({ element }) => {
-    const { isAuthenticated } = useAppAuth();
-    return !isAuthenticated ? <>{element}</> : <Navigate to="/" replace />;
+    const { user } = useAppAuth();
+    const isAuthenticated = user?.isAuthenticated;
+
+    return !isAuthenticated ? (
+        <>{element}</>
+    ) : (
+        <Navigate to="/derniere-etape" replace />
+    );
+};
+
+const PreRegistedGuard: FC<{ element: ReactNode }> = ({ element }) => {
+    const { user } = useAppAuth();
+
+    const isPreRegistered = user?.role === "USER_PENDING";
+
+    return isPreRegistered ? <>{element}</> : <Navigate to="/" replace />;
 };
 
 export function Router() {
@@ -52,7 +64,7 @@ export function Router() {
         },
         {
             path: "/derniere-etape",
-            element: <PrivateRoute element={<Register />} />,
+            element: <PreRegistedGuard element={<Register />} />,
         },
         {
             path: "/connexion",
