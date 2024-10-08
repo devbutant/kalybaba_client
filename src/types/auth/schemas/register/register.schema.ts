@@ -31,11 +31,12 @@ export const registerSchema = z
             ),
         phone: z
             .string()
-            .min(
-                10,
-                "Le numéro de téléphone doit contenir au moins 10 caractères."
-            )
-            .optional(),
+            .transform((val) => (val === "" ? undefined : val))
+            .optional()
+            .refine((val) => !val || val.length >= 10, {
+                message:
+                    "Le numéro de téléphone doit contenir au moins 10 caractères.",
+            }),
         city: z
             .string({ required_error: "Veuillez renseigner une ville." })
             .min(3, "La ville doit contenir au moins 2 caractères.")
