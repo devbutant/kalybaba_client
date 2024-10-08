@@ -11,7 +11,6 @@ const useLogout = () => {
     const handleLogout = async (): Promise<void> => {
         if (token) {
             try {
-                console.log("Logging out...");
                 await updateUserConnectionStatus(token, false);
             } catch (error) {
                 console.error("Error during logout:", error);

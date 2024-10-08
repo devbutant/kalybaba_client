@@ -20,6 +20,7 @@ export const AppAuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
             // /token-validate
 
             const decodedToken = jwtDecode<DecodedToken>(newToken);
+            console.log(decodedToken);
             setUserId(decodedToken.id);
         } else {
             localStorage.removeItem("access_token");
@@ -82,3 +83,40 @@ export const AppAuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
         </AppAuthContext.Provider>
     );
 };
+
+// TODO
+// TODO
+// TODO
+// TODO
+
+// S'en inspirer pour mettre un userId, le rle etc pour les guards
+
+// import { createContext, useContext, useState, FC, useEffect } from "react";
+// import { getUserRoleFromToken } from "@/utils/getUserRoleFromToken"; // L'import de la fonction de décodage
+
+// type User = {
+//   isAuthenticated: boolean;
+//   role: string | null;
+// };
+
+// const AuthContext = createContext<User | null>(null);
+
+// export const useAuth = () => useContext(AuthContext);
+
+// export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
+//   const [user, setUser] = useState<User>({ isAuthenticated: false, role: null });
+
+//   useEffect(() => {
+//     const token = localStorage.getItem("token");
+//     if (token) {
+//       const role = getUserRoleFromToken(token);
+//       setUser({ isAuthenticated: true, role });
+//     }
+//   }, []);
+
+//   return (
+//     <AuthContext.Provider value={user}>
+//       {children}
+//     </AuthContext.Provider>
+//   );
+// };
