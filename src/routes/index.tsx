@@ -66,6 +66,6 @@ export function Router() {
             path: "/confirmation-email/:token?",
             element: <PublicRoute element={<ConfirmEmail />} />,
         },
-        { path: "*", element: <Navigate to="/404" replace /> },
+        { path: "/*", element: <Navigate to="/404" replace /> },
     ]);
 }
