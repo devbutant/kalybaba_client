@@ -19,7 +19,7 @@ const CreateAdButton = () => {
 
 const Header = () => {
     return (
-        <header className="bg-gray-800 text-white py-4 shadow-md">
+        <header className="px-2 md:px-0 bg-gray-800 text-white py-4 shadow-md">
             <div className="max-w-screen-xl flex justify-between mx-auto">
                 <HeaderTitle />
                 <div className="nav-buttons flex">
