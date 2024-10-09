@@ -10,10 +10,12 @@ import { ChangeEvent, FC, useEffect, useState } from "react";
 
 const Chat: FC = () => {
     const [message, setMessage] = useState<string>("");
-    const { userId: currentUser } = useAppAuth();
+    const { user } = useAppAuth();
     const { connectSocket } = useSocket();
     const { isSocketAuthenticated } = useSocketAuth();
     const { sendMessage, listenToMessages } = useMessages();
+
+    const currentUser = user?.userId ?? null;
 
     useEffect(() => {
         if (currentUser) {

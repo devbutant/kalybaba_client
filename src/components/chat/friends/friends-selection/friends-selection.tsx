@@ -10,7 +10,8 @@ const FriendsSelection: FC = () => {
     const { data: friendList } = useFriendListQuery();
     const { friends } = useFriends();
 
-    const { userId: currentUserId } = useAppAuth();
+    const { user } = useAppAuth();
+    const currentUserId = user?.userId ?? null;
 
     const { handleSelectUser, isOpen, setIsOpen, containerRef } =
         useFriendsSelection();

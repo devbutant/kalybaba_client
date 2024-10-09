@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 
 const useSingleAd = () => {
     const { id: singleAdId } = useParams<{ id: string }>();
-    const { token, userId } = useAppAuth();
+    const { token, user } = useAppAuth();
+    const userId = user?.userId ?? null;
 
     const {
         data: singleAd,

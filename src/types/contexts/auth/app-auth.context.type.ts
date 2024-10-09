@@ -1,6 +1,12 @@
 export interface AppAuthContextType {
-    isAuthenticated: boolean;
     token: string | null;
     setToken: (token: string | null) => void;
-    userId: string | null;
+    user: User | null;
 }
+
+export type User = {
+    isAuthenticated: boolean;
+    token: string | null;
+    userId: string | null;
+    role: string | null;
+};

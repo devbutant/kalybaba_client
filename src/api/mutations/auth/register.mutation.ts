@@ -18,6 +18,7 @@ export const useRegisterMutation = () => {
     return useMutation<void, Error, RegisterDto>({
         mutationFn: registerUser,
         onSuccess: async () => {
+            // TODO: faire un refresh token pour que l'utilisateur puisse avoir accès aux autres routes
             navigate("/");
         },
         onError: (error) => {

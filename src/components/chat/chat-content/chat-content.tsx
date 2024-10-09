@@ -4,7 +4,8 @@ import { FC } from "react";
 
 const ChatContent: FC = () => {
     const { messages } = useChat();
-    const { userId: currentUser } = useAppAuth();
+    const { user } = useAppAuth();
+    const currentUser = user?.userId ?? null;
 
     return (
         <>

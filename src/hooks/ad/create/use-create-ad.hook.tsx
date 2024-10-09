@@ -6,7 +6,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
 const useCreateAd = () => {
-    const { userId } = useAppAuth();
+    const { user } = useAppAuth();
+    const userId = user?.userId ?? null;
 
     if (!userId) {
         throw new Error("Vous devez être authentifié pour créer une annonce");

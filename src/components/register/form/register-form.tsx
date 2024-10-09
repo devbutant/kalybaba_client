@@ -10,7 +10,6 @@ import {
 } from "@/shadcn/components/ui/form";
 import { Input } from "@/shadcn/components/ui/input";
 import { FC } from "react";
-import { Link } from "react-router-dom";
 
 const RegisterForm: FC = () => {
     const { handleSubmit, onFormSubmit, form } = useRegisterForm();
@@ -118,20 +117,11 @@ const RegisterForm: FC = () => {
                         disabled={isSubmitting}
                         className="w-full mt-4"
                     >
-                        {isSubmitting ? "Chargement..." : "S'inscrire"}
+                        {isSubmitting
+                            ? "Chargement..."
+                            : "Enregistrer mes informations"}
                     </Button>
                 </div>
-
-                <p>
-                    Déjà membre ?{" "}
-                    <Button
-                        variant={"link"}
-                        className="m-0 p-0 text-md"
-                        asChild
-                    >
-                        <Link to="/connexion">Connectez-vous !</Link>
-                    </Button>
-                </p>
             </form>
         </Form>
     );

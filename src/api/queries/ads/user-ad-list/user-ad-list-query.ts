@@ -4,7 +4,8 @@ import { AdDto } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
 export const useUserAdListQuery = () => {
-    const { token, userId } = useAppAuth();
+    const { token, user } = useAppAuth();
+    const userId = user?.userId ?? null;
 
     return useQuery<AdDto[]>({
         queryKey: ["ads", token],
