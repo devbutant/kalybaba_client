@@ -1,5 +1,4 @@
 import { EditAdForm } from "@/components/ad/edit-ad-form/edit-ad-form";
-import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
 import { CompactLayout } from "@/layouts/compact";
 import { Chat } from "@/pages/chat";
 import { ConfirmEmail } from "@/pages/confirm-email";
@@ -14,22 +13,17 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { CreateAccount } from "../pages/create-account";
 
 const PrivateRoute: FC<{ element: ReactNode }> = ({ element }) => {
-    const { user } = useAppAuth();
-    console.log(user);
-    console.log(user);
-    console.log(user);
-
-    const isAuthorized = user?.roles?.includes("USER") ?? false;
+    const isAuthorized = false;
+    // const isAuthorized = user?.roles?.includes("USER") ?? false;
     return isAuthorized ? <>{element}</> : <Navigate to="/connexion" replace />;
 };
 
 const PublicRoute: FC<{ element: ReactNode }> = ({ element }) => {
-    const { user } = useAppAuth();
-    console.log(user);
-    console.log(user);
-    console.log(user);
+    // const { data: user } = useCheck();
+    // console.log(user);
 
-    const isAuthenticated = user?.isAuthenticated;
+    // const isAuthenticated = user?.isAuthenticated;
+    const isAuthenticated = false;
 
     return !isAuthenticated ? (
         <>{element}</>
@@ -39,12 +33,11 @@ const PublicRoute: FC<{ element: ReactNode }> = ({ element }) => {
 };
 
 const PreRegistedGuard: FC<{ element: ReactNode }> = ({ element }) => {
-    const { user } = useAppAuth();
-    console.log(user);
-    console.log(user);
-    console.log(user);
+    // const { data: user } = useCheck();
+    // console.log(user);
 
-    const isPreRegistered = user?.roles?.includes("USER_PENDING") ?? false;
+    // const isPreRegistered = user?.roles?.includes("USER_PENDING") ?? false;
+    const isPreRegistered = false;
 
     return isPreRegistered ? <>{element}</> : <Navigate to="/" replace />;
 };

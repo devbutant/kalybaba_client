@@ -1,10 +1,8 @@
 import createAxiosInstance from "@/config/axios/axiosConfig";
 import { UserDto } from "@/types";
 
-export const fetchFriendList = async (
-    token: string | null
-): Promise<UserDto[]> => {
-    const axiosInstance = createAxiosInstance(token);
+export const fetchFriendList = async (): Promise<UserDto[]> => {
+    const axiosInstance = createAxiosInstance();
     const { data: friendList } = await axiosInstance.get(`/friends`);
 
     return friendList;

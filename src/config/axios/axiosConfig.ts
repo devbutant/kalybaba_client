@@ -7,6 +7,16 @@ const createAxiosInstance = () => {
         withCredentials: true,
     });
 
+    axiosInstance.interceptors.request.use(
+        (config) => {
+            console.log("En-têtes de requête :", config.headers); // Afficher les en-têtes de la requête
+            return config;
+        },
+        (error) => {
+            return Promise.reject(error);
+        }
+    );
+
     axiosInstance.interceptors.response.use(
         (response) => response,
         (error) => {
