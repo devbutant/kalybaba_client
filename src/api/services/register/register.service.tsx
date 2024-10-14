@@ -11,7 +11,7 @@ type RegisterDto = {
 };
 
 export const registerUser = async (userData: RegisterDto): Promise<void> => {
-    const { confirmPassword, token, userId, ...user } = userData;
+    const { confirmPassword, userId, ...user } = userData;
 
     const checkPassword = (password: string, confirmPassword: string) => {
         if (password !== confirmPassword) {
@@ -22,7 +22,7 @@ export const registerUser = async (userData: RegisterDto): Promise<void> => {
     checkPassword(userData.password, confirmPassword);
 
     try {
-        const axiosInstance = createAxiosInstance(token);
+        const axiosInstance = createAxiosInstance();
         const userWithRole = { ...user, role: "USER" };
         await axiosInstance.patch(`/users/${userId}`, userWithRole);
     } catch (error: unknown) {

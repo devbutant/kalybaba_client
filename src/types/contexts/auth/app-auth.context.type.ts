@@ -6,7 +6,6 @@ export interface AppAuthContextType {
 
 export type User = {
     isAuthenticated: boolean;
-    token: string | null;
     userId: string | null;
-    role: string | null;
+    roles: [] | null;
 };
