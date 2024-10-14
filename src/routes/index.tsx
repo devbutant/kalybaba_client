@@ -19,10 +19,6 @@ const PrivateRoute: FC<{ element: ReactNode }> = ({ element }) => {
 };
 
 const PublicRoute: FC<{ element: ReactNode }> = ({ element }) => {
-    // const { data: user } = useCheck();
-    // console.log(user);
-
-    // const isAuthenticated = user?.isAuthenticated;
     const isAuthenticated = false;
 
     return !isAuthenticated ? (
@@ -33,12 +29,8 @@ const PublicRoute: FC<{ element: ReactNode }> = ({ element }) => {
 };
 
 const PreRegistedGuard: FC<{ element: ReactNode }> = ({ element }) => {
-    // const { data: user } = useCheck();
-    // console.log(user);
-
     // const isPreRegistered = user?.roles?.includes("USER_PENDING") ?? false;
     const isPreRegistered = false;
-
     return isPreRegistered ? <>{element}</> : <Navigate to="/" replace />;
 };
 
