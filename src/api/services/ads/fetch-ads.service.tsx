@@ -4,6 +4,7 @@ import { AdDto } from "@/types";
 export const fetchAdList = async (): Promise<AdDto[]> => {
     const axiosInstance = createAxiosInstance();
     const { data: adList } = await axiosInstance.get(`/ads`);
+    console.log(adList);
 
     return adList;
 };

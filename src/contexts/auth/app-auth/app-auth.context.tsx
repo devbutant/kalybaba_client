@@ -1,7 +1,5 @@
-import createAxiosInstance from "@/config/axios/axiosConfig";
 import { AppAuthContextType, User } from "@/types/contexts";
-import { useQuery } from "@tanstack/react-query";
-import { createContext, FC, ReactNode, useEffect, useState } from "react";
+import { createContext, FC, ReactNode, useState } from "react";
 
 export const AppAuthContext = createContext<AppAuthContextType | undefined>(
     undefined
@@ -11,33 +9,33 @@ export const AppAuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
     const [token, setToken] = useState<string | null>(null); // Pas besoin de localStorage
 
-    const axiosInstance = createAxiosInstance();
+    // const axiosInstance = createAxiosInstance();
 
-    const checkAuth = async () => {
-        const { data } = await axiosInstance.get("/auth/check"); // Endpoint pour vérifier l'auth
-        console.log(data);
-        console.log("hello");
+    // const checkAuth = async () => {
+    //     const { data } = await axiosInstance.get("/auth/check"); // Endpoint pour vérifier l'auth
+    //     console.log(data);
+    //     console.log("hello");
 
-        return data;
-    };
+    //     return data;
+    // };
 
-    const { data: userData, isSuccess } = useQuery({
-        queryKey: ["auth"],
-        queryFn: checkAuth,
-        enabled: !!user,
-    });
+    // const { data: userData, isSuccess } = useQuery({
+    //     queryKey: ["auth"],
+    //     queryFn: checkAuth,
+    //     enabled: !!user,
+    // });
 
-    useEffect(() => {
-        if (isSuccess && userData) {
-            setUser({
-                isAuthenticated: true,
-                userId: userData.id,
-                roles: userData.roles,
-            });
-        } else {
-            setUser(null);
-        }
-    }, [isSuccess, userData]);
+    // useEffect(() => {
+    //     if (isSuccess && userData) {
+    //         setUser({
+    //             isAuthenticated: true,
+    //             id: userData.id,
+    //             roles: userData.roles,
+    //         });
+    //     } else {
+    //         setUser(null);
+    //     }
+    // }, [isSuccess, userData]);
 
     return (
         <AppAuthContext.Provider
@@ -45,6 +43,7 @@ export const AppAuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
                 token,
                 setToken,
                 user,
+                setUser,
             }}
         >
             {children}

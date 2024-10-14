@@ -15,13 +15,20 @@ import { CreateAccount } from "../pages/create-account";
 
 const PrivateRoute: FC<{ element: ReactNode }> = ({ element }) => {
     const { user } = useAppAuth();
-    const isAuthorized = user?.role === "USER";
+    console.log(user);
+    console.log(user);
+    console.log(user);
 
+    const isAuthorized = user?.roles?.includes("USER") ?? false;
     return isAuthorized ? <>{element}</> : <Navigate to="/connexion" replace />;
 };
 
 const PublicRoute: FC<{ element: ReactNode }> = ({ element }) => {
     const { user } = useAppAuth();
+    console.log(user);
+    console.log(user);
+    console.log(user);
+
     const isAuthenticated = user?.isAuthenticated;
 
     return !isAuthenticated ? (
@@ -33,8 +40,11 @@ const PublicRoute: FC<{ element: ReactNode }> = ({ element }) => {
 
 const PreRegistedGuard: FC<{ element: ReactNode }> = ({ element }) => {
     const { user } = useAppAuth();
+    console.log(user);
+    console.log(user);
+    console.log(user);
 
-    const isPreRegistered = user?.role === "USER_PENDING";
+    const isPreRegistered = user?.roles?.includes("USER_PENDING") ?? false;
 
     return isPreRegistered ? <>{element}</> : <Navigate to="/" replace />;
 };
