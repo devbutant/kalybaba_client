@@ -19,7 +19,7 @@ const useSingleAd = () => {
     const deleteAdMutation = useDeleteAdMutation();
 
     const handleDelete = async () => {
-        if (!singleAd) throw new Error("Token not found");
+        if (!singleAd) throw new Error("Annonce non trouvée");
 
         try {
             await deleteAdMutation.mutateAsync(singleAd.id);

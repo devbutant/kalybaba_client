@@ -1,4 +1,5 @@
 import { useRegisterMutation } from "@/api/mutations/auth/register.mutation";
+import { useCheckAuthQuery } from "@/api/queries/auth/check-auth/check-auth.query";
 import { RegisterFormFields, registerSchema } from "@/types/auth/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -9,7 +10,8 @@ const useRegisterForm = () => {
     });
     const { handleSubmit, setError } = form;
 
-    const userId = null;
+    const { data } = useCheckAuthQuery();
+    const userId = data?.user?.id;
 
     const registerMutation = useRegisterMutation();
 
@@ -18,7 +20,7 @@ const useRegisterForm = () => {
     ) => {
         try {
             if (!userId) {
-                throw new Error("Token not found");
+                throw new Error("Veuillez rententer l'inscription");
             }
 
             const completeUser = { ...userData, userId };

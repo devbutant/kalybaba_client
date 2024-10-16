@@ -1,3 +1,4 @@
+import { useCheckAuthQuery } from "@/api/queries/auth/check-auth/check-auth.query";
 import { useFriendListQuery } from "@/api/queries/friends";
 import { Button } from "@/components/button";
 import { useFriends } from "@/hooks/contexts-hooks/friends";
@@ -9,7 +10,8 @@ const FriendsSelection: FC = () => {
     const { data: friendList } = useFriendListQuery();
     const { friends } = useFriends();
 
-    const currentUserId = null;
+    const { data } = useCheckAuthQuery();
+    const currentUserId = data?.user?.id;
 
     const { handleSelectUser, isOpen, setIsOpen, containerRef } =
         useFriendsSelection();

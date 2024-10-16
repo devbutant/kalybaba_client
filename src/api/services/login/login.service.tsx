@@ -8,19 +8,3 @@ export const loginUser = async (
     const response = await axiosInstance.post(`/auth/login`, userData);
     return response.data;
 };
-
-export const updateUserConnectionStatus = async (
-    connected: boolean
-): Promise<void> => {
-    const data = {
-        connected,
-    };
-
-    try {
-        await axiosInstance.patch(`/users/connected`, data);
-    } catch (error: unknown) {
-        throw new Error(
-            error as string | "Une erreur est survenue, veuillez réessayer"
-        );
-    }
-};
