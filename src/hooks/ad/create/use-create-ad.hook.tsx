@@ -1,11 +1,13 @@
 import { useCreateAdMutation } from "@/api/mutations/ads/create/create-ad.mutation";
+import { useCheckAuthQuery } from "@/api/queries/auth/check-auth/check-auth.query";
 import { CreateAdDto } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
 const useCreateAd = () => {
-    const userId = null;
+    const { data } = useCheckAuthQuery();
+    const userId = data?.user?.id;
 
     if (!userId) {
         throw new Error("Vous devez être authentifié pour créer une annonce");
