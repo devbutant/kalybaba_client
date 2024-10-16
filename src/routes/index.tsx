@@ -1,5 +1,6 @@
 import { useCheckAuthQuery } from "@/api/queries/auth/check-auth/check-auth.query";
 import { EditAdForm } from "@/components/ad/edit-ad-form/edit-ad-form";
+import { SplashScreen } from "@/components/loading";
 import { CompactLayout } from "@/layouts/compact";
 import { Chat } from "@/pages/chat";
 import { ConfirmEmail } from "@/pages/confirm-email";
@@ -14,14 +15,24 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { CreateAccount } from "../pages/create-account";
 
 const PrivateRoute: FC<{ element: ReactNode }> = ({ element }) => {
-    const { data } = useCheckAuthQuery();
+    const { data, isLoading } = useCheckAuthQuery();
+
+    if (isLoading) {
+        return <SplashScreen />;
+    }
+
     const isAuthorized = data?.user?.role === "USER";
 
     return isAuthorized ? <>{element}</> : <Navigate to="/connexion" replace />;
 };
 
 const PublicRoute: FC<{ element: ReactNode }> = ({ element }) => {
-    const { data } = useCheckAuthQuery();
+    const { data, isLoading } = useCheckAuthQuery();
+
+    if (isLoading) {
+        return <SplashScreen />;
+    }
+
     const isAuthorized = data?.isAuthenticated;
 
     return !isAuthorized ? (
@@ -32,7 +43,12 @@ const PublicRoute: FC<{ element: ReactNode }> = ({ element }) => {
 };
 
 const PreRegistedGuard: FC<{ element: ReactNode }> = ({ element }) => {
-    const { data } = useCheckAuthQuery();
+    const { data, isLoading } = useCheckAuthQuery();
+
+    if (isLoading) {
+        return <SplashScreen />;
+    }
+
     const isPreRegistered = data?.user.role === "USER_PENDING";
     return isPreRegistered ? <>{element}</> : <Navigate to="/" replace />;
 };

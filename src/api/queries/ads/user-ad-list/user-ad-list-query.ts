@@ -5,6 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 export const useUserAdListQuery = () => {
     return useQuery<AdDto[]>({
         queryKey: ["ads"],
-        queryFn: () => fetchUserAdList(),
+        queryFn: fetchUserAdList,
     });
 };

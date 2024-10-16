@@ -1,10 +1,12 @@
 import { useDeleteAdMutation } from "@/api/mutations/ads/delete/delete-ad.mutation";
 import { useSingleAdQuery } from "@/api/queries/ads/single-ad";
+import { useCheckAuthQuery } from "@/api/queries/auth/check-auth/check-auth.query";
 import { useParams } from "react-router-dom";
 
 const useSingleAd = () => {
     const { id: singleAdId } = useParams<{ id: string }>();
-    const userId = null;
+    const { data } = useCheckAuthQuery();
+    const userId = data?.user?.id;
 
     const {
         data: singleAd,
