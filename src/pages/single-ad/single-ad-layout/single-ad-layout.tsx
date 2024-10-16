@@ -11,8 +11,8 @@ const SingleAdLayout: FC<PropsWithChildren<SingleAdLayoutType>> = (props) => {
 
     return (
         <div
-            className="mx-auto bg-white shadow-md rounded-lg overflow-hidden"
-            style={{ width: "40rem" }}
+            className="bg-white shadow-md rounded-lg overflow-hidden sm:w-screen border"
+            style={{ maxWidth: "40rem" }}
         >
             <div className="p-6">
                 <Tags typeEnum={ad.typeEnum} categoryEnum={ad.categoryEnum} />
