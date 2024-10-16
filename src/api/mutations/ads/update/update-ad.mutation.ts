@@ -1,11 +1,9 @@
 import { editAd } from "@/api/services/ads/edit/edit-ad.service";
-import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
 import { EditAdFormValues } from "@/types/dtos";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const useUpdateAdMutation = () => {
-    const { token } = useAppAuth();
 
     const navigate = useNavigate();
 
@@ -15,7 +13,7 @@ export const useUpdateAdMutation = () => {
     }
 
     return useMutation<EditAdResponse, Error, EditAdFormValues>({
-        mutationFn: (editedAd: EditAdFormValues) => editAd(token, editedAd),
+        mutationFn: (editedAd: EditAdFormValues) => editAd(editedAd),
         onSuccess: () => {
             navigate(-1);
         },

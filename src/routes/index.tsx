@@ -1,3 +1,4 @@
+import { useCheckAuthQuery } from "@/api/queries/auth/check-auth/check-auth.query";
 import { EditAdForm } from "@/components/ad/edit-ad-form/edit-ad-form";
 import { CompactLayout } from "@/layouts/compact";
 import { Chat } from "@/pages/chat";
@@ -13,15 +14,17 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { CreateAccount } from "../pages/create-account";
 
 const PrivateRoute: FC<{ element: ReactNode }> = ({ element }) => {
-    const isAuthorized = false;
-    // const isAuthorized = user?.roles?.includes("USER") ?? false;
+    const { data } = useCheckAuthQuery();
+    const isAuthorized = data?.user?.role === "USER";
+
     return isAuthorized ? <>{element}</> : <Navigate to="/connexion" replace />;
 };
 
 const PublicRoute: FC<{ element: ReactNode }> = ({ element }) => {
-    const isAuthenticated = false;
+    const { data } = useCheckAuthQuery();
+    const isAuthorized = data?.isAuthenticated;
 
-    return !isAuthenticated ? (
+    return !isAuthorized ? (
         <>{element}</>
     ) : (
         <Navigate to="/derniere-etape" replace />
@@ -29,8 +32,8 @@ const PublicRoute: FC<{ element: ReactNode }> = ({ element }) => {
 };
 
 const PreRegistedGuard: FC<{ element: ReactNode }> = ({ element }) => {
-    // const isPreRegistered = user?.roles?.includes("USER_PENDING") ?? false;
-    const isPreRegistered = false;
+    const { data } = useCheckAuthQuery();
+    const isPreRegistered = data?.user.role === "USER_PENDING";
     return isPreRegistered ? <>{element}</> : <Navigate to="/" replace />;
 };
 

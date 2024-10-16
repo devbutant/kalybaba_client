@@ -1,8 +1,8 @@
 import createAxiosInstance from "@/config/axios/axiosConfig";
 import { AdDto, CreateAdDto } from "@/types";
 
-export const createAd = async (newAd: CreateAdDto, token: string | null) => {
-    const axiosInstance = createAxiosInstance(token);
+export const createAd = async (newAd: CreateAdDto) => {
+    const axiosInstance = createAxiosInstance();
     const { data: ad } = await axiosInstance.post<AdDto>("/ads", newAd);
 
     return ad;

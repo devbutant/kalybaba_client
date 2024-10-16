@@ -1,5 +1,4 @@
 import { useRegisterMutation } from "@/api/mutations/auth/register.mutation";
-import { useAppAuth } from "@/hooks/contexts-hooks/auth";
 import { RegisterFormFields, registerSchema } from "@/types/auth/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -10,8 +9,7 @@ const useRegisterForm = () => {
     });
     const { handleSubmit, setError } = form;
 
-    const { token, user } = useAppAuth();
-    const userId = user?.userId ?? null;
+    const userId = null;
 
     const registerMutation = useRegisterMutation();
 
@@ -19,11 +17,11 @@ const useRegisterForm = () => {
         userData
     ) => {
         try {
-            if (!token || !userId) {
+            if (!userId) {
                 throw new Error("Token not found");
             }
 
-            const completeUser = { ...userData, token, userId };
+            const completeUser = { ...userData, userId };
             await registerMutation.mutateAsync(completeUser);
         } catch (error: unknown) {
             setError("root", {

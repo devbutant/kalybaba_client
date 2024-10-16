@@ -6,7 +6,6 @@ type RegisterDto = {
     confirmPassword: string;
     city: string;
     phone?: string;
-    token: string;
     userId: string;
 };
 

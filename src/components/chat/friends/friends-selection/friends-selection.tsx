@@ -1,6 +1,5 @@
 import { useFriendListQuery } from "@/api/queries/friends";
 import { Button } from "@/components/button";
-import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
 import { useFriends } from "@/hooks/contexts-hooks/friends";
 import { useFriendsSelection } from "@/hooks/friends/friends-selection";
 import { UserDto } from "@/types/dtos";
@@ -10,8 +9,7 @@ const FriendsSelection: FC = () => {
     const { data: friendList } = useFriendListQuery();
     const { friends } = useFriends();
 
-    const { user } = useAppAuth();
-    const currentUserId = user?.userId ?? null;
+    const currentUserId = null;
 
     const { handleSelectUser, isOpen, setIsOpen, containerRef } =
         useFriendsSelection();

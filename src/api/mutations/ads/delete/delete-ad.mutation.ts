@@ -1,10 +1,8 @@
 import { deleteAd } from "@/api/services/ads/delete";
-import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const useDeleteAdMutation = () => {
-    const { token } = useAppAuth();
     const { id: adId } = useParams<{ id: string }>();
 
     const navigate = useNavigate();
@@ -14,7 +12,7 @@ export const useDeleteAdMutation = () => {
     }
 
     return useMutation<string, Error, string>({
-        mutationFn: () => deleteAd(adId, token),
+        mutationFn: () => deleteAd(adId),
         onSuccess: () => {
             navigate("/mes-annonces");
         },

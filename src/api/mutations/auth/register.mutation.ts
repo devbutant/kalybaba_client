@@ -9,17 +9,11 @@ type RegisterDto = {
     confirmPassword: string;
     city: string;
     phone?: string;
-    token: string;
     userId: string;
 };
 
 export const useRegisterMutation = () => {
     const navigate = useNavigate();
-    const token = localStorage.getItem("access_token");
-
-    if (!token) {
-        throw new Error("Token is missing");
-    }
 
     return useMutation<void, Error, RegisterDto>({
         mutationFn: registerUser,
