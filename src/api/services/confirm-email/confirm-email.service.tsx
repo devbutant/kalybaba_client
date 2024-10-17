@@ -5,13 +5,13 @@ type ConfirmEmailDto = {
 };
 
 export const confirmEmail = async (
-    userData: ConfirmEmailDto
+    emailToken: ConfirmEmailDto
 ): Promise<string> => {
     try {
         const axiosInstance = createAxiosInstance();
         const response = await axiosInstance.post(
             `/auth/confirm-email`,
-            userData
+            emailToken
         );
 
         if (response.status !== 201) {

@@ -1,7 +1,6 @@
 import { FiPlusCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { SearchBar } from "../search-bar";
-import { ChatButton } from "./chat";
 import { ProfileMenuDropdown } from "./profile";
 import { HeaderTitle } from "./title";
 
@@ -25,7 +24,7 @@ const Header = () => {
                 <div className="nav-buttons flex">
                     <SearchBar />
                     <CreateAdButton />
-                    <ChatButton />
+                    {/* <ChatButton /> */}
                     <ProfileMenuDropdown />
                 </div>
             </div>

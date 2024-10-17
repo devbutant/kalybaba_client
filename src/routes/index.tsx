@@ -1,6 +1,5 @@
 import { useCheckAuthQuery } from "@/api/queries/auth/check-auth/check-auth.query";
 import { EditAdForm } from "@/components/ad/edit-ad-form/edit-ad-form";
-import { SplashScreen } from "@/components/loading";
 import { CompactLayout } from "@/layouts/compact";
 import { Chat } from "@/pages/chat";
 import { ConfirmEmail } from "@/pages/confirm-email";
@@ -18,7 +17,7 @@ const PrivateRoute: FC<{ element: ReactNode }> = ({ element }) => {
     const { data, isLoading } = useCheckAuthQuery();
 
     if (isLoading) {
-        return <SplashScreen />;
+        return <h1>PRIVATE ROUTE LOADING</h1>;
     }
 
     const isAuthorized = data?.user?.role === "USER";
@@ -30,12 +29,12 @@ const PublicRoute: FC<{ element: ReactNode }> = ({ element }) => {
     const { data, isLoading } = useCheckAuthQuery();
 
     if (isLoading) {
-        return <SplashScreen />;
+        return <h1>PUBLIC ROUTE LOADING</h1>;
     }
 
-    const isAuthorized = data?.isAuthenticated;
+    const isAuthorized = !data;
 
-    return !isAuthorized ? (
+    return isAuthorized ? (
         <>{element}</>
     ) : (
         <Navigate to="/derniere-etape" replace />
@@ -46,7 +45,7 @@ const PreRegistedGuard: FC<{ element: ReactNode }> = ({ element }) => {
     const { data, isLoading } = useCheckAuthQuery();
 
     if (isLoading) {
-        return <SplashScreen />;
+        return <h1>PRE REGISTERED ROUTE LOADING</h1>;
     }
 
     const isPreRegistered = data?.user.role === "USER_PENDING";
