@@ -23,7 +23,9 @@ const useRegisterForm = () => {
                 throw new Error("Veuillez rententer l'inscription");
             }
 
-            const completeUser = { ...userData, userId };
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { confirmPassword, ...restUserData } = userData;
+            const completeUser = { ...restUserData, userId };
             await registerMutation.mutateAsync(completeUser);
         } catch (error: unknown) {
             setError("root", {
