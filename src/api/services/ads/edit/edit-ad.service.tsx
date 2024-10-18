@@ -7,12 +7,9 @@ interface EditAdResponse {
 }
 
 export const editAd = async (
-    token: string | null,
     editedAd: EditAdFormValues
 ): Promise<EditAdResponse> => {
-    if (!token) throw new Error("Token not found");
-
-    const axiosInstance = createAxiosInstance(token);
+    const axiosInstance = createAxiosInstance();
     const response = await axiosInstance.patch(`/ads/${editedAd.id}`, editedAd);
 
     return response.data;

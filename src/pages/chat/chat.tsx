@@ -1,21 +1,21 @@
+import { useCheckAuthQuery } from "@/api/queries/auth/check-auth/check-auth.query";
 import { Button } from "@/components/button";
 import { ChatContent } from "@/components/chat";
 import { FriendsList } from "@/components/chat/friends/friends-list";
 import { FriendsSelection } from "@/components/chat/friends/friends-selection";
 import { useSocketAuth } from "@/hooks/contexts-hooks/auth";
-import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
 import { useMessages } from "@/hooks/messages";
 import { useSocket } from "@/hooks/socket";
 import { ChangeEvent, FC, useEffect, useState } from "react";
 
 const Chat: FC = () => {
     const [message, setMessage] = useState<string>("");
-    const { user } = useAppAuth();
     const { connectSocket } = useSocket();
     const { isSocketAuthenticated } = useSocketAuth();
     const { sendMessage, listenToMessages } = useMessages();
 
-    const currentUser = user?.userId ?? null;
+    const { data } = useCheckAuthQuery();
+    const currentUser = data?.user?.id;
 
     useEffect(() => {
         if (currentUser) {

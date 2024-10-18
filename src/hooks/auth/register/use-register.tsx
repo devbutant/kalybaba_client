@@ -1,5 +1,5 @@
 import { useRegisterMutation } from "@/api/mutations/auth/register.mutation";
-import { useAppAuth } from "@/hooks/contexts-hooks/auth";
+import { useCheckAuthQuery } from "@/api/queries/auth/check-auth/check-auth.query";
 import { RegisterFormFields, registerSchema } from "@/types/auth/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -10,8 +10,8 @@ const useRegisterForm = () => {
     });
     const { handleSubmit, setError } = form;
 
-    const { token, user } = useAppAuth();
-    const userId = user?.userId ?? null;
+    const { data } = useCheckAuthQuery();
+    const userId = data?.user?.id;
 
     const registerMutation = useRegisterMutation();
 
@@ -19,11 +19,13 @@ const useRegisterForm = () => {
         userData
     ) => {
         try {
-            if (!token || !userId) {
-                throw new Error("Token not found");
+            if (!userId) {
+                throw new Error("Veuillez rententer l'inscription");
             }
 
-            const completeUser = { ...userData, token, userId };
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { confirmPassword, ...restUserData } = userData;
+            const completeUser = { ...restUserData, userId };
             await registerMutation.mutateAsync(completeUser);
         } catch (error: unknown) {
             setError("root", {

@@ -10,10 +10,9 @@ export const CompactLayout: FC = () => {
             <DropdownMenuProvider>
                 <Header />
             </DropdownMenuProvider>
-            <main className="my-4 flex-grow mx-auto max-w-screen-xl">
+            <main className="my-4 flex-grow max-w-screen-xl mx-2 sm:mx-auto">
                 <Outlet />
             </main>
-
             <Footer />
         </div>
     );

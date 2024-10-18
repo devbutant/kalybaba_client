@@ -1,5 +1,4 @@
 import { useSocketAuth } from "@/hooks/contexts-hooks/auth";
-import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
 import { API } from "@/utils/environment";
 import { useCallback } from "react";
 import io from "socket.io-client";
@@ -11,15 +10,14 @@ export const useSocket = () => {
         setSocket,
         socket,
     } = useSocketAuth();
-    const { token } = useAppAuth();
 
     const connectSocket = useCallback(() => {
-        if (token && !socket) {
+        if (!socket) {
             const newSocket = io(`${API.URL}`);
 
             newSocket.on("connect", () => {
                 console.log("Connected to server");
-                newSocket.emit("authenticate", token);
+                newSocket.emit("authenticate");
             });
 
             newSocket.on("authenticated", () => {
@@ -34,7 +32,7 @@ export const useSocket = () => {
 
             setSocket(newSocket);
         }
-    }, [token, socket, setIsSocketAuthenticated, setSocket]);
+    }, [socket, setIsSocketAuthenticated, setSocket]);
 
     const disconnectSocket = useCallback(() => {
         if (socket) {

@@ -5,10 +5,10 @@ import { FC } from "react";
 const Homepage: FC = () => {
     const { data: ads, isLoading, error } = useAdListQuery();
     if (isLoading) return <p>Chargement...</p>;
-    if (error) return <p>Erreur lors du chargement de l'annonce</p>;
+    if (error) return <p>Erreur lors du chargement des annonce</p>;
 
     return (
-        <div className="min-h-screenflex flex-col">
+        <div className="min-h-screenflex flex-col sm:mx-2 xl:mx-auto">
             <main className="flex flex-col flex-1">
                 <h2 className="text-2xl font-semibold mb-6">
                     Dernières annonces

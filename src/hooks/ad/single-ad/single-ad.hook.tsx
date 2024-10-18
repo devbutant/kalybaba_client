@@ -1,12 +1,12 @@
 import { useDeleteAdMutation } from "@/api/mutations/ads/delete/delete-ad.mutation";
 import { useSingleAdQuery } from "@/api/queries/ads/single-ad";
-import { useAppAuth } from "@/hooks/contexts-hooks/auth";
+import { useCheckAuthQuery } from "@/api/queries/auth/check-auth/check-auth.query";
 import { useParams } from "react-router-dom";
 
 const useSingleAd = () => {
     const { id: singleAdId } = useParams<{ id: string }>();
-    const { token, user } = useAppAuth();
-    const userId = user?.userId ?? null;
+    const { data } = useCheckAuthQuery();
+    const userId = data?.user?.id;
 
     const {
         data: singleAd,
@@ -19,7 +19,7 @@ const useSingleAd = () => {
     const deleteAdMutation = useDeleteAdMutation();
 
     const handleDelete = async () => {
-        if (!token || !singleAd) throw new Error("Token not found");
+        if (!singleAd) throw new Error("Annonce non trouvée");
 
         try {
             await deleteAdMutation.mutateAsync(singleAd.id);

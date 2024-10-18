@@ -1,11 +1,11 @@
-import { useAppAuth } from "@/hooks/contexts-hooks/auth/app";
 import { useChat } from "@/hooks/contexts-hooks/chat";
 import { FC } from "react";
 
 const ChatContent: FC = () => {
     const { messages } = useChat();
-    const { user } = useAppAuth();
-    const currentUser = user?.userId ?? null;
+    // const { data } = useCheckAuthQuery();
+    // const currentUser = data?.user?.id;
+    const currentUser = "userid";
 
     return (
         <>
