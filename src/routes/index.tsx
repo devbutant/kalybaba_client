@@ -32,7 +32,6 @@ const PrivateGuard: FC<{ element: ReactNode }> = ({ element }) => {
 
 const PreRegistedGuard: FC<{ element: ReactNode }> = ({ element }) => {
     const { authData, isLoading } = useAppAuth();
-    console.log(authData, "preregister guard");
 
     if (isLoading) <SplashScreen />;
 

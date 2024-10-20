@@ -8,7 +8,6 @@ type RegisterDto = {
 export const useConfirmEmailMutation = () => {
     return useMutation<string, Error, RegisterDto>({
         mutationFn: confirmEmail,
-        onSuccess: () => console.log("success"),
         onError: (error) => {
             console.log("erreur! ", error);
         },

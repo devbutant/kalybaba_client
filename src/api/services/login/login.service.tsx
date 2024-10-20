@@ -11,6 +11,6 @@ export const loginUser = async (
     } catch (error) {
         console.log(error);
 
-        throw error; // Re-throw the error to handle it further up the call stack if needed
+        throw error;
     }
 };
