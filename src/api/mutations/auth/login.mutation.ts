@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 export const useLoginMutation = () => {
     return useMutation<LoginResponseDto, Error, LoginDto>({
         mutationFn: loginUser,
+        onSuccess: () => (window.location.href = "/"),
         onError: (error) => {
             console.log(error && "toast error");
         },
