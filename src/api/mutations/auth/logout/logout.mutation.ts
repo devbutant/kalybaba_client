@@ -7,7 +7,7 @@ export const useLogoutMutation = () => {
 
     return useMutation<void, Error>({
         mutationFn: logoutUser,
-        onSuccess: () => navigate("/connexion"),
+        onSuccess: () => (window.location.href = "/connexion"),
         onError: (error) => {
             console.log(error && "toast error");
         },
