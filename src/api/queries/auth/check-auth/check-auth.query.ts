@@ -5,6 +5,7 @@ export const useCheckAuthQuery = () => {
     return useQuery({
         queryKey: ["check-auth"],
         queryFn: checkAuth,
-        staleTime: 1000 * 60 * 5, // Met en cache pendant 5 minutes ??
+        staleTime: 1000 * 60 * 5,
+        refetchOnWindowFocus: false,
     });
 };

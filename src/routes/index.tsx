@@ -1,5 +1,6 @@
-import { useCheckAuthQuery } from "@/api/queries/auth/check-auth/check-auth.query";
 import { EditAdForm } from "@/components/ad/edit-ad-form/edit-ad-form";
+import { SplashScreen } from "@/components/loading";
+import { useAppAuth } from "@/hooks/contexts-hooks/auth/app-auth/use-auth.hook";
 import { CompactLayout } from "@/layouts/compact";
 import { Chat } from "@/pages/chat";
 import { ConfirmEmail } from "@/pages/confirm-email";
@@ -14,53 +15,51 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { CreateAccount } from "../pages/create-account";
 
 const PrivateGuard: FC<{ element: ReactNode }> = ({ element }) => {
-    const { data, isLoading } = useCheckAuthQuery();
+    const { authData, isLoading } = useAppAuth();
 
-    if (!data) {
-        <Navigate to="/connexion" />;
+    if (isLoading) <SplashScreen />;
+
+    if (!authData) {
+        return <Navigate to="/connexion" replace />;
     }
 
-    if (isLoading) {
-        return <h1>PRIVATE ROUTE LOADING</h1>;
-    }
-
-    const isAuthorized = data?.user?.role === "USER";
-
-    return isAuthorized ? <>{element}</> : <Navigate to="/connexion" replace />;
-};
-
-const PreRegistedGuard: FC<{ element: ReactNode }> = ({ element }) => {
-    const { data, isLoading } = useCheckAuthQuery();
-
-    if (!data) {
-        <Navigate to="/connexion" />;
-    }
-
-    if (isLoading) {
-        return <h1>PRE REGISTERED ROUTE LOADING</h1>;
-    }
-
-    const isPreRegistered = data?.user.role === "USER_PENDING";
-    return isPreRegistered ? <>{element}</> : <Navigate to="/" replace />;
-};
-
-const PublicGuard: FC<{ element: ReactNode }> = ({ element }) => {
-    const { data, isLoading } = useCheckAuthQuery();
-
-    if (isLoading) {
-        return <h1>PUBLIC ROUTE LOADING</h1>;
-    }
-
-    const isAuthorized = !data;
-
-    return isAuthorized ? (
+    return authData?.user.role === "USER" ? (
         <>{element}</>
     ) : (
         <Navigate to="/derniere-etape" replace />
     );
 };
 
-export function Router() {
+const PreRegistedGuard: FC<{ element: ReactNode }> = ({ element }) => {
+    const { authData, isLoading } = useAppAuth();
+
+    if (isLoading) <SplashScreen />;
+
+    return authData?.isAuthenticated &&
+        authData.user.role === "USER_PENDING" ? (
+        <>{element}</>
+    ) : (
+        <Navigate to="/" replace />
+    );
+};
+
+const PublicGuard: FC<{ element: ReactNode }> = ({ element }) => {
+    const { authData } = useAppAuth();
+
+    if (authData?.user.role === "USER_PENDING") {
+        return <Navigate to="/derniere-etape" replace />;
+    }
+
+    // Si l'utilisateur est authentifié avec un rôle valide (non public), redirige vers l'accueil
+    if (authData) {
+        return <Navigate to="/" replace />;
+    }
+
+    // Si l'utilisateur n'est pas authentifié, il peut accéder à la page publique
+    return <>{element}</>;
+};
+
+export const Router: FC = () => {
     return useRoutes([
         {
             path: "/",
@@ -84,6 +83,10 @@ export function Router() {
             ],
         },
         {
+            path: "/confirmation-email/:token?",
+            element: <PublicGuard element={<ConfirmEmail />} />,
+        },
+        {
             path: "/derniere-etape",
             element: <PreRegistedGuard element={<Register />} />,
         },
@@ -95,10 +98,6 @@ export function Router() {
             path: "/inscription",
             element: <PublicGuard element={<CreateAccount />} />,
         },
-        {
-            path: "/confirmation-email/:token?",
-            element: <PublicGuard element={<ConfirmEmail />} />,
-        },
         { path: "/*", element: <Navigate to="/404" replace /> },
     ]);
-}
+};
