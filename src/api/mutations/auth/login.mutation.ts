@@ -8,9 +8,7 @@ export const useLoginMutation = () => {
 
     return useMutation<LoginResponseDto, Error, LoginDto>({
         mutationFn: loginUser,
-        onSuccess: () => {
-            navigate("/");
-        },
+        onSuccess: () => navigate("/"),
         onError: (error) => {
             console.log(error && "toast error");
         },
