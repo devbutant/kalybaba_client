@@ -8,8 +8,6 @@ export const confirmEmail = async (
     emailToken: ConfirmEmailDto
 ): Promise<string> => {
     try {
-        console.log("emailToken: ", emailToken);
-
         const axiosInstance = createAxiosInstance();
         const response = await axiosInstance.post(
             `/auth/confirm-email`,

@@ -8,12 +8,7 @@ type RegisterDto = {
 export const useConfirmEmailMutation = () => {
     return useMutation<string, Error, RegisterDto>({
         mutationFn: confirmEmail,
-        onSuccess: async (accessToken) => {
-            localStorage.removeItem("email_token");
-            if (accessToken) {
-                localStorage.setItem("access_token", accessToken);
-            }
-        },
+        onSuccess: () => console.log("success"),
         onError: (error) => {
             console.log("erreur! ", error);
         },

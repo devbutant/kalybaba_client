@@ -1,4 +1,5 @@
 import { EditAdForm } from "@/components/ad/edit-ad-form/edit-ad-form";
+import { SplashScreen } from "@/components/loading";
 import { useAppAuth } from "@/hooks/contexts-hooks/auth/app-auth/use-auth.hook";
 import { CompactLayout } from "@/layouts/compact";
 import { Chat } from "@/pages/chat";
@@ -14,7 +15,9 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { CreateAccount } from "../pages/create-account";
 
 const PrivateGuard: FC<{ element: ReactNode }> = ({ element }) => {
-    const { authData } = useAppAuth();
+    const { authData, isLoading } = useAppAuth();
+
+    if (isLoading) <SplashScreen />;
 
     if (!authData) {
         return <Navigate to="/connexion" replace />;
@@ -28,7 +31,10 @@ const PrivateGuard: FC<{ element: ReactNode }> = ({ element }) => {
 };
 
 const PreRegistedGuard: FC<{ element: ReactNode }> = ({ element }) => {
-    const { authData } = useAppAuth();
+    const { authData, isLoading } = useAppAuth();
+    console.log(authData, "preregister guard");
+
+    if (isLoading) <SplashScreen />;
 
     return authData?.isAuthenticated &&
         authData.user.role === "USER_PENDING" ? (
@@ -40,9 +46,18 @@ const PreRegistedGuard: FC<{ element: ReactNode }> = ({ element }) => {
 
 const PublicGuard: FC<{ element: ReactNode }> = ({ element }) => {
     const { authData } = useAppAuth();
-    console.log("authData: ", authData);
 
-    return !authData ? <>{element}</> : <Navigate to="/" replace />;
+    if (authData?.user.role === "USER_PENDING") {
+        return <Navigate to="/derniere-etape" replace />;
+    }
+
+    // Si l'utilisateur est authentifié avec un rôle valide (non public), redirige vers l'accueil
+    if (authData) {
+        return <Navigate to="/" replace />;
+    }
+
+    // Si l'utilisateur n'est pas authentifié, il peut accéder à la page publique
+    return <>{element}</>;
 };
 
 export const Router: FC = () => {
@@ -84,7 +99,6 @@ export const Router: FC = () => {
             path: "/inscription",
             element: <PublicGuard element={<CreateAccount />} />,
         },
-
         { path: "/*", element: <Navigate to="/404" replace /> },
     ]);
 };

@@ -12,9 +12,6 @@ const ConfirmEmail: FC = () => {
 
     useEffect(() => {
         if (token) {
-            localStorage.setItem("email_token", token); // Pas besoin de stocker ? TODO: vu que je le passe direct dns la fonction d'apres pr check
-            console.log("token: ", token);
-
             confirmEmailMutation.mutate({
                 token,
             });
@@ -42,11 +39,6 @@ const ConfirmEmail: FC = () => {
     }
 
     if (isSuccess) {
-        // Redirection au bout de 5 secondes
-        setTimeout(() => {
-            window.location.href = "/derniere-etape";
-        }, 3000);
-
         welcome = (
             <div className="min-h-screen flex flex-col gap-3 items-center justify-center bg-gradient-to-br from-blue-400 to-indigo-300">
                 <h1 className="text-3xl font-bold">Bienvenue</h1>
