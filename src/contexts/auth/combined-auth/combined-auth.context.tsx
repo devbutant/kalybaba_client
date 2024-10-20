@@ -1,5 +1,6 @@
 import { CombinedAuthContextType } from "@/types/contexts";
 import { createContext, FC, ReactNode, useContext } from "react";
+import { AppAuthProvider } from "../app-auth";
 import {
     SocketAuthContext,
     SocketAuthProvider,
@@ -13,9 +14,13 @@ export const CombinedAuthProvider: FC<{ children: ReactNode }> = ({
     children,
 }) => {
     return (
-        <SocketAuthProvider>
-            <CombinedAuthContextWrapper>{children}</CombinedAuthContextWrapper>
-        </SocketAuthProvider>
+        <AppAuthProvider>
+            <SocketAuthProvider>
+                <CombinedAuthContextWrapper>
+                    {children}
+                </CombinedAuthContextWrapper>
+            </SocketAuthProvider>
+        </AppAuthProvider>
     );
 };
 

@@ -12,7 +12,9 @@ const ConfirmEmail: FC = () => {
 
     useEffect(() => {
         if (token) {
-            localStorage.setItem("email_token", token);
+            localStorage.setItem("email_token", token); // Pas besoin de stocker ? TODO: vu que je le passe direct dns la fonction d'apres pr check
+            console.log("token: ", token);
+
             confirmEmailMutation.mutate({
                 token,
             });
