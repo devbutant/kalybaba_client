@@ -16,7 +16,6 @@ import { CreateAccount } from "../pages/create-account";
 
 const PrivateGuard: FC<{ element: ReactNode }> = ({ element }) => {
     const { authData, isLoading } = useAppAuth();
-    console.log(authData);
 
     if (isLoading) <SplashScreen />;
 
@@ -33,7 +32,6 @@ const PrivateGuard: FC<{ element: ReactNode }> = ({ element }) => {
 
 const PreRegistedGuard: FC<{ element: ReactNode }> = ({ element }) => {
     const { authData, isLoading } = useAppAuth();
-    console.log(authData);
 
     if (isLoading) <SplashScreen />;
 
@@ -47,7 +45,6 @@ const PreRegistedGuard: FC<{ element: ReactNode }> = ({ element }) => {
 
 const PublicGuard: FC<{ element: ReactNode }> = ({ element }) => {
     const { authData } = useAppAuth();
-    console.log(authData);
 
     if (authData?.user.role === "USER_PENDING") {
         return <Navigate to="/derniere-etape" replace />;
