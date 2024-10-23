@@ -6,8 +6,8 @@ type TagProps = {
 };
 
 type TagsProps = {
-    typeEnum: string;
-    categoryEnum: string;
+    typeEnum: string | undefined;
+    categoryEnum: string | undefined;
 };
 
 export type { TagProps, TagsProps };

@@ -9,8 +9,8 @@ export interface AdCardProps {
             name: string;
             city: string;
         };
-        typeEnum: string;
-        categoryEnum: string;
+        typeEnum?: string | undefined;
+        categoryEnum?: string | undefined;
     };
     mine?: boolean;
 }
