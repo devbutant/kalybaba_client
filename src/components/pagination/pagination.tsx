@@ -26,12 +26,14 @@ const Pagination: FC<PaginationProps> = ({
     const pageNumbers = getPageNumbers();
 
     return (
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-center mt-8 my-6">
             <button
                 onClick={() => onPageChange(currentPage - 1)}
                 disabled={currentPage === 1}
                 className={`ml-2 p-2 rounded ${
-                    currentPage === 1 ? "bg-gray-100" : "bg-gray-300"
+                    currentPage === 1
+                        ? "bg-gray-100 text-gray-500"
+                        : "bg-gray-300"
                 }`}
             >
                 Précédent
@@ -41,9 +43,9 @@ const Pagination: FC<PaginationProps> = ({
                 <button
                     key={page}
                     onClick={() => onPageChange(page)}
-                    className={`mx-1 p-2 rounded ${
+                    className={`mx-1 p-2  px-4 rounded ${
                         currentPage === page
-                            ? "bg-blue-500 text-white"
+                            ? "bg-gray-800 text-white"
                             : "bg-gray-300"
                     }`}
                 >
@@ -55,7 +57,9 @@ const Pagination: FC<PaginationProps> = ({
                 onClick={() => onPageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
                 className={`ml-2 p-2 rounded ${
-                    currentPage === totalPages ? "bg-gray-100" : "bg-gray-300"
+                    currentPage === totalPages
+                        ? "bg-gray-100  text-gray-500"
+                        : "bg-gray-300"
                 }`}
             >
                 Suivant
