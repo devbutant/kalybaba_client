@@ -1,17 +1,12 @@
-import { useAdListQuery } from "@/api/queries/ads/ad-list";
 import { AdCard } from "@/components/ad/ad-card";
 import { Pagination } from "@/components/pagination";
 import { usePagination } from "@/hooks/pagination";
 import { FC } from "react";
 
 const Homepage: FC = () => {
-    const { currentPage, handlePageChange, perPage } = usePagination();
-
-    const { data, isLoading, error } = useAdListQuery(currentPage, perPage);
-
-    const ads = data?.data || [];
-    const totalCount = data?.meta.total || 0;
-    const totalPages = data?.meta.lastPage || 1;
+    const { currentPage, currentPageData } = usePagination();
+    const { ads, totalCount, totalPages, isLoading, error, handlePageChange } =
+        currentPageData;
 
     if (isLoading) return <p>Chargement...</p>;
     if (error) return <p>Erreur lors du chargement des annonces</p>;
