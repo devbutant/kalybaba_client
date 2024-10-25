@@ -15,19 +15,18 @@ const UserAdList: FC<AdResponse> = (props) => {
     if (error) return <p>Erreur lors du chargement des annonces</p>;
 
     return (
-        <main className="flex flex-col flex-1">
-            <h2 className="text-2xl font-semibold mb-6">
-                Mes {totalCount} annonces
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                {ads &&
-                    ads.map((ad, index) => (
-                        <div key={index} className="relative">
-                            <AdCard ad={ad} />
-                        </div>
-                    ))}
-            </div>
-        </main>
+        <div className="min-h-screen flex flex-col sm:mx-2 xl:mx-auto">
+            <main className="flex flex-col flex-1">
+                <h2 className="text-2xl font-semibold mb-6">
+                    Mes {totalCount} annonces
+                </h2>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    {ads &&
+                        ads.map((ad, index) => <AdCard key={index} ad={ad} />)}
+                </div>
+            </main>
+        </div>
     );
 };
 
