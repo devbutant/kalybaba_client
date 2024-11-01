@@ -8,6 +8,7 @@ import { CreateAd } from "@/pages/create-ad";
 import { Homepage } from "@/pages/homepage";
 import { Login } from "@/pages/login";
 import { MyAdList } from "@/pages/my-ad-list";
+import { Profil } from "@/pages/profil";
 import { Register } from "@/pages/register/register";
 import { SingleAdPage } from "@/pages/single-ad";
 import { FC, ReactNode } from "react";
@@ -67,6 +68,7 @@ export const Router: FC = () => {
             children: [
                 { path: "/", element: <Homepage /> },
                 { path: "/chat", element: <Chat /> },
+                { path: "/profil", element: <Profil /> },
                 {
                     path: "/annonces/:id",
                     element: <SingleAdPage />,
