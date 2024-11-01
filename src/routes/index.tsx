@@ -20,7 +20,7 @@ const PrivateGuard: FC<{ element: ReactNode }> = ({ element }) => {
 
     if (isLoading) <SplashScreen />;
 
-    if (!authData) {
+    if (!authData || !authData.isAuthenticated) {
         return <Navigate to="/connexion" replace />;
     }
 
