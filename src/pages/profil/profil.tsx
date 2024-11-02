@@ -3,6 +3,8 @@ import { FC } from "react";
 
 const Profil: FC = () => {
     const { authData } = useAppAuth();
+    if (!authData) return null;
+
     const { user } = authData;
     console.log("authData ", authData);
 
@@ -19,9 +21,9 @@ const Profil: FC = () => {
                     />
                     <div className="text-center md:text-left">
                         <h1 className="text-3xl font-semibold text-gray-800">
-                            John Doe
+                            {user.name}
                         </h1>
-                        <p className="text-gray-600">Développeur Full Stack</p>
+                        <p className="text-gray-600">Poste actuel..</p>
                         <p className="text-gray-500">{user.email}</p>
                         <div className="mt-4 flex gap-4 justify-center md:justify-start">
                             <button className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 focus:outline-none">
@@ -74,31 +76,19 @@ const Profil: FC = () => {
                     </h2>
                     <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <span className="block text-gray-600">Nom :</span>
-                            <span className="block text-gray-800 font-medium">
-                                John Doe
-                            </span>
-                        </div>
-                        <div>
-                            <span className="block text-gray-600">Email :</span>
-                            <span className="block text-gray-800 font-medium">
-                                johndoe@example.com
-                            </span>
-                        </div>
-                        <div>
                             <span className="block text-gray-600">
                                 Téléphone :
                             </span>
                             <span className="block text-gray-800 font-medium">
-                                +33 6 12 34 56 78
+                                {user.phone || "Non renseigné"}
                             </span>
                         </div>
                         <div>
                             <span className="block text-gray-600">
-                                Adresse :
+                                Localisation :
                             </span>
                             <span className="block text-gray-800 font-medium">
-                                123 Rue de Paris, France
+                                {user.city}
                             </span>
                         </div>
                     </div>

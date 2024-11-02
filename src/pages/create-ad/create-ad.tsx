@@ -84,6 +84,41 @@ const CreateAd: FC = () => {
 
                     <FormField
                         control={form.control}
+                        name="photos"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Photos</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        type="file"
+                                        multiple
+                                        onChange={(e) => {
+                                            const fileList = e.target.files;
+                                            console.log(fileList);
+
+                                            if (!fileList) return;
+
+                                            const newFiles =
+                                                Array.from(fileList);
+                                            const existingFiles =
+                                                field.value || [];
+
+                                            const allFiles = [
+                                                ...existingFiles,
+                                                ...newFiles,
+                                            ];
+
+                                            field.onChange(allFiles);
+                                        }}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
                         name="city"
                         render={({ field }) => (
                             <FormItem>

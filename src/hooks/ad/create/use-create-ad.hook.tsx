@@ -18,6 +18,7 @@ const useCreateAd = () => {
             .string({ required_error: "Veuillez renseigner un titre." })
             .min(5, "Le titre doit contenir au moins 5 caractères.")
             .max(50, "Le titre doit contenir au maximum 50 caractères."),
+        photos: z.array(z.instanceof(File)).optional(),
         description: z
             .string({ required_error: "Veuillez renseigner une description." })
             .min(20, "La description doit contenir au moins 20 caractères."),
@@ -36,6 +37,7 @@ const useCreateAd = () => {
         defaultValues: {
             title: "",
             description: "",
+            photos: [],
             city: "",
             price: undefined,
             authorId: userId,
@@ -50,6 +52,10 @@ const useCreateAd = () => {
 
     const onFormSubmit: SubmitHandler<CreateAdDto> = async (newAd) => {
         try {
+            console.log(
+                "USE MULTER ex: https://www.youtube.com/watch?v=XMxKUONCQh8&ab_channel=TechnicalRajni"
+            );
+
             const adWithAuthorId = { ...newAd, authorId: userId };
             await createNewAdMutation.mutateAsync(adWithAuthorId);
         } catch (error: unknown) {

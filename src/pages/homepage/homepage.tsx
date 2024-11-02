@@ -19,10 +19,8 @@ const Homepage: FC = () => {
     return (
         <div className="min-h-screen flex flex-col sm:mx-2 xl:mx-auto">
             <main className="flex flex-col flex-1">
-                <h2 className="text-2xl font-semibold mb-6">
-                    Nombre total d'annonces : {totalCount}
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <h2 className="font-thin mb-6">{totalCount} résultats</h2>
+                <div className="flex flex-col gap-6">
                     {ads &&
                         ads.map((ad, index) => <AdCard key={index} ad={ad} />)}
                 </div>

@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 
 export const CompactLayout: FC = () => {
     return (
-        <div className="min-h-screen flex flex-1 flex-col">
+        <div className="min-h-screen flex flex-1 flex-col bg-gray-100">
             <DropdownMenuProvider>
                 <Header />
             </DropdownMenuProvider>
