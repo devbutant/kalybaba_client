@@ -10,6 +10,8 @@ import {
     FormMessage,
 } from "@/shadcn/components/ui/form";
 import { Input } from "@/shadcn/components/ui/input";
+import { Textarea } from "@/shadcn/components/ui/textarea";
+
 import {
     Select,
     SelectContent,
@@ -17,7 +19,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/shadcn/components/ui/select";
-import { Textarea } from "@/shadcn/components/ui/textarea";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -64,7 +65,6 @@ const CreateAd: FC = () => {
                             </FormItem>
                         )}
                     />
-
                     <FormField
                         control={form.control}
                         name="description"
@@ -90,25 +90,42 @@ const CreateAd: FC = () => {
                                 <FormLabel>Photos</FormLabel>
                                 <FormControl>
                                     <Input
+                                        name="photos"
                                         type="file"
-                                        multiple
                                         onChange={(e) => {
-                                            const fileList = e.target.files;
-                                            console.log(fileList);
+                                            const files = e.target.files;
+                                            if (!files) return;
 
-                                            if (!fileList) return;
+                                            const filesArray =
+                                                Array.from(files);
+                                            const validFiles =
+                                                filesArray.filter((file) => {
+                                                    // Valider le type et la taille
+                                                    const isValidType =
+                                                        file.type.startsWith(
+                                                            "image/"
+                                                        );
+                                                    const isValidSize =
+                                                        file.size <=
+                                                        2 * 1024 * 1024; // Limite à 2 Mo
+                                                    return (
+                                                        isValidType &&
+                                                        isValidSize
+                                                    );
+                                                });
 
-                                            const newFiles =
-                                                Array.from(fileList);
-                                            const existingFiles =
-                                                field.value || [];
+                                            if (
+                                                validFiles.length <
+                                                filesArray.length
+                                            ) {
+                                                // Gérer les fichiers invalides ici, par exemple, en affichant un message
+                                                console.warn(
+                                                    "Certains fichiers sont invalides et n'ont pas été ajoutés."
+                                                );
+                                            }
 
-                                            const allFiles = [
-                                                ...existingFiles,
-                                                ...newFiles,
-                                            ];
-
-                                            field.onChange(allFiles);
+                                            // Mettre à jour le champ avec uniquement les fichiers valides
+                                            field.onChange(validFiles);
                                         }}
                                     />
                                 </FormControl>

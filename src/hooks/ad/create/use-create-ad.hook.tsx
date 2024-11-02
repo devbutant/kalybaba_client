@@ -37,9 +37,9 @@ const useCreateAd = () => {
         defaultValues: {
             title: "",
             description: "",
-            photos: [],
+            photos: undefined,
             city: "",
-            price: undefined,
+            price: 0,
             authorId: userId,
             categoryEnum: "",
             typeEnum: "",
@@ -52,21 +52,36 @@ const useCreateAd = () => {
 
     const onFormSubmit: SubmitHandler<CreateAdDto> = async (newAd) => {
         try {
-            console.log(
-                "USE MULTER ex: https://www.youtube.com/watch?v=XMxKUONCQh8&ab_channel=TechnicalRajni"
-            );
-
-            const adWithAuthorId = { ...newAd, authorId: userId };
-            await createNewAdMutation.mutateAsync(adWithAuthorId);
+            const formData = createFormData(newAd, userId);
+            await createNewAdMutation.mutateAsync(formData);
         } catch (error: unknown) {
-            setError("root", {
-                type: "manual",
-                message:
-                    error instanceof Error
-                        ? error.message
-                        : "Une erreur est survenue",
-            });
+            handleFormError(error);
         }
+    };
+
+    const createFormData = (newAd: CreateAdDto, userId: string) => {
+        const formData = new FormData();
+        formData.append("authorId", userId);
+
+        Object.entries(newAd).forEach(([key, value]) => {
+            if (key === "photos" && Array.isArray(value)) {
+                value.forEach((photo) => formData.append("photos", photo));
+            } else if (typeof value === "string" || typeof value === "number") {
+                formData.append(key, value.toString());
+            }
+        });
+
+        return formData;
+    };
+
+    const handleFormError = (error: unknown) => {
+        setError("root", {
+            type: "manual",
+            message:
+                error instanceof Error
+                    ? error.message
+                    : "Une erreur est survenue",
+        });
     };
 
     return {
