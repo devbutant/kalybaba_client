@@ -19,6 +19,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/shadcn/components/ui/select";
+import { categories } from "@/types/enums/category";
+import { types } from "@/types/enums/types";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -29,28 +31,13 @@ const CreateAd: FC = () => {
 
     const { t } = useTranslation();
 
-    const types = ["OFFER", "DEMAND"];
-
-    const categories = [
-        "VEHICLE",
-        "REAL_ESTATE",
-        "MULTIMEDIA",
-        "HOME",
-        "LEISURE",
-        "FASHION",
-        "CHILDREN",
-        "ANIMALS",
-        "SERVICES",
-        "EMPLOYMENT",
-        "OTHERS",
-    ];
-
     return (
         <FormContainer title="Déposer une nouvelle annonce">
             <Form {...form}>
                 <form
                     onSubmit={handleSubmit(onFormSubmit)}
                     className="space-y-2"
+                    autoComplete="off"
                 >
                     <FormField
                         control={form.control}
@@ -136,35 +123,36 @@ const CreateAd: FC = () => {
 
                     <FormField
                         control={form.control}
-                        name="city"
+                        name="typeEnum"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Ville</FormLabel>
+                                <FormLabel>Type</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Ville" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name="price"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Prix</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="number"
-                                        placeholder="Prix"
-                                        {...field}
-                                        onChange={(e) => {
-                                            field.onChange(
-                                                Number(e.target.value)
-                                            );
+                                    <Select
+                                        name="typeEnum"
+                                        onValueChange={(value) => {
+                                            field.onChange(value);
                                         }}
-                                    />
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Sélectionnez un type" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {types.map((type) => {
+                                                return (
+                                                    <SelectItem
+                                                        key={type}
+                                                        value={type}
+                                                    >
+                                                        {t(
+                                                            "categoryOrType." +
+                                                                type
+                                                        )}
+                                                    </SelectItem>
+                                                );
+                                            })}
+                                        </SelectContent>
+                                    </Select>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -207,40 +195,29 @@ const CreateAd: FC = () => {
                         )}
                     />
 
+                    {/* 
                     <FormField
                         control={form.control}
-                        name="typeEnum"
+                        name="price"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Type</FormLabel>
+                                <FormLabel>Prix</FormLabel>
                                 <FormControl>
-                                    <Select
-                                        name="typeEnum"
-                                        onValueChange={(value) => {
-                                            field.onChange(value);
+                                    <Input
+                                        type="number"
+                                        placeholder="Prix"
+                                        {...field}
+                                        onChange={(e) => {
+                                            field.onChange(
+                                                Number(e.target.value)
+                                            );
                                         }}
-                                    >
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Sélectionnez un type" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            {types.map((type) => (
-                                                <SelectItem
-                                                    key={type}
-                                                    value={type}
-                                                >
-                                                    {t(
-                                                        "categoryOrType." + type
-                                                    )}
-                                                </SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
-                    />
+                    /> */}
 
                     <div>
                         <Button type="submit" className="w-full mt-4">

@@ -22,13 +22,6 @@ const useCreateAd = () => {
         description: z
             .string({ required_error: "Veuillez renseigner une description." })
             .min(20, "La description doit contenir au moins 20 caractères."),
-        price: z
-            .number({ required_error: "Veuillez renseigner un prix." })
-            .min(0, "Le prix doit être positif."),
-        city: z
-            .string({ required_error: "Veuillez renseigner une ville." })
-            .min(2, "La ville doit contenir au moins 2 caractères.")
-            .max(100, "La ville doit contenir au maximum 100 caractères."),
         typeEnum: z.string().min(1, "Veuillez sélectionner un type."),
         categoryEnum: z.string().min(1, "Veuillez sélectionner une catégorie."),
     });
@@ -38,8 +31,6 @@ const useCreateAd = () => {
             title: "",
             description: "",
             photos: undefined,
-            city: "",
-            price: 0,
             authorId: userId,
             categoryEnum: "",
             typeEnum: "",

@@ -16,9 +16,6 @@ const SingleAd: FC<SingleAdProps> = (props) => {
                 {ad.title}
             </h2>
             <p className="text-gray-600 mb-4">{ad.description}</p>
-            <div className="text-lg font-bold text-green-600">
-                ${ad.price.toFixed(2)}
-            </div>
             <div className="text-sm text-gray-500 mt-2">
                 Publié par : {ad.author.name}
             </div>

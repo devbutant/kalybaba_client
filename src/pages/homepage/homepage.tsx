@@ -18,13 +18,13 @@ const Homepage: FC = () => {
 
     return (
         <div className="min-h-screen flex flex-col sm:mx-2 xl:mx-auto">
-            <main className="flex flex-col flex-1">
+            <div className="flex flex-col flex-1">
                 <h2 className="font-thin mb-6">{totalCount} résultats</h2>
                 <div className="flex flex-col gap-6">
                     {ads &&
                         ads.map((ad, index) => <AdCard key={index} ad={ad} />)}
                 </div>
-            </main>
+            </div>
 
             <Pagination
                 currentPage={currentPage}

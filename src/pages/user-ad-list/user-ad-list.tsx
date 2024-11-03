@@ -1,6 +1,7 @@
 import { useUserAdListQuery } from "@/api/queries/ads/user-ad-list";
 import { AdResponse } from "@/api/services/ads/user-ad-list/fetch-user-ad-list.service";
 import { AdCard } from "@/components/ad/ad-card";
+import { useAppAuth } from "@/hooks/contexts-hooks/auth/app-auth/use-auth.hook";
 import { usePagination } from "@/hooks/pagination";
 import { FC } from "react";
 
@@ -8,6 +9,7 @@ const UserAdList: FC<AdResponse> = (props) => {
     const { data: ads } = props;
     const { currentPage, perPage } = usePagination();
     const { data, isLoading, error } = useUserAdListQuery(currentPage, perPage);
+    const { authData } = useAppAuth();
 
     const totalCount = (data?.meta && data?.meta.total) || 0;
 
@@ -15,17 +17,15 @@ const UserAdList: FC<AdResponse> = (props) => {
     if (error) return <p>Erreur lors du chargement des annonces</p>;
 
     return (
-        <div className="min-h-screen flex flex-col sm:mx-2 xl:mx-auto">
-            <main className="flex flex-col flex-1">
-                <h2 className="font-thin mb-6">
-                    {totalCount} résultats (mes posts)
-                </h2>
+        <div className="flex flex-col flex-1">
+            <h2>{authData?.user.name}</h2>
+            <h2 className="font-thin mb-6">
+                {totalCount} résultats (mes posts)
+            </h2>
 
-                <div className="flex flex-col gap-6">
-                    {ads &&
-                        ads.map((ad, index) => <AdCard key={index} ad={ad} />)}
-                </div>
-            </main>
+            <div className="flex flex-col gap-6">
+                {ads && ads.map((ad, index) => <AdCard key={index} ad={ad} />)}
+            </div>
         </div>
     );
 };

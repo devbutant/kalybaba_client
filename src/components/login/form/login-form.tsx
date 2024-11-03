@@ -22,6 +22,7 @@ const LoginForm: FC = () => {
             <form
                 onSubmit={form.handleSubmit(onFormSubmit)}
                 className="space-y-2"
+                autoComplete="off"
             >
                 <FormField
                     control={form.control}

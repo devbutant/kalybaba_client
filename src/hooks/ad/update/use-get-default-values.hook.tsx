@@ -5,8 +5,6 @@ const useGetDefaultValues = () => {
         id: string;
         title: string;
         description: string;
-        price: number;
-        city: string;
         typeEnum: string;
         categoryEnum: string;
     };
@@ -17,8 +15,6 @@ const useGetDefaultValues = () => {
         id: ad?.id || "",
         title: ad?.title || "",
         description: ad?.description || "",
-        price: ad?.price || 0,
-        city: ad?.city || "",
         categoryEnum: ad?.categoryEnum || "",
         typeEnum: ad?.typeEnum || "",
     });

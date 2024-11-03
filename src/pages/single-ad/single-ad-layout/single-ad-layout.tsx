@@ -23,7 +23,6 @@ const SingleAdLayout: FC<PropsWithChildren<SingleAdLayoutType>> = (props) => {
                 <h3 className="text-lg font-semibold text-gray-800">
                     Détails supplémentaires :
                 </h3>
-                <p className="text-gray-600">{ad.city}</p>
             </div>
         </div>
     );

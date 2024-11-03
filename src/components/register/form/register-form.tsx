@@ -18,7 +18,11 @@ const RegisterForm: FC = () => {
 
     return (
         <Form {...form}>
-            <form className="space-y-2" onSubmit={handleSubmit(onFormSubmit)}>
+            <form
+                className="space-y-2"
+                onSubmit={handleSubmit(onFormSubmit)}
+                autoComplete="off"
+            >
                 <FormField
                     control={form.control}
                     name="name"

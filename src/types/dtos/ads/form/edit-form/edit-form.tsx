@@ -2,8 +2,7 @@ export interface Ad {
     id: string;
     title: string;
     description: string;
-    price: number;
-    city: string;
+    photos?: string[];
     author: {
         name: string;
     };
@@ -15,8 +14,6 @@ export interface EditAdFormValues {
     id: string;
     title: string;
     description: string;
-    price: number;
-    city: string;
     typeEnum: string;
     categoryEnum: string;
 }

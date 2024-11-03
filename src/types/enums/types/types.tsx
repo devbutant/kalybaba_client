@@ -1,1 +1,1 @@
-export const types = ["OFFER", "DEMAND"];
+export const types = ["SHARED_SETUP", "NEED_ADVICE"];

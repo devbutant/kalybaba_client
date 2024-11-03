@@ -11,15 +11,4 @@ export const formFields: EditAdFormField[] = [
         type: "textarea",
         placeholder: "Description",
     },
-    {
-        name: "city",
-        type: "text",
-        placeholder: "Ville",
-    },
-    {
-        name: "price",
-        type: "number",
-        placeholder: "Prix",
-        valueAsNumber: true,
-    },
 ];

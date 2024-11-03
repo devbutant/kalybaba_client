@@ -38,6 +38,7 @@ const EditAdForm: FC = () => {
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="space-y-2"
+                    autoComplete="off"
                 >
                     <FormField
                         key="title"
@@ -65,45 +66,6 @@ const EditAdForm: FC = () => {
                                     <Textarea
                                         placeholder="Description"
                                         {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        key="city"
-                        control={form.control}
-                        name="city"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Ville</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="Ville" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        key="price"
-                        control={form.control}
-                        name="price"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Prix</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        placeholder="Prix"
-                                        {...field}
-                                        type="number"
-                                        onChange={(e) =>
-                                            field.onChange(
-                                                parseFloat(e.target.value)
-                                            )
-                                        }
                                     />
                                 </FormControl>
                                 <FormMessage />
