@@ -3,6 +3,7 @@ import { handleError } from "@/api/services/error";
 import { LoginFormFields, loginSchema } from "@/types/auth/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const useLoginForm = () => {
     const form = useForm<LoginFormFields>({
@@ -15,12 +16,16 @@ const useLoginForm = () => {
     } = form;
 
     const authenticationMutation = useLoginMutation();
+    const navigate = useNavigate();
 
     const onFormSubmit: SubmitHandler<LoginFormFields> = async (
         credentials
     ) => {
         try {
-            await authenticationMutation.mutateAsync(credentials);
+            const res = await authenticationMutation.mutateAsync(credentials);
+            if (res) {
+                navigate("/");
+            }
         } catch (error: unknown) {
             handleError(error, setError);
         }

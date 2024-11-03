@@ -20,7 +20,11 @@ const UserAdList: FC<AdResponse> = (props) => {
         <div className="flex flex-col flex-1">
             <h2>{authData?.user.name}</h2>
             <h2 className="font-thin mb-6">
-                {totalCount} résultats (mes posts)
+                <h2 className="font-thin mb-6">
+                    {totalCount === 0
+                        ? "Aucun résultat"
+                        : `${totalCount} résultat${totalCount > 1 ? "s" : ""}`}
+                </h2>
             </h2>
 
             <div className="flex flex-col gap-6">

@@ -8,6 +8,7 @@ export interface Ad {
     };
     typeEnum: string;
     categoryEnum: string;
+    createdAt: string;
 }
 
 export interface EditAdFormValues {
