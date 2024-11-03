@@ -7,14 +7,14 @@ const AdCard: FC<AdCardProps> = ({ ad }) => {
     return (
         <NavLink
             to={`/annonces/${ad.id}`}
-            className="flex flex-col md:flex-row items-start bg-white rounded shadow-sm overflow-hidden transition-transform transform hover:bg-gray-200 w-full h-60"
+            className="flex flex-col md:flex-row items-start bg-white rounded shadow-sm overflow-hidden transition-transform transform hover:bg-gray-200 w-full md:h-60"
         >
-            <div className="flex items-center w-full md:w-1/3 h-full bg-gray-200">
+            <div className="flex items-center w-3/3 md:w-1/3 mx-auto md:h-full bg-gray-200 h-52">
                 {ad.photos && ad.photos[0] ? (
                     <img
                         src={ad.photos[0]}
                         alt={"Photo du setup " + ad.title}
-                        className="relative min-h-full min-w-full object-cover mx-auto z-10"
+                        className="object-cover w-full h-full"
                     />
                 ) : (
                     <div className="flex items-center justify-center w-full h-full text-gray-500 text-sm">
