@@ -1,11 +1,6 @@
 {
     "rewrites": [
         {
-            "src": "/api/(.*)",
-            "dest": "https://kalybaba-server.vercel.app/$1",
-            "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
-        },
-        {
             "source": "/(.*)",
             "destination": "/index.html"
         }
