@@ -17,7 +17,7 @@ const useCreateAd = () => {
         title: z
             .string({ required_error: "Veuillez renseigner un titre." })
             .min(5, "Le titre doit contenir au moins 5 caractères.")
-            .max(50, "Le titre doit contenir au maximum 50 caractères."),
+            .max(30, "Le titre doit contenir au maximum 30 caractères."),
         photos: z.array(z.instanceof(File)).optional(),
         description: z
             .string({ required_error: "Veuillez renseigner une description." })
