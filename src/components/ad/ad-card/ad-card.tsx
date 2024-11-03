@@ -1,5 +1,6 @@
 import { Tags } from "@/components/ui/tag";
 import { AdCardProps } from "@/types";
+import { API } from "@/utils/environment";
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -9,17 +10,14 @@ const AdCard: FC<AdCardProps> = ({ ad }) => {
             to={`/annonces/${ad.id}`}
             className="flex flex-col md:flex-row items-start bg-white rounded shadow-sm overflow-hidden transition-transform transform hover:bg-gray-200"
         >
-            {/* Image large à gauche */}
             <div className="flex-shrink-0 w-full md:w-1/3">
                 <img
-                    src={
-                        "https://www.minimaldesksetups.com/wp-content/uploads/2024/02/image-768x576.jpeg"
-                    }
-                    alt={ad.title}
+                    src={API.URL + "/ads/" + ad.photos[0]}
+                    alt={ad.photos && ad.photos[0]}
                     className="w-full h-48 md:h-auto object-cover"
                 />
             </div>
-            {/* Texte à droite */}
+
             <div className="p-4 flex flex-col justify-between md:w-2/3">
                 <Tags typeEnum={ad.typeEnum} categoryEnum={ad.categoryEnum} />
                 <h3 className="text-xl font-semibold text-gray-800 mt-2">

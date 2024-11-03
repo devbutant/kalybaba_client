@@ -3,6 +3,7 @@ export interface AdCardProps {
         id: string;
         title: string;
         description: string;
+        photos: string[];
         price: number;
         author: {
             id: string;
