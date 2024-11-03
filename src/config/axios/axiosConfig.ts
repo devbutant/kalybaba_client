@@ -2,8 +2,11 @@ import { API } from "@/utils/environment";
 import axios from "axios";
 
 const createAxiosInstance = () => {
+    const isProduction = import.meta.env.MODE === "production";
+    const baseURL = isProduction ? "/api" : API.URL;
+
     const axiosInstance = axios.create({
-        baseURL: API.URL,
+        baseURL: baseURL,
         withCredentials: true,
     });
 
