@@ -1,6 +1,5 @@
 import { Tags } from "@/components/ui/tag";
 import { AdCardProps } from "@/types";
-import { API } from "@/utils/environment";
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -12,8 +11,8 @@ const AdCard: FC<AdCardProps> = ({ ad }) => {
         >
             <div className="flex-shrink-0 w-full md:w-1/3">
                 <img
-                    src={API.URL + "/ads/" + ad.photos[0]}
-                    alt={ad.photos && ad.photos[0]}
+                    src={ad.photos && ad.photos[0]}
+                    alt={"Photo du setup " + ad.title}
                     className="w-full h-48 md:h-auto object-cover"
                 />
             </div>
