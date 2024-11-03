@@ -18,6 +18,7 @@ const useCreateAd = () => {
             .string({ required_error: "Veuillez renseigner un titre." })
             .min(5, "Le titre doit contenir au moins 5 caractères.")
             .max(50, "Le titre doit contenir au maximum 50 caractères."),
+        photos: z.array(z.instanceof(File)).optional(),
         description: z
             .string({ required_error: "Veuillez renseigner une description." })
             .min(20, "La description doit contenir au moins 20 caractères."),
@@ -36,8 +37,9 @@ const useCreateAd = () => {
         defaultValues: {
             title: "",
             description: "",
+            photos: undefined,
             city: "",
-            price: undefined,
+            price: 0,
             authorId: userId,
             categoryEnum: "",
             typeEnum: "",
@@ -50,17 +52,36 @@ const useCreateAd = () => {
 
     const onFormSubmit: SubmitHandler<CreateAdDto> = async (newAd) => {
         try {
-            const adWithAuthorId = { ...newAd, authorId: userId };
-            await createNewAdMutation.mutateAsync(adWithAuthorId);
+            const formData = createFormData(newAd, userId);
+            await createNewAdMutation.mutateAsync(formData);
         } catch (error: unknown) {
-            setError("root", {
-                type: "manual",
-                message:
-                    error instanceof Error
-                        ? error.message
-                        : "Une erreur est survenue",
-            });
+            handleFormError(error);
         }
+    };
+
+    const createFormData = (newAd: CreateAdDto, userId: string) => {
+        const formData = new FormData();
+        formData.append("authorId", userId);
+
+        Object.entries(newAd).forEach(([key, value]) => {
+            if (key === "photos" && Array.isArray(value)) {
+                value.forEach((photo) => formData.append("photos", photo));
+            } else if (typeof value === "string" || typeof value === "number") {
+                formData.append(key, value.toString());
+            }
+        });
+
+        return formData;
+    };
+
+    const handleFormError = (error: unknown) => {
+        setError("root", {
+            type: "manual",
+            message:
+                error instanceof Error
+                    ? error.message
+                    : "Une erreur est survenue",
+        });
     };
 
     return {

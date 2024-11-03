@@ -11,13 +11,13 @@ const DropdownMenu: FC = () => {
             role="menu"
             aria-orientation="vertical"
         >
-            <a
-                href="#"
+            <NavLink
+                to="/profil"
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 role="menuitem"
             >
                 Mon profil
-            </a>
+            </NavLink>
             <NavLink
                 to="/mes-annonces"
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"

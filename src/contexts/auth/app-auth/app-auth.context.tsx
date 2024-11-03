@@ -5,8 +5,11 @@ type AuthCheckResponseType = {
     isAuthenticated: boolean;
     user: {
         id: string;
-        role: string;
+        name: string;
         email: string;
+        role: string;
+        city: string;
+        phone: string;
     };
 };
 

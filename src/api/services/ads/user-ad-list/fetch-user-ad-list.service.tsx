@@ -4,6 +4,7 @@ export interface AdDto {
     id: string;
     title: string;
     description: string;
+    photos: string[];
     city: string;
     price: number;
     authorId?: string;

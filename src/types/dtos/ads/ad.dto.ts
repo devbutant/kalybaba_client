@@ -4,6 +4,7 @@ export const adSchema = z.object({
     id: z.string(),
     title: z.string(),
     description: z.string(),
+    photos: z.array(z.instanceof(File)).optional(),
     city: z.string(),
     price: z.number(),
     authorId: z.string(),
