@@ -1,5 +1,5 @@
 import { useAdListQuery } from "@/api/queries/ads/ad-list";
-import { AdCard } from "@/components/ad/ad-card";
+import { AdCard } from "@/components/ad";
 import { Pagination } from "@/components/pagination";
 import { usePagination } from "@/hooks/pagination";
 import { FC } from "react";
@@ -17,7 +17,7 @@ const Homepage: FC = () => {
     if (error) return <p>Erreur lors du chargement des annonces</p>;
 
     return (
-        <div className="min-h-screen flex flex-col sm:mx-2 xl:mx-auto">
+        <div className="flex flex-col flex-1 w-full">
             <div className="flex flex-col flex-1 mx-2">
                 <h2>Tout</h2>
                 <h2 className="font-thin mb-6">
