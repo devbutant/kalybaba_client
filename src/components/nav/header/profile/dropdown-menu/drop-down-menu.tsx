@@ -25,21 +25,21 @@ const DropdownMenu: FC = () => {
             >
                 Mes annonces
             </NavLink>
-            <a
-                href="#"
+            <NavLink
+                to="/"
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 role="menuitem"
             >
                 Paramètres
-            </a>
-            <a
-                href="#"
+            </NavLink>
+            <NavLink
+                to="/connexion"
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 role="menuitem"
                 onClick={handleLogout}
             >
                 Déconnexion
-            </a>
+            </NavLink>
         </div>
     );
 };
