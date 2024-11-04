@@ -17,7 +17,7 @@ const UserAdList: FC<AdResponse> = (props) => {
     if (error) return <p>Erreur lors du chargement des annonces</p>;
 
     return (
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1 mx-2 md:mx-0">
             <h2>{authData?.user.name}</h2>
             <h2 className="font-thin mb-6">
                 {totalCount === 0
