@@ -12,7 +12,7 @@ const SingleAd: FC<SingleAdProps> = ({ ad, isMine }) => {
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
     return (
-        <div className="flex justify-center p-4 gap-10 items-center">
+        <div className="flex flex-col md:flex-row justify-center p-4 gap-10 items-center">
             <div className="bg-white rounded-lg shadow-md overflow-hidden max-w-xl flex-grow border px-6 pb-5">
                 {isMine && <ActionButtons />}
 
@@ -42,7 +42,7 @@ const SingleAd: FC<SingleAdProps> = ({ ad, isMine }) => {
                 </div>
             </div>
 
-            <div className="flex-col w-1/3">
+            <div className="flex-col w-4/5 md:w-1/3">
                 <div className="grid grid-cols-2 gap-2 h-full pb-4 w-full">
                     {ad.photos &&
                         ad.photos.map((photo, index) => (
