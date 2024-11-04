@@ -14,7 +14,7 @@ const MyAdList: FC = () => {
     if (error) return <p>Erreur lors du chargement des annonces</p>;
 
     return (
-        <div className="min-h-screen flex flex-col sm:mx-2 xl:mx-auto">
+        <div className="flex flex-col flex-1 w-full">
             <UserAdList data={data?.data || []} />
             <Pagination
                 currentPage={currentPage}
