@@ -45,7 +45,9 @@ const PreRegistedGuard: FC<{ element: ReactNode }> = ({ element }) => {
 };
 
 const PublicGuard: FC<{ element: ReactNode }> = ({ element }) => {
-    const { authData } = useAppAuth();
+    const { authData, isLoading } = useAppAuth();
+
+    if (isLoading) <SplashScreen />;
 
     if (authData?.user.role === "USER_PENDING") {
         return <Navigate to="/derniere-etape" replace />;
@@ -85,13 +87,14 @@ export const Router: FC = () => {
             ],
         },
         {
-            path: "/confirmation-email/:token?",
-            element: <PublicGuard element={<ConfirmEmail />} />,
-        },
-        {
             path: "/derniere-etape",
             element: <PreRegistedGuard element={<Register />} />,
         },
+        {
+            path: "/confirmation-email/:token?",
+            element: <PublicGuard element={<ConfirmEmail />} />,
+        },
+
         {
             path: "/connexion",
             element: <PublicGuard element={<Login />} />,

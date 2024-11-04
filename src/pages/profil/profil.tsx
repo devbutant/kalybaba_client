@@ -6,7 +6,6 @@ const Profil: FC = () => {
     if (!authData) return null;
 
     const { user } = authData;
-    console.log("authData ", authData);
 
     return (
         <div className="flex flex-col items-center p-6">

@@ -14,9 +14,11 @@ const SingleAdPage: FC = () => {
     if (!singleAd) return <p>Aucune annonce trouvée</p>;
 
     return (
-        <SingleAdLayout ad={singleAd}>
-            <SingleAd ad={singleAd} isMine={isMine} />
-        </SingleAdLayout>
+        <div className="flex items-center justify-center h-full bg-gray-50">
+            <SingleAdLayout ad={singleAd}>
+                <SingleAd ad={singleAd} isMine={isMine} />
+            </SingleAdLayout>
+        </div>
     );
 };
 

@@ -26,7 +26,7 @@ const Homepage: FC = () => {
                         : `${totalCount} résultat${totalCount > 1 ? "s" : ""}`}
                 </h2>
 
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-4">
                     {ads &&
                         ads.map((ad, index) => <AdCard key={index} ad={ad} />)}
                 </div>

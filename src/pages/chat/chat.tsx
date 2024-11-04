@@ -1,4 +1,3 @@
-import { useCheckAuthQuery } from "@/api/queries/auth/check-auth/check-auth.query";
 import { Button } from "@/components/button";
 import { ChatContent } from "@/components/chat";
 import { FriendsList } from "@/components/chat/friends/friends-list";
@@ -14,8 +13,7 @@ const Chat: FC = () => {
     const { isSocketAuthenticated } = useSocketAuth();
     const { sendMessage, listenToMessages } = useMessages();
 
-    const { data } = useCheckAuthQuery();
-    const currentUser = data?.user?.id;
+    const currentUser = "data?.user?.id";
 
     useEffect(() => {
         if (currentUser) {

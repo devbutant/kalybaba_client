@@ -20,14 +20,12 @@ const UserAdList: FC<AdResponse> = (props) => {
         <div className="flex flex-col flex-1">
             <h2>{authData?.user.name}</h2>
             <h2 className="font-thin mb-6">
-                <h2 className="font-thin mb-6">
-                    {totalCount === 0
-                        ? "Aucun résultat"
-                        : `${totalCount} résultat${totalCount > 1 ? "s" : ""}`}
-                </h2>
+                {totalCount === 0
+                    ? "Aucun résultat"
+                    : `${totalCount} résultat${totalCount > 1 ? "s" : ""}`}
             </h2>
 
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
                 {ads && ads.map((ad, index) => <AdCard key={index} ad={ad} />)}
             </div>
         </div>

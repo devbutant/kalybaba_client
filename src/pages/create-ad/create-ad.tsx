@@ -79,6 +79,7 @@ const CreateAd: FC = () => {
                                     <Input
                                         name="photos"
                                         type="file"
+                                        multiple
                                         onChange={(e) => {
                                             const files = e.target.files;
                                             if (!files) return;

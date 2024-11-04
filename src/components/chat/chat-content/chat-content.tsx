@@ -3,8 +3,6 @@ import { FC } from "react";
 
 const ChatContent: FC = () => {
     const { messages } = useChat();
-    // const { data } = useCheckAuthQuery();
-    // const currentUser = data?.user?.id;
     const currentUser = "userid";
 
     return (
