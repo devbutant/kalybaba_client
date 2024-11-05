@@ -23,21 +23,29 @@ const AdCard: FC<AdCardProps> = ({ ad }) => {
                 )}
             </div>
 
-            <div className="p-4 flex flex-col justify-between md:w-2/3 w-full">
-                <Tags typeEnum={ad.typeEnum} categoryEnum={ad.categoryEnum} />
+            <div className="px-8 py-6 flex flex-col justify-between md:w-2/3 w-full">
+                <div className="flex items-center justify-between">
+                    <Tags
+                        typeEnum={ad.typeEnum}
+                        categoryEnum={ad.categoryEnum}
+                        className="mb-0"
+                    />
+                    <div className="flex gap-1 items-center">
+                        <span className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-gray-500 text-sm font-semibold">
+                            {ad.author.name[0]}
+                        </span>
+                        <span className="text-gray-800 font-semibold">
+                            {ad.author.name}
+                        </span>
+                    </div>
+                </div>
+
                 <h3 className="text-xl font-semibold text-gray-800 mt-2">
                     {ad.title}
                 </h3>
                 <p className="mt-2 text-gray-600 line-clamp-3">
                     {ad.description}
                 </p>
-                <div className="mt-auto">
-                    <div className="flex justify-between items-center mt-4">
-                        <span className="text-lg text-gray-500">
-                            {ad.author.name}
-                        </span>
-                    </div>
-                </div>
             </div>
         </NavLink>
     );

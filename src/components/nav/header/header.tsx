@@ -11,7 +11,7 @@ const CreateAdButton = () => {
             className="hidden items-center bg-blue-900 text-white mx-2 px-4 py-2 rounded-md hover:bg-blue-800 transition-colors md:flex"
         >
             <FiPlusCircle className="mr-2 text-xl" />
-            Déposer une annonce
+            Poste ton setup
         </Link>
     );
 };
